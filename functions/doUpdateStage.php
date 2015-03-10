@@ -44,7 +44,7 @@ if(!empty($stageID) && !empty($newsID)) {
 	}
 }
 else {
-	$_SESSION["error"] .= "We couldn't verify the Stage ID number or the News ID number. Please contact your friendly AgComm web developer."; 
+	$_SESSION["error"] .= "We couldn't verify the Stage ID number or the News ID number. Please contact your friendly AgComm web developer.";
 	header("Location: ../beholdStory.php?newsID=" . $newsID);
 }
 
@@ -86,7 +86,7 @@ if($stageID == 2) {
 		$title = $news["strHeadline"];
 	}
 	else {
-		$subject = "[AgNews DB] '" . $news["strFilename"] . "' is ready for editing.";	
+		$subject = "[AgNews DB] '" . $news["strFilename"] . "' is ready for editing.";
 		$title = $news["strFilename"];
 	}
 
@@ -144,16 +144,16 @@ if($stageID == 3) {
 	$to = "gprice@purdue.edu"; //was Kenny's email here 08-05-14
 
 	if(!empty($news["strHeadline"])) {
-		$subject = "[AgNews DB] '" . $news["strHeadline"] . "' is ready for review.";	
+		$subject = "[AgNews DB] '" . $news["strHeadline"] . "' is ready for review.";
 		$title = $news["strHeadline"];
 
 	}
 	else {
-		$subject = "[AgNews DB] '" . $news["strFilename"] . "' is ready for review.";	
+		$subject = "[AgNews DB] '" . $news["strFilename"] . "' is ready for review.";
 		$title = $news["strFilename"];
 	}
 
-	
+
 
 	$message = "<html><body style='background-color: #fafafa;'>";
 	$message .= "<table align='center' width='650' cellpadding='5' cellspacing='5' style='font-family: arial; border: 1px solid #a4a4a4; background-color: #FFF;'>";
@@ -210,11 +210,11 @@ if($stageID == 4) {
 	}
 
 	$_SESSION["note"] = mysql_real_escape_string($_POST["note"]);
-	
+
 	if(!empty($_SESSION["note"])) {
 		$note = "<strong>Writer's Note</strong>: ";
 		$note .= $_SESSION["note"] . "<br /><br />";
-	} 
+	}
 	else {
 		$note = "";
 	}
@@ -252,13 +252,13 @@ if($stageID == 4) {
 	$body .= "<html>";
 	$body .= "<table><tr><td colspan='2'>";
 	$body .= "<img width='556' height='94' src='http://dev.www.purdue.edu/agnewsdb/img/agnewsheader.png' />";
-	$body .= "</td></tr>"; 
+	$body .= "</td></tr>";
 	$body .= "<tr><td colspan='2'><br/>";
 	$body .= "<h3><u>NEWS RELEASE</u></h3>";
 	$body .= "<p>" . date("F d, Y", strtotime($news["datePublished"])) . "</p>";
 	$body .= "<h3 style='font-size: 24pt; font-family: Cambria, Georgia, serif;'>" . $title . "</h3>";
 	$body .= "<p style='font-size: 12pt; font-family: TimesNewRoman, \'Times New Roman\', Times, Baskerville, Georgia, serif;'>" .  html_entity_decode(htmlspecialchars_decode($news["txtBody"])) . "</p><br /><br />"; // <br /> to give space between story and information
-	$body .= "</td></tr><tr><td>"; 
+	$body .= "</td></tr><tr><td>";
 	$body .= "Writer(s)</td>";
 	$body .= "<td>";
 
@@ -269,7 +269,7 @@ if($stageID == 4) {
 		}
 
 	$body .= "</td></tr><tr><td>";
-	$body .= "Source(s)</td>"; 
+	$body .= "Source(s)</td>";
 	$body .= "<td>";
 
 		$sqlSources = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsSourcePeople ON tblNewsSourcePeople.peopleID = tblPeople.peopleID WHERE tblNewsSourcePeople.newsID=" . $newsID;
@@ -287,11 +287,11 @@ if($stageID == 4) {
 	if(!empty($news["strWebsite2"])) {
 			$body .= $news["strWebsiteTitle2"] . ": " . $news["strWebsite2"] . "<br />";
 	}
-	
+
 	if(!empty($news["strWebsite3"])) {
 			$body .= $news["strWebsiteTitle3"] . ": " . $news["strWebsite3"] . "<br />";
 	}
-	
+
 	if(!empty($news["strWebsite4"])) {
 			$body .= $news["strWebsiteTitle4"] . ": " . $news["strWebsite4"] . "<br />";
 	}
@@ -355,11 +355,11 @@ if($stageID == 5) {
 	$to = $support["strEmail"];
 
 	if(!empty($news["strHeadline"])) {
-		$subject = "[AgNews DB] '" . $news["strHeadline"] . "' has been submitted to M&M.";	
+		$subject = "[AgNews DB] '" . $news["strHeadline"] . "' has been submitted to M&M.";
 		$title = $news["strHeadline"];
 	}
 	else {
-		$subject = "[AgNews DB] '" . $news["strFilename"] . "' has been submitted to M&M.";	
+		$subject = "[AgNews DB] '" . $news["strFilename"] . "' has been submitted to M&M.";
 		$title = $news["strFilename"];
 	}
 
@@ -420,11 +420,11 @@ if($stageID == 6) {
 		$to = $recipient["strEmail"];
 
 		if(!empty($news["strHeadline"])) {
-			$subject = "[AgNews DB] '" . $news["strHeadline"] . "' is now published.";	
+			$subject = "[AgNews DB] '" . $news["strHeadline"] . "' is now published.";
 			$title = $news["strHeadline"];
 		}
 		else {
-			$subject = "[AgNews DB] '" . $news["strFilename"] . "' is now published.";	
+			$subject = "[AgNews DB] '" . $news["strFilename"] . "' is now published.";
 			$title = $news["strFilename"];
 		}
 
@@ -450,7 +450,7 @@ if($stageID == 6) {
 	$resultArea = mysql_query($sqlArea);
 	$areaNum = mysql_num_rows($resultArea);
 
-	// Do I need to do this? Currently, no...	
+	// Do I need to do this? Currently, no...
 	// $sqlArea = "SELECT tblNews.newsID FROM tblNewsArea JOIN tblNews ON tblNewsArea.newsID=tblNews.newsID WHERE tblNewsArea.newsID=" . $newsID . " AND areaID=2 AND strVideo <> ''";
 	// $resultARPAlert = mysql_query($sqlArea);
 	// $areaNumARPAlert = mysql_num_rows($resultArea);
@@ -465,18 +465,18 @@ if($stageID == 6) {
 
 	$sqlTopics = "SELECT * FROM tblTopic JOIN tblNewsTopic ON tblTopic.topicID = tblNewsTopic.topicID WHERE tblNewsTopic.newsID=" . $newsID . " AND tblTopic.isHidden=0";
 	$resultTopics = mysql_query($sqlTopics);
-	$numTopics = mysql_num_rows($resultTopics); 
+	$numTopics = mysql_num_rows($resultTopics);
 
 	if($areaNum > 0) {
 
 		$to = "knwilson@purdue.edu,abanta@purdue.edu,clgosnell@purdue.edu,wsfrazier@purdue.edu,katz@purdue.edu,kgetzin@purdue.edu";
 		//$to = "knwilson@purdue.edu";
 		if(!empty($news["strHeadline"])) {
-			$subject = "[Depot] '" . $news["strHeadline"] . "' needs to be added to the Depot.";	
+			$subject = "[Depot] '" . $news["strHeadline"] . "' needs to be added to the Depot.";
 			$title = $news["strHeadline"];
 		}
 		else {
-			$subject = "[Depot] '" . $news["strFilename"] . "' needs to be added to the Extension Depot.";	
+			$subject = "[Depot] '" . $news["strFilename"] . "' needs to be added to the Extension Depot.";
 			$title = $news["strFilename"];
 		}
 		$message = "<html><body style='background-color: #fafafa;'>";
@@ -510,7 +510,7 @@ if($stageID == 6) {
 				$message .= $issues["strIssues"];
 			}
 			$i++;
-		}		
+		}
 		$message .= "<tr><td width='10%'><strong>URL</strong></td><td width='*' colspan='3'>" . $news["strURL"] . "</td></tr>";
 		$message .= "<tr><td width='10%'><strong>Headline</strong></td><td width='*' colspan='3'>" . $news["strHeadline"] . "</td></tr>";
 		$message .= "<tr><td width='10%'><strong>Writers</strong></td><td width='*' colspan='3'>";
@@ -520,7 +520,7 @@ if($stageID == 6) {
 				$message .= $writer["strFirstName"] . " " . $writer["strLastName"] . ", ";
 			}
 			else {
-				$message .= $writer["strFirstName"] . " " . $writer["strLastName"];	
+				$message .= $writer["strFirstName"] . " " . $writer["strLastName"];
 			}
 			$i++;
 		}
@@ -579,7 +579,14 @@ if($stageID == 6) {
 	mysql_query($sql);
 
 	// social media information
-	$_SESSION["tweetHeadline"] = $news["strHeadline"];
+	if(empty($news["strTweet"])) {
+		$_SESSION["tweetHeadline"] = $news["strHeadline"];
+	}
+	else {
+		$_SESSION["tweetHeadline"] = $news["strTweet"];
+		$_SESSION["customTweet"] = 1;
+	}
+
 	$_SESSION["tweetURL"] = $news["strURL"];
 
 	header("Location: ../social.php");

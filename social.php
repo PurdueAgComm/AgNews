@@ -31,7 +31,9 @@ include_once("includes/header.php");
    <div class="containerSocial">
    	<h3>Social Media</h3>
 
-   	<p><strong>Headline:</strong> <?php echo $_SESSION["tweetHeadline"]; ?></p>
+    <?php ($_SESSION["customTweet"]) ? $title = "Custom Tweet: " : $title= "Headline: "; ?>
+
+   	<p><strong><?= $title ?></strong> <?php echo $_SESSION["tweetHeadline"]; ?></p>
    	<p><strong>News URL:</strong> <a href="<?php echo $_SESSION["tweetURL"]; ?>"><?php echo $_SESSION["tweetURL"]; ?></a></p>
 
    	<hr>
@@ -40,7 +42,7 @@ include_once("includes/header.php");
    	<table style="width: 100%;">
    		<tr>
    			<td><strong>Tweet Story:</strong></td><td><a href="https://twitter.com/share" class="twitter-share-button" data-url="<? echo $_SESSION['tweetURL'];?>" data-text="<? echo $_SESSION['tweetHeadline'];?>" data-size="large">Tweet Purdue Ag</a></td>
-   
+
    			<td>
    				<strong>Facebook Story:</strong>
    			</td>

@@ -9,7 +9,7 @@ include_once('../includes/db.php'); // includes db connection
 // Grab information from last page and save
 // #############################################################
 $newsID = $_GET["newsID"];
-$nowModified = date("Y-m-d H:i:s");  
+$nowModified = date("Y-m-d H:i:s");
 
 $_SESSION["filename"] = mysql_real_escape_string($_POST["filename"]);
 $_SESSION["intent"] = mysql_real_escape_string($_POST["intent"]);
@@ -17,6 +17,8 @@ $_SESSION["reach"] = mysql_real_escape_string($_POST["reach"]);
 $_SESSION["url"] = mysql_real_escape_string($_POST["url"]);
 
 $_SESSION["headline"] = mysql_real_escape_string(str_replace('"', "''", $_POST["headline"]));
+$_SESSION["tweet"] = mysql_real_escape_string($_POST["tweet"]);
+
 
 if(!empty($_POST["datePublished"])) {
 	$_SESSION["datePublished"] = mysql_real_escape_string(date('Y-m-d', strtotime($_POST["datePublished"])));
@@ -51,9 +53,9 @@ $_SESSION["websiteURL5"] = mysql_real_escape_string($_POST["website5"]);
 // save  in session in case they error out
 for($i=1; $i<6; $i++) {
 	$_SESSION["writerID" . $i] = mysql_real_escape_string($_POST["writer" . $i]);
-	$_SESSION["sourceID" . $i] = mysql_real_escape_string($_POST["source" . $i]);	
-	$_SESSION["affiliationID" . $i] = mysql_real_escape_string($_POST["affiliation" . $i]);	
-	$_SESSION["departmentID" . $i] = mysql_real_escape_string($_POST["department" . $i]);	
+	$_SESSION["sourceID" . $i] = mysql_real_escape_string($_POST["source" . $i]);
+	$_SESSION["affiliationID" . $i] = mysql_real_escape_string($_POST["affiliation" . $i]);
+	$_SESSION["departmentID" . $i] = mysql_real_escape_string($_POST["department" . $i]);
 }
 
 $_SESSION["area"] = $_POST["area"];
@@ -219,7 +221,7 @@ if(isset($_POST["source"])) {
 		$_SESSION["email01Error"] = 1;
 		$_SESSION["errorCounter"]++;
 	}
-	
+
 	//email validation is done
     if(!preg_match("/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9_-]+\.[a-zA-Z0-9_-]/", $_SESSION["email01"])){
 
@@ -236,13 +238,13 @@ if(isset($_POST["source"])) {
 // check for duplicate sources
 $query = mysql_query("SELECT * FROM tblPeople WHERE strEmail = ('" . $_SESSION["email01"] . "') && isSource = 1");
 $row = mysql_fetch_array($query);
- 
+
 	if(mysql_num_rows($query) != 0) {
 		$_SESSION["errorSameSource"] = 1;
 		$_SESSION["email01Error"] = 1;
-	
+
 		$_SESSION["error"] = "Our database shows <strong>". $row[strFirstName]. " ". $row[strLastName]. "</strong> is assigned the entered email address.<br> <a rel='tooltip' title='Create a new Source profile' data-toggle='modal' href='#myModal' role='button' class='btn btn-small btn-danger'><strong> " . $row[strEmail]. " </strong> is assigned as a source in our database. Please enter a different email address for this source.</a>";
-	    header("Location: ../editStory.php?newsID=" . $newsID . "&isComplete=false&count=1");		
+	    header("Location: ../editStory.php?newsID=" . $newsID . "&isComplete=false&count=1");
 
 	}
 
@@ -254,7 +256,7 @@ $row = mysql_fetch_array($query);
 
 		$sql = "UPDATE tblPeople SET isSource='1' WHERE strEmail=('" . $_SESSION["email01"] . "')";
      		   mysql_query($sql);
-	
+
 		// redirect with success message
      	// **07-27: we need the stripslashes to return without any \'s.
 		$_SESSION["success"] = "You've successfully added <strong>" . htmlspecialchars(stripslashes($_SESSION["fname01"]), ENT_QUOTES) . " " . htmlspecialchars(stripslashes($_SESSION["lname01"]), ENT_QUOTES) . "</strong> as a source.";
@@ -266,8 +268,8 @@ $row = mysql_fetch_array($query);
 		$_SESSION["phone01"] = "";
 		$_SESSION["dept01"] = "";
 		$_SESSION["errorSameSource"] = 1;
-		
-		header("Location: ../editStory.php?newsID=" . $newsID);	
+
+		header("Location: ../editStory.php?newsID=" . $newsID);
 	}
 
 
@@ -330,10 +332,16 @@ else {
 
 	// set that the form is complete by default
 	$_SESSION["validationCount"] = 0;
-	
+
     //the only REQUIRED field is filename
 	if(empty($_SESSION["filename"])) {
 		$_SESSION["filenameError"] = 1;
+		$_SESSION["validationCount"]++;
+	}
+
+	if(strlen($_SESSION["tweet"]) > 140) {
+		$_SESSION['error'] = "Your tweet must be 140 characters or less.";
+		$_SESSION['tweetError'] = 1;
 		$_SESSION["validationCount"]++;
 	}
 
@@ -343,17 +351,18 @@ else {
 		$_SESSION["error"] = "We didn't receive all of the information required to create a story. Please look through the form below and fix any fields highlighted in red.";
 		header("Location: ../editStory.php?newsID=" . $newsID . "&isComplete=false&count=" . $_SESSION["validationCount"]);
 	}
-	// if no validation errors, come here. Goes to 2nd to last bracket	
-		else { 
+	// if no validation errors, come here. Goes to 2nd to last bracket
+		else {
 
 			$sql = "SELECT strHeadline FROM tblNews WHERE strHeadline='". $_SESSION["headline"] ."'";
 			$result = mysql_query($sql);
 			$num_rows = mysql_num_rows($result);
 
+		// what is this gina? -KW
 		if (true) {
-	
+
 			// #############################################################
-			//	tblNewsWriterPeople -  This SQL statement is dd the writers, 
+			//	tblNewsWriterPeople -  This SQL statement is dd the writers,
 			//  referencing this story
 			// #############################################################
 			// First, we have to query the tblNews table in order to get the maximum newsID and then increment it by one for this story's ID
@@ -375,9 +384,9 @@ else {
 
 		for($i=1; $i<6; $i++) {
 			if(!empty($_SESSION["writerID" .  $i])) {
-			
+
 					// match form names to database names
-					$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["writerID" .  $i] . "' LIMIT 1"; 
+					$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["writerID" .  $i] . "' LIMIT 1";
 		    		$result = mysql_query($sql3);
 
 				// if it ever is 0 nothing is inputted and error is sent back
@@ -389,7 +398,7 @@ else {
 
 			if(!empty($_SESSION["sourceID" .  $i])) {
 				// match form names to database names
-				$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["sourceID" .  $i] . "' LIMIT 1"; 
+				$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["sourceID" .  $i] . "' LIMIT 1";
 				$result = mysql_query($sql3);
 
 				// if it ever is 0 nothing is inputted and error is sent back
@@ -404,7 +413,7 @@ else {
 				$sql3 = "SELECT affiliationID FROM tblAffiliation WHERE strAffiliation='" . $_SESSION["affiliationID" . $i] . "';";
 				$result = mysql_query($sql3);
 
-				// if it ever is 0 nothing is inputted and error is sent back		
+				// if it ever is 0 nothing is inputted and error is sent back
 				if(mysql_num_rows($result) == 0) {
 					$errorStopAffiliation = 1;
 					$_SESSION["error"] = "The affiliate you provided was not found in our database. Please check your spelling and try again. A great tip is to use the hints provided and not type the entire name out yourself. If you need to select an affiliate that does not appear, <a href='contactHelp.php'>tell us</a>.";
@@ -428,11 +437,11 @@ else {
 	if($errorStopWriter == 0 && $errorStopSource == 0 && $errorStopAffiliation == 0 && $errorStopDepartment == 0) {
 
 			// #############################################################
-			//	tblNewsWriterPeople -  This SQL statement is dd the writers, 
+			//	tblNewsWriterPeople -  This SQL statement is dd the writers,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
-			// Only need five tries because that's the max amount of fields we give them 
+			// Now, insert the required information into the database.
+			// Only need five tries because that's the max amount of fields we give them
 
 			$sqlDelete = "DELETE FROM tblNewsWriterPeople WHERE newsID=" . $newsID;
 			mysql_query($sqlDelete);
@@ -440,14 +449,14 @@ else {
 			for($i=1; $i<6; $i++) {
 
 				if(!empty($_SESSION["writerID" .  $i])) {
-			
+
 					// match form names to database names
-					$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["writerID" .  $i] . "' LIMIT 1"; 
+					$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["writerID" .  $i] . "' LIMIT 1";
 		    		$result = mysql_query($sql3);
-		   
+
 		           	// if we find a row in the database matching the person, enter the folloiwing into the database
 					if(mysql_num_rows($result) != 0) {
-						while ($row = mysql_fetch_array($result)) {					
+						while ($row = mysql_fetch_array($result)) {
 							$sql2 = "INSERT INTO tblNewsWriterPeople (newsID, peopleID) VALUES (" . $newsID . ", " . $row["peopleID"] . ");";
 							mysql_query($sql2);
 						}
@@ -461,11 +470,11 @@ else {
 			}  // end Writer FOR loop
 
 			// #############################################################
-			//	tblNewsSourcePeople -  This SQL statement is dd the sources, 
+			//	tblNewsSourcePeople -  This SQL statement is dd the sources,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
-			// Only need five tries because that's the max amount of fields we give them 
+			// Now, insert the required information into the database.
+			// Only need five tries because that's the max amount of fields we give them
 
 			$sqlDelete = "DELETE FROM tblNewsSourcePeople WHERE newsID=" . $newsID;
 			mysql_query($sqlDelete);
@@ -473,14 +482,14 @@ else {
 			for($i=1; $i<6; $i++) {
 
 				if(!empty($_SESSION["sourceID" .  $i])) {
-			
+
 					// match form names to database names
-					$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["sourceID" .  $i] . "' LIMIT 1"; 
+					$sql3 = "SELECT peopleID FROM tblPeople WHERE CONCAT_WS(' ', strFirstName, strLastName) = '". $_SESSION["sourceID" .  $i] . "' LIMIT 1";
 					$result = mysql_query($sql3);
 
 		           	// if we find a row in the database matching the person, enter the folloiwing into the database
 					if(mysql_num_rows($result) != 0) {
-						while ($row = mysql_fetch_array($result)) {					
+						while ($row = mysql_fetch_array($result)) {
 							$sql2 = "INSERT INTO tblNewsSourcePeople (newsID, peopleID) VALUES (" . $newsID . ", " . $row["peopleID"] . ");";
 							mysql_query($sql2);
 						}
@@ -495,11 +504,11 @@ else {
 			}  // end Source FOR loop
 
 			// #############################################################
-			//	tblNewsAffiliation -  This SQL statement is dd the affiliations, 
+			//	tblNewsAffiliation -  This SQL statement is dd the affiliations,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
-			// Only need five tries because that's the max amount of fields we give them 
+			// Now, insert the required information into the database.
+			// Only need five tries because that's the max amount of fields we give them
 
 			$sqlDelete = "DELETE FROM tblNewsAffiliation WHERE newsID=" . $newsID;
 			mysql_query($sqlDelete);
@@ -513,7 +522,7 @@ else {
 
 		           	// if we find a row in the database matching the affiliation, enter the folloiwing into the database
 					if(mysql_num_rows($result) != 0) {
-						while ($row = mysql_fetch_array($result)) {					
+						while ($row = mysql_fetch_array($result)) {
 							$sql2 = "INSERT INTO tblNewsAffiliation (newsID, affiliationID) VALUES (" . $newsID . ", " . $row["affiliationID"] . ");";
 							mysql_query($sql2);
 						}
@@ -528,11 +537,11 @@ else {
 			}  // end Affiliation FOR loop
 
 			// #############################################################
-			//	tblNewsDept -  This SQL statement is dd departments, 
+			//	tblNewsDept -  This SQL statement is dd departments,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
-			// Only need five tries because that's the max amount of fields we give them 
+			// Now, insert the required information into the database.
+			// Only need five tries because that's the max amount of fields we give them
 
 			$sqlDelete = "DELETE FROM tblNewsDept WHERE newsID=" . $newsID;
 			mysql_query($sqlDelete);
@@ -546,7 +555,7 @@ else {
 
            	        // if we find a row in the database matching the person, enter the folloiwing into the database
 					if(mysql_num_rows($result) != 0) {
-						while ($row = mysql_fetch_array($result)) {					
+						while ($row = mysql_fetch_array($result)) {
 							$sql2 = "INSERT INTO tblNewsDept (newsID, deptID) VALUES (" . $newsID . ", " . $row["deptID"] . ");";
 							mysql_query($sql2);
 						}
@@ -587,16 +596,16 @@ else {
 			header("Location: ../editStory.php?newsID=" . $newsID . "&isComplete=false&count=" . $j);
 			die();
 	        }
-			
+
 			// #############################################################
-			//	tblNewsTopic -  This SQL statement is dd topics, 
+			//	tblNewsTopic -  This SQL statement is dd topics,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
+			// Now, insert the required information into the database.
 
 			$sqlDelete = "DELETE FROM tblNewsTopic WHERE newsID=" . $newsID;
 			mysql_query($sqlDelete);
-	
+
 			$sql3 = "SELECT COUNT(topicID) AS numberOfTopics FROM tblTopic;";
 			$result = mysql_query($sql3);
 			$row = mysql_fetch_array($result);
@@ -616,10 +625,10 @@ else {
 			$row = mysql_fetch_array($result);
 
 			// #############################################################
-			//	tblNewsArea -  This SQL statement is dd areas, 
+			//	tblNewsArea -  This SQL statement is dd areas,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
+			// Now, insert the required information into the database.
 
 			for($i=0; $i <= $row["numberOfAreas"]; $i++) {
 				if(!empty($_SESSION["area"][$i])) {
@@ -636,10 +645,10 @@ else {
 			$row = mysql_fetch_array($result);
 
 			// #############################################################
-			//	tblNewsTopic -  This SQL statement is dd topics, 
+			//	tblNewsTopic -  This SQL statement is dd topics,
 			//  referencing this story
 			// #############################################################
-			// Now, insert the required information into the database. 
+			// Now, insert the required information into the database.
 
 			for($i=0; $i < $row["numberofIssues"]; $i++) {
 				if(!empty($_SESSION["issues"][$i])) {
@@ -652,8 +661,8 @@ else {
 			//	tblNews - Saving news story information
 			// #############################################################
 			if($_SESSION["validationCount"] <= 0) {
-			
-			$sql = "UPDATE tblNews SET strHeadline='" . $_SESSION["headline"] . "', strVideo='" . $_SESSION["youtube"] . "', strURL='" . $_SESSION["url"] . "', strImage='" . $_SESSION["image"] . "', datePublished='" . $_SESSION["datePublished"] . "', txtIntent='" . $_SESSION["intent"]  . "', strFilename='" . $_SESSION["filename"] . "', strReach='" . $_SESSION["reach"]. "', txtBody='" . htmlspecialchars(mysql_real_escape_string($_SESSION["story"])) . "', isScience=" . $_SESSION["isScience"] . ",  isColumn=" . $_SESSION["isColumn"] . ",  isTopStory=" . $_SESSION["isTopStory"]. ",  isAgricultures=" . $_SESSION["isAgricultures"] . ",  isConnections=" . $_SESSION["isConnections"] . ",  isExtTopStory=" . $_SESSION["isExtTopStory"] . ", dateModified='" . $nowModified . "', strWebsite1='" . $_SESSION["websiteURL1"] . "', strWebsite2='" . $_SESSION["websiteURL2"] . "', strWebsite3='" . $_SESSION["websiteURL3"] . "', strWebsite4='" . $_SESSION["websiteURL4"] . "', strWebsite5='" . $_SESSION["websiteURL5"] . "', strWebsiteTitle1='" . $_SESSION["websiteName1"] . "',  strWebsiteTitle2='" . $_SESSION["websiteName2"] . "',  strWebsiteTitle3='" . $_SESSION["websiteName3"] . "',  strWebsiteTitle4='" . $_SESSION["websiteName4"] . "',  strWebsiteTitle5='" . $_SESSION["websiteName5"] . "', isPhoto=" . $_SESSION["isPhoto"] . ", isGraphic=" . $_SESSION["isGraphic"]  . ", isVideo=" . $_SESSION["isVideo"]  . ", isAudio=" . $_SESSION["isAudio"]  . ", isAnswers=" . $_SESSION["isAnswers"]  . ", strImage='" . $_SESSION["image"] . "' WHERE newsID=" . $newsID;
+
+			$sql = "UPDATE tblNews SET strHeadline='" . $_SESSION["headline"] . "', strVideo='" . $_SESSION["youtube"] . "', strURL='" . $_SESSION["url"] . "', strImage='" . $_SESSION["image"] . "', datePublished='" . $_SESSION["datePublished"] . "', txtIntent='" . $_SESSION["intent"]  . "', strFilename='" . $_SESSION["filename"] . "', strReach='" . $_SESSION["reach"]. "', txtBody='" . htmlspecialchars(mysql_real_escape_string($_SESSION["story"])) . "', isScience=" . $_SESSION["isScience"] . ",  isColumn=" . $_SESSION["isColumn"] . ",  isTopStory=" . $_SESSION["isTopStory"]. ",  isAgricultures=" . $_SESSION["isAgricultures"] . ",  isConnections=" . $_SESSION["isConnections"] . ",  isExtTopStory=" . $_SESSION["isExtTopStory"] . ", dateModified='" . $nowModified . "', strWebsite1='" . $_SESSION["websiteURL1"] . "', strWebsite2='" . $_SESSION["websiteURL2"] . "', strWebsite3='" . $_SESSION["websiteURL3"] . "', strWebsite4='" . $_SESSION["websiteURL4"] . "', strWebsite5='" . $_SESSION["websiteURL5"] . "', strWebsiteTitle1='" . $_SESSION["websiteName1"] . "',  strWebsiteTitle2='" . $_SESSION["websiteName2"] . "',  strWebsiteTitle3='" . $_SESSION["websiteName3"] . "',  strWebsiteTitle4='" . $_SESSION["websiteName4"] . "',  strWebsiteTitle5='" . $_SESSION["websiteName5"] . "', isPhoto=" . $_SESSION["isPhoto"] . ", isGraphic=" . $_SESSION["isGraphic"]  . ", isVideo=" . $_SESSION["isVideo"]  . ", isAudio=" . $_SESSION["isAudio"]  . ", isAnswers=" . $_SESSION["isAnswers"]  . ", strImage='" . $_SESSION["image"] . "', strTweet='" . $_SESSION["tweet"] . "' WHERE newsID=" . $newsID;
      		mysql_query($sql);
 
 			$sql2 = "SELECT strStage FROM tblStage WHERE stageID=1;";
@@ -669,6 +678,7 @@ else {
 			$_SESSION["intent"]		 = "";
 			$_SESSION["reach"]		 = "";
 			$_SESSION["headline"]	 = "";
+			$_SESSION["tweet"]	 = "";
 			$_SESSION["writerID1"]		 = "";
 			$_SESSION["writerID2"]		 = "";
 			$_SESSION["writerID3"]		 = "";
@@ -724,8 +734,8 @@ else {
 				header("Location: ../editStory.php?newsID=" . $newsID . "&isComplete=false&count=1");
 			}
 
-		}   // end ELSE, adding writers referenced to the story	
-	}	
-}	// end ELSE. This matches the ELSE bracket before the VALIDATION area	
+		}   // end ELSE, adding writers referenced to the story
+	}
+}	// end ELSE. This matches the ELSE bracket before the VALIDATION area
 
 ?>
