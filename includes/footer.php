@@ -3,7 +3,7 @@
 
       <div class="footer" style="clear:both;">
         <p>&copy; Purdue University 2013-<?=date("Y")?> | You are logged in as <?php echo phpCAS::getAttribute('fullname');?>. <a href="?logout=1">Logout</a>
-          <span class="muted pull-right"><small>version 1.2</small></p>
+          <span class="muted pull-right"><small><i class="icon icon-gift muted" data-container="body" rel="tooltip" title="We're 1!"></i> version 1.2</small></p>
 
 
 <!--       <div class="alert alert-info"><strong>1.1.0 Changelog</strong><br />

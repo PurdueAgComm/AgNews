@@ -120,7 +120,7 @@ $_SESSION["waitingOnWriter"] = mysql_num_rows($redResult);
     <div class="container">
 
       <div class="masthead">
-        <a href="/agnewsdb"><h3 class="muted">AgComm News</h3></a>
+        <a href="/agnewsdb"><h3 class="muted">Agricultural Communication News Center</h3></a>
         <div class="navbar">
           <div class="navbar-inner">
             <div class="container">
@@ -130,7 +130,9 @@ $_SESSION["waitingOnWriter"] = mysql_num_rows($redResult);
                 <li><a href="viewAllStories.php">News Stories</a></li>
                 <li><a href="addStory.php">Add Story</a></li>
                 <li><a href="help.php">Help</a></li>
-                <?php if($_SESSION["isAdmin"] == 1) { ?> <li><a href="controlPanel.php">Control Panel</a></li> <?php } ?>
+                <?php if($_SESSION["isAdmin"]) : ?>
+                  <li><a href="controlPanel.php">Control Panel</a></li>
+                <?php endif; ?>
                 <li><a href="?logout=1">Logout</a></li>
               </ul>
             </div>
