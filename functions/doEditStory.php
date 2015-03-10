@@ -73,6 +73,7 @@ if(strlen($_SESSION["story"]) >= 63000) {
 // Start off with fresh error variables for resubmit
 $_SESSION["filenameError"] = 0;
 $_SESSION["headlineError"] = 0;
+$_SESSION["tweetError"] = 0;
 $_SESSION["writerError"] = 0;
 $_SESSION["sourceError"] = 0;
 $_SESSION["departmentError"] = 0;
