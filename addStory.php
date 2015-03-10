@@ -166,7 +166,13 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           </div>
         </div>
 
-        <div class="control-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
+        <div class="alert alert-info">
+          <p><strong><i class="icon icon-share"></i> Rockin' the Twitterverse</strong> <small>new in v1.2</small></p>
+          <p>You can now specify a custom tweet in the field below. We'll save it for you (you can edit it later) and then use this instead of the headline once you publish the story. Cool, right? Since we're using Twitter, make sure to keep it 140 characters or less!</p>
+
+        </div>
+
+        <div class="control-group info <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
           <label class="control-label" for="tweet">Tweet</label>
           <div class="controls">
             <input type="text" class="span3" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= $_SESSION['tweet'];?>"> <span id="count" class="muted"></span>
