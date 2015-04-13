@@ -419,8 +419,9 @@ $newsID = (int) $_GET["newsID"];
               }
              ?>
 
-              <input class="span2" name="datePublished" size="16" type="text" value="<?= $datePub; ?>" readonly><span class="add-on"><i class="icon-th"></i></span>
+              <input class="span2" name="datePublished" id="datePublished" size="16" type="text" value="<?= $datePub; ?>" readonly><span class="add-on"><i class="icon-th"></i></span>
             </div>
+            <a onClick="$('#datePublished').val('');" class="btn">Clear</a>
           </div>
         </div>
 
