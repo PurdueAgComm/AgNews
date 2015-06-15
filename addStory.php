@@ -285,7 +285,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
 
         <div class="control-group <?php if($_SESSION['areaError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Area(s)*</label>
+          <label class="control-label" for="college">Story Type*</label>
           <div class="controls">
               <?php
               $sql = "SELECT * FROM tblArea;";
