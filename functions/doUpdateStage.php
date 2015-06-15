@@ -22,11 +22,12 @@ $newsID  = $_POST["newsID"];
 
 if(!empty($stageID) && !empty($newsID)) {
 	if($stageID == 6) {
-		$sql2 = "SELECT * FROM tblNews WHERE newsID=" . $newsID;
+		$sql2 = "SELECT * FROM tblNews INNER JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.newsID=" . $newsID;
 		$result2 = mysql_query($sql2);
 		$news = mysql_fetch_array($result2);
 
-		if($news["strURL"] == "") {
+		// if the URL is empty and the story has an area OTHER THAN 'notable' area type...
+		if($news["strURL"] == "" && $news["areaID"] < 5) {
 			$_SESSION["error"] = "You must enter the <a class='btn btn-mini btn-danger' href='editStory.php?newsID=" . $newsID . "#storyURL'>URL for the Purdue News Service version of the story</a> before publishing.";
 			header("Location: ../beholdStory.php?newsID=" . $newsID);
 			die();
@@ -467,9 +468,10 @@ if($stageID == 6) {
 	$resultTopics = mysql_query($sqlTopics);
 	$numTopics = mysql_num_rows($resultTopics);
 
+	// if the area is Extension Depot News...
 	if($areaNum > 0) {
 
-		$to = "knwilson@purdue.edu,abanta@purdue.edu,clgosnell@purdue.edu,wsfrazier@purdue.edu,katz@purdue.edu,kgetzin@purdue.edu";
+		$to = "knwilson@purdue.edu,abanta@purdue.edu,clgosnell@purdue.edu,olopez@purdue.edu,katz@purdue.edu,kgetzin@purdue.edu";
 		//$to = "knwilson@purdue.edu";
 		if(!empty($news["strHeadline"])) {
 			$subject = "[Depot] '" . $news["strHeadline"] . "' needs to be added to the Depot.";
