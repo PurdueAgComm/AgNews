@@ -11,6 +11,7 @@
         <ul>
           <li>Changes to doUpdateStage.php</li>
           <li>Notables release</li>
+          <li>~ Bootstrap Upgrade</li>
       </div>
 
     </div> <!-- /container -->
