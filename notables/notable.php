@@ -111,16 +111,16 @@ google.setOnLoadCallback(function() {
       <button class="navbar-toggle" data-target=".black" data-toggle="collapse" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><p>Menu</p>
     </div>
     <div class="collapse navbar-collapse black">
-      <ul class="nav navbar-nav"><li class="first"><a href="../index.html">
+      <ul class="nav navbar-nav"><li class="first"><a href="../notables/index.php">
             Home
-          </a></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="../homepages/department1.html">Homepages<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="../homepages/department1.html">Department/Office 1</a></li><li><a href="../homepages/department2.html">Department/Office 2</a></li></ul></li><li><a href="archives.php">Archives</a></li><li class="dropdown current"><a class="dropdown-toggle" data-toggle="dropdown" href="content1.html">Content<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="content1.html">Content 1</a></li><li><a href="content2.html">Content 2</a></li><li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="submenu2/index.html">Submenu2<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="submenu2/index.html">Main</a></li><li><a href="submenu2/subcontent1.html">SubContent 1</a></li><li><a href="submenu2/subcontent2.html">SubContent 2</a></li></ul></li></ul></li></ul>
+          </a></li><li class="dropdown"><a href="archives.php">Archives</a></li><li class="dropdown current"><a class="dropdown-toggle" data-toggle="dropdown" href="content1.html">Content<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="content1.html">Content 1</a></li><li><a href="content2.html">Content 2</a></li><li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="submenu2/index.html">Submenu2<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="submenu2/index.html">Main</a></li><li><a href="submenu2/subcontent1.html">SubContent 1</a></li><li><a href="submenu2/subcontent2.html">SubContent 2</a></li></ul></li></ul></li></ul>
     </div>
     <!--/.nav-collapse --></div>
 </div>
 <div class="breadcrumb">
   <div class="container">
     <div class="row">
-      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="content1.html">Content</a></li></ol></div>
+      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="content1.html">Archives</a></li></ol></div>
     </div>
   </div>
 </div>
@@ -129,30 +129,16 @@ google.setOnLoadCallback(function() {
     <div class="row">
       <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
 
-<img alt="Page Banner" class="banner" height="235" src="https://www.purdue.edu/purdue/images/page-banner.jpg" width="840"/>
 
-
-<h1>Notables</h1>
-<p>Appointments, Honors, and Notables from the College of Agriculture. Nunc laoreet mi vel augue malesuada, nec pulvinar mi viverra. Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
-
-<h2>This is the First Story</h2>
+<h1>Title of the Notable</h1>
 <p> <strong> June 15, 2015</strong> </p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
-<h2>This is the Second Story</h2>
-<p> <strong> June 15, 2015</strong> </p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
-<h2>This is the Third Story</h2>
-<p> <strong> June 15, 2015</strong> </p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
+<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
 
       </div>
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
         <h5 class="header">Recent Notables</h5>
-        <ul><li><a href="content1.html">Content 1</a></li><li><a href="content2.html">Content 2</a></li><li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="submenu2/index.html">Submenu2</a><ul class="dropdown-menu"><li><a href="submenu2/index.html">Main</a></li><li><a href="submenu2/subcontent1.html">SubContent 1</a></li><li><a href="submenu2/subcontent2.html">SubContent 2</a></li></ul></li></ul>
+        <ul><li><a href="content1.html">This is a really cool article with a long title.</a></li><li><a href="content2.html">Content 2</a></li><li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="submenu2/index.html">Submenu2</a><ul class="dropdown-menu"><li><a href="submenu2/index.html">Main</a></li><li><a href="submenu2/subcontent1.html">SubContent 1</a></li><li><a href="submenu2/subcontent2.html">SubContent 2</a></li></ul></li></ul>
       </div>
       <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
 
