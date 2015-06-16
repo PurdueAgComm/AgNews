@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
 <head>
@@ -11,7 +10,7 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, user-scalable=no" name="viewport"/>
-<title>Content 1 - Office of Marketing and Media - Purdue University</title>
+<title>Notables - Office of Marketing and Media - Purdue University</title>
 <link href="images/favicon.ico" rel="shortcut icon"/>
 <script async="true" src="js/modernizr-1.5.min.js" type="text/javascript">
 </script>
@@ -111,16 +110,16 @@ google.setOnLoadCallback(function() {
       <button class="navbar-toggle" data-target=".black" data-toggle="collapse" type="button"><span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button><p>Menu</p>
     </div>
     <div class="collapse navbar-collapse black">
-      <ul class="nav navbar-nav"><li class="first"><a href="../index.html">
+      <ul class="nav navbar-nav"><li class="first"><a href="index.php">
             Home
-          </a></li><li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="../homepages/department1.html">Homepages<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="../homepages/department1.html">Department/Office 1</a></li><li><a href="../homepages/department2.html">Department/Office 2</a></li></ul></li><li><a href="archives.php">Archives</a></li><li class="dropdown current"><a class="dropdown-toggle" data-toggle="dropdown" href="content1.html">Content<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="content1.html">Content 1</a></li><li><a href="content2.html">Content 2</a></li><li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="submenu2/index.html">Submenu2<span class="caret"></span></a><ul class="dropdown-menu"><li><a href="submenu2/index.html">Main</a></li><li><a href="submenu2/subcontent1.html">SubContent 1</a></li><li><a href="submenu2/subcontent2.html">SubContent 2</a></li></ul></li></ul></li></ul>
+          </a></li><li><a href="archives.php">Archives</a></li><li><a href="notable.php">Content</a></li></ul>
     </div>
     <!--/.nav-collapse --></div>
 </div>
 <div class="breadcrumb">
   <div class="container">
     <div class="row">
-      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="content1.html">Content</a></li></ol></div>
+      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="content1.html">Homepage</a></li></ol></div>
     </div>
   </div>
 </div>
@@ -152,7 +151,7 @@ google.setOnLoadCallback(function() {
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
         <h5 class="header">Recent Notables</h5>
-        <ul><li><a href="content1.html">Content 1</a></li><li><a href="content2.html">Content 2</a></li><li class="dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" href="submenu2/index.html">Submenu2</a><ul class="dropdown-menu"><li><a href="submenu2/index.html">Main</a></li><li><a href="submenu2/subcontent1.html">SubContent 1</a></li><li><a href="submenu2/subcontent2.html">SubContent 2</a></li></ul></li></ul>
+        <ul><li><a href="content1.html">Title of Recent Notable</a></li><li><a href="content2.html">Title of Recent Notable 2</a></li><li><a href="content3.html">Title of Recent Notable 3</a></li></ul>
       </div>
       <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
 
