@@ -1,4 +1,10 @@
 
+<?php include_once('../includes/db.php');
+$notableID = (int) stripslashes($_GET["n"]);
+$sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 AND tblNews.newsID =" . $notableID;
+$result = mysql_query($sql);
+$notableBC = mysql_fetch_array($result);
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
 <head>
@@ -120,7 +126,7 @@ google.setOnLoadCallback(function() {
 <div class="breadcrumb">
   <div class="container">
     <div class="row">
-      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="index.php">Purdue Agriculture Notables</a></li><li><a href="notable.php">Title of the Notable</a></li></ol></div>
+      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="index.php">Purdue Agriculture Notables</a></li><li><a href="notable.php?n=<?php echo $notableBC["newsID"]; ?>"><?php echo $notableBC["strHeadline"]; ?></a></li></ol></div>
     </div>
   </div>
 </div>
@@ -128,17 +134,29 @@ google.setOnLoadCallback(function() {
   <div class="container">
     <div class="row">
       <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
-
-
-<h1>Title of the Notable</h1>
-<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
+        <?php
+          $notableID = (int) stripslashes($_GET["n"]);
+          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 AND tblNews.newsID =" . $notableID . " ORDER BY tblNews.datePublished DESC LIMIT 5";
+          $result = mysql_query($sql) or die(mysql_error());
+          while($notable = mysql_fetch_array($result)) : ?>
+            <h1><?php echo $notable["strHeadline"]; ?></h1>
+            <p class="noteDate"><i class="fa fa-calendar"></i> <?php echo date("F d, Y", strtotime($notable["datePublished"])); ?></p>
+            <hr>
+            <p><?php echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
+        <?php endwhile; ?>
       </div>
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
-        <h5 class="header">Recent Notables</h5>
-        <ul><li><a href="content1.html">Title of Recent Notable</a></li><li><a href="content2.html">Title of Recent Notable 2</a></li><li><a href="content3.html">Title of Recent Notable 3</a></li><li><a href="archives.html">All Notables</a></li></ul>
+        <h3 class="header">Recent Notables</h3>
+        <ul>
+          <?php
+          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 ORDER BY tblNews.datePublished DESC LIMIT 10";
+          $result = mysql_query($sql) or die(mysql_error());
+          while($notable = mysql_fetch_array($result)) : ?>
+            <li><a href="notable.php?n=<?php echo $notable["newsID"]?>"><?php echo $notable["strHeadline"]; ?></a></li>
+        <?php endwhile; ?>
+        <li><a href="archives.php"><strong>All Notables</strong></a>
+        </ul>
       </div>
       <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
 

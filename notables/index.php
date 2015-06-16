@@ -9,7 +9,7 @@
 <meta charset="utf-8"/>
 <meta content="IE=edge" http-equiv="X-UA-Compatible"/>
 <meta content="width=device-width, user-scalable=no" name="viewport"/>
-<title>Notables - Office of Marketing and Media - Purdue University</title>
+<title>Notables - Purdue Agriculture  - Purdue University</title>
 <link href="images/favicon.ico" rel="shortcut icon"/>
 <script async="true" src="js/modernizr-1.5.min.js" type="text/javascript">
 </script>
@@ -128,18 +128,25 @@ google.setOnLoadCallback(function() {
         <p>Appointments, Honors, and Notables from the College of Agriculture. Nunc laoreet mi vel augue malesuada, nec pulvinar mi viverra. Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
 
         <?php
-          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNewsArea.areaID=5 AND tblNews.isHidden=0;";
+          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 ORDER BY tblNews.datePublished DESC LIMIT 5";
           $result = mysql_query($sql) or die(mysql_error());
           while($notable = mysql_fetch_array($result)) : ?>
-            <h2><a href="notable.php">This is the First Story</a></h2>
-            <p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
-            <p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-          <?php endwhile; ?>
+            <h2><a href="notable.php?n=<?php echo $notable["newsID"]?>"><?php echo $notable["strHeadline"]; ?></a></h2>
+            <p class="noteDate"><i class="fa fa-calendar"></i> <?php echo date("F d, Y", strtotime($notable["datePublished"])); ?></p>
+            <p><?php echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
+        <?php endwhile; ?>
       </div>
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
-        <h5 class="header">Recent Notables</h5>
-        <ul><li><a href="content1.html">Title of Recent Notable</a></li><li><a href="content2.html">Title of Recent Notable 2</a></li><li><a href="content3.html">Title of Recent Notable 3</a></li></ul>
+        <h3 class="header">Recent Notables</h3>
+        <ul>
+          <?php
+          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 ORDER BY tblNews.datePublished DESC LIMIT 10";
+          $result = mysql_query($sql) or die(mysql_error());
+          while($notable = mysql_fetch_array($result)) : ?>
+            <li><a href="notable.php?n=<?php echo $notable["newsID"]?>"><?php echo $notable["strHeadline"]; ?></a></li>
+        <?php endwhile; ?>
+        </ul>
       </div>
       <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
 

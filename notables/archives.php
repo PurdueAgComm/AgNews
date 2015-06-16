@@ -1,4 +1,5 @@
 
+<?php include_once('../includes/db.php'); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
 <head>
@@ -160,8 +161,15 @@ google.setOnLoadCallback(function() {
       </div>
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
-        <h5 class="header">Recent Notables</h5>
-        <ul><li><a href="content1.html">Title of Recent Notable</a></li><li><a href="content2.html">Title of Recent Notable 2</a></li><li><a href="content3.html">Title of Recent Notable 3</a></li></ul>
+        <h3 class="header">Recent Notables</h3>
+        <ul>
+          <?php
+          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 ORDER BY tblNews.datePublished DESC LIMIT 10";
+          $result = mysql_query($sql) or die(mysql_error());
+          while($notable = mysql_fetch_array($result)) : ?>
+            <li><a href="notable.php?n=<?php echo $notable["newsID"]?>"><?php echo $notable["strHeadline"]; ?></a></li>
+        <?php endwhile; ?>
+        </ul>
       </div>
       <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
 
