@@ -1,8 +1,7 @@
+<?php include_once('../includes/db.php'); ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" class="no-js" lang="en">
 <head>
-
-
 <meta content="$description.value" name="description"/>
 <meta content="$keywords.value" name="keywords"/>
 <meta content="$author.value" name="author"/>
@@ -16,16 +15,12 @@
 </script>
 <!-- Bootstrap core CSS -->
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
-
 <!-- Font Awesome -->
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
 <!-- Main CSS -->
 <link href="css/styles.css" rel="stylesheet"/>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
 <!--<script async="true" src="//www.purdue.edu/purdue/js/jquery-1.10.2.min.js" type="text/javascript"></script> -->
-
 </head>
 <body style="">
 <div class="navbar navbar-inverse goldbar" role="navigation">
@@ -128,25 +123,20 @@ google.setOnLoadCallback(function() {
     <div class="row">
       <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
 
-<img alt="Page Banner" class="banner" height="235" src="https://www.purdue.edu/purdue/images/page-banner.jpg" width="840"/>
+        <img alt="Page Banner" class="banner" height="235" src="https://www.purdue.edu/purdue/images/page-banner.jpg" width="840"/>
 
 
-<h1>Notables</h1>
-<p>Appointments, Honors, and Notables from the College of Agriculture. Nunc laoreet mi vel augue malesuada, nec pulvinar mi viverra. Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+        <h1>Notables</h1>
+        <p>Appointments, Honors, and Notables from the College of Agriculture. Nunc laoreet mi vel augue malesuada, nec pulvinar mi viverra. Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
 
-<h2><a href="notable.php">This is the First Story</a></h2>
-<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
-<h2><a href="notable.php">This is the Second Story</a></h2>
-<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
-<h2><a href="notable.php">This is the Third Story</a></h2>
-<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
-<p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
-
-
+        <?php
+          $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNewsArea.areaID=5 AND tblNews.isHidden=0;";
+          $result = mysql_query($sql) or die(mysql_error());
+          while($notable = mysql_fetch_array($result)) : ?>
+            <h2><a href="notable.php">This is the First Story</a></h2>
+            <p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
+            <p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
+          <?php endwhile; ?>
       </div>
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
