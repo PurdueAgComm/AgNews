@@ -97,7 +97,7 @@ google.setOnLoadCallback(function() {
 <div class="top">
   <div class="container">
     <div class="row">
-      <div class="logo col-lg-2 col-md-3 col-sm-3 col-xs-12"><a href="//www.purdue.edu"><img alt="Purdue University" src="//www.purdue.edu/purdue/images/logo.png"/></a></div>
+      <div class="logo col-lg-2 col-md-3 col-sm-3 col-xs-12"><a href="//www.purdue.edu"><img alt="Purdue University" src="images/logo.png"/></a></div>
       <div class="department col-lg-9 col-md-9 col-sm-9 col-xs-8"><a href="../index.html">
         College of Agriculture Notables
         </a><span class="tagline"><a href="#">Agricultural Communication</a></span></div>
@@ -128,7 +128,7 @@ google.setOnLoadCallback(function() {
     <div class="row">
       <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
 
-<img alt="Page Banner" class="banner" height="235" src="https://www.purdue.edu/purdue/images/page-banner.jpg" width="840"/>
+<img alt="Page Banner" class="banner" height="235" src="images/page-banner.jpg" width="840"/>
 
 
 <h1>Notables</h1>

@@ -21,7 +21,7 @@ $normalResult = mysql_query($normalSQL);
 $numNormal = mysql_num_rows($normalResult);
 
 
-if(!empty($_SESSION["error"])) { 
+if(!empty($_SESSION["error"])) {
   // if there is an error, display it
   echo "<div class='alert alert-error alert-block'><h4>Houston, we have a problem!</h4><p>" . $_SESSION["error"] . "</p></div>";
   $_SESSION["error"] = "";
@@ -34,15 +34,14 @@ if ($_SESSION["success"] != "") {
 ?>
 
 
-     
-      <?php 
-
+      <?php
+/*
         $today = strtotime('now');
         $yesterday = strtotime('-1 day', $today);
 
         echo "<h3>Recent Activity<span rel='tooltip' title='Shows activity in the last 48 hours made by others.'><i class='icon-question-sign'></i></span></h3>";
         echo "<div class='row-fluid'>";
- 
+
 
         $sql = "SELECT * FROM tblActivity INNER JOIN tblNews ON tblNews.newsID=tblActivity.newsID WHERE tblActivity.peopleID <> " . $_SESSION["userID"] . " ORDER BY tblActivity.dateTimeStamp DESC LIMIT 3";
         $result = mysql_query($sql);
@@ -56,7 +55,7 @@ if ($_SESSION["success"] != "") {
               echo "<p><strong><a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>" . $newsActivityEach["strHeadline"] . "</a></strong><br /><small class='muted' rel='tooltip' style='cursor:pointer' title='Activity made on " .  $newsActivityEach["dateTimeStamp"] . "'>" . $newsActivityEach["strFirstName"] . " " . $newsActivityEach["strLastName"] .  "</small>";
             }
             else {
-              echo "<p><strong><a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>" . $newsActivityEach["strFilename"] . "</a></strong><br /><small class='muted' rel='tooltip' style='cursor:pointer' title='Activity made on " .  $newsActivityEach["dateTimeStamp"] . "'>" . $newsActivityEach["strFirstName"] . " " . $newsActivityEach["strLastName"] .  "</small>";              
+              echo "<p><strong><a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>" . $newsActivityEach["strFilename"] . "</a></strong><br /><small class='muted' rel='tooltip' style='cursor:pointer' title='Activity made on " .  $newsActivityEach["dateTimeStamp"] . "'>" . $newsActivityEach["strFirstName"] . " " . $newsActivityEach["strLastName"] .  "</small>";
             }
             echo "<p>" . $newsActivityEach["strActivity"] . "</p>";
             echo "<p><a class='btn btn-block btn-small' <a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>View Story <i class='icon-arrow-right'></i></a></p>";
@@ -64,7 +63,7 @@ if ($_SESSION["success"] != "") {
             $activityCount++;
           }
         }
-      
+
         if($activityCount == 0) {
             echo "<div class='alert alert-info'>You have no recent activity.</div>";
 
@@ -73,7 +72,7 @@ if ($_SESSION["success"] != "") {
         echo "</div>";
 
 
-/*
+
 
         $sql = "SELECT * FROM tblActivity INNER JOIN tblNews ON tblNews.newsID=tblActivity.newsID WHERE tblActivity.peopleID <> " . $_SESSION["userID"];
         $result = mysql_query($sql);
@@ -86,11 +85,11 @@ if ($_SESSION["success"] != "") {
         $yesterday = strtotime('-1 day', $today);
 
 
-  
+
       if((mysql_num_rows($result) > 0))   {
          echo "<h3>Recent Activity<span rel='tooltip' title='Shows activity in the last 48 hours made by others.'><i class='icon-question-sign'></i></h3>";
          echo "<div class='row-fluid'>";
- 
+
 
         $sql = "SELECT * FROM tblActivity INNER JOIN tblNews ON tblNews.newsID=tblActivity.newsID WHERE tblActivity.peopleID <> " . $_SESSION["userID"] . " ORDER BY tblActivity.dateTimeStamp DESC LIMIT 3";
         $result = mysql_query($sql);
@@ -106,7 +105,7 @@ if ($_SESSION["success"] != "") {
               echo "<p><strong><a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>" . $newsActivityEach["strHeadline"] . "</a></strong><br /><small class='muted' rel='tooltip' style='cursor:pointer' title='Activity made on " .  $newsActivityEach["dateTimeStamp"] . "'>" . $newsActivityEach["strFirstName"] . " " . $newsActivityEach["strLastName"] .  "</small>";
             }
             else {
-              echo "<p><strong><a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>" . $newsActivityEach["strFilename"] . "</a></strong><br /><small class='muted' rel='tooltip' style='cursor:pointer' title='Activity made on " .  $newsActivityEach["dateTimeStamp"] . "'>" . $newsActivityEach["strFirstName"] . " " . $newsActivityEach["strLastName"] .  "</small>";              
+              echo "<p><strong><a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>" . $newsActivityEach["strFilename"] . "</a></strong><br /><small class='muted' rel='tooltip' style='cursor:pointer' title='Activity made on " .  $newsActivityEach["dateTimeStamp"] . "'>" . $newsActivityEach["strFirstName"] . " " . $newsActivityEach["strLastName"] .  "</small>";
             }
             echo "<p>" . $newsActivityEach["strActivity"] . "</p>";
             echo "<p><a class='btn btn-block btn-small' <a href='beholdStory.php?newsID=" . $newsActivityEach["newsID"] . "'>View Story <i class='icon-arrow-right'></i></a></p>";
@@ -126,16 +125,16 @@ if ($_SESSION["success"] != "") {
       */
 
       ?>
- 
-      
- 
+
+
+
       <h3>Your News Stories</h3>
-      
+
 
       <?php
       // if there are news stories, post them in table format
       if($num_results > 0) {
-      
+
         if($numNormal > 11) {
           echo "<div class='alert alert-info'>Not all of your <strong>published</strong> stories are showing. <a href='viewAllStories.php'>View all stories</a></div>.";
         }
@@ -147,13 +146,13 @@ if ($_SESSION["success"] != "") {
 
        <div class="clearfix">
         <a href="addStory.php" style="margin-left: 5px;" class="pull-right btn">Add Story <i class="icon-plus-sign"></i></a>
-        
+
         <div class="input-append pull-right">
           <form action="searchResults.php" method="get" style="margin-bottom: -5px;">
             <input class="span2" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
             <button class="btn" type="submit"><i class='icon-search' onClick="setConfirmUnload(false);"></i></button>
           </form>
-        </div> 
+        </div>
         </div>
 
       <table class="table table-striped table-hover table-bordered">
@@ -164,18 +163,18 @@ if ($_SESSION["success"] != "") {
         <td width="20%">Status</td>
         <td width="5%">Admin</td>
       </tr>
-      
+
       <?php
 
       // display stories that require their attention first
-      while($redRow = mysql_fetch_array($redResult)) { 
+      while($redRow = mysql_fetch_array($redResult)) {
         // check date
-        
+
 
         echo "<tr class='error'>";
         echo "<td align='center' width='3%''><i rel='tooltip' title='This story is waiting on the writer(s).' class='icon-remove-sign'></i></td>";
         echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
-        
+
         if($redRow["datePublished"] != "0000-00-00") {
           echo "<td width='15%'>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
         }
@@ -188,7 +187,7 @@ if ($_SESSION["success"] != "") {
         $result2 = mysql_query($sql2);
         $row2 = mysql_fetch_array($result2);
         if(!empty($row2["strStatus"])) {
-          echo $row2["strStatus"];   
+          echo $row2["strStatus"];
         } else {
           echo "No status provided";
         }
@@ -199,7 +198,7 @@ if ($_SESSION["success"] != "") {
 
 
       // next, display stories that are not published and are waiting on the approval from others
-      while($yellowRow = mysql_fetch_array($yellowResult)) { 
+      while($yellowRow = mysql_fetch_array($yellowResult)) {
         // check date
         $ts = strtotime($yellowRow["datePublished"]);
         if ($ts === false)
@@ -211,7 +210,7 @@ if ($_SESSION["success"] != "") {
         echo "<tr class='warning'>";
         echo "<td align='center' width='3%''><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='icon-minus-sign'></i></td>";
         echo "<td width='55%'><a href='beholdStory.php?newsID=" . $yellowRow['newsID'] . "'>" . $yellowRow['strFilename'] . "</a></td>";
-     
+
         if($yellowRow["datePublished"] != "0000-00-00") {
           echo "<td width='15%'>" .  date("F d, Y", strtotime($yellowRow["datePublished"])) . "</td>";
         }
@@ -224,7 +223,7 @@ if ($_SESSION["success"] != "") {
         $result2 = mysql_query($sql2);
         $row2 = mysql_fetch_array($result2);
         if(!empty($row2["strStatus"])) {
-          echo $row2["strStatus"];   
+          echo $row2["strStatus"];
         } else {
           echo "No status provided";
         }
@@ -235,7 +234,7 @@ if ($_SESSION["success"] != "") {
 
       // finally, show their published stories
       // TODO: limit #
-      while($normalRow = mysql_fetch_array($normalResult)) { 
+      while($normalRow = mysql_fetch_array($normalResult)) {
         // check date
         $ts = strtotime($normalRow["datePublished"]);
         if ($ts === false || $ts == "1969-12-31")
@@ -246,7 +245,7 @@ if ($_SESSION["success"] != "") {
         echo "<tr>";
         echo "<td align='center' width='3%''><i rel='tooltip' title='This story has been published successfully.' class='icon-ok-sign'></i></td>";
         echo "<td width='55%'><a href='beholdStory.php?newsID=" . $normalRow['newsID'] . "'>" . $normalRow['strFilename'] . "</a></td>";
-      
+
         if($normalRow["datePublished"] != "0000-00-00") {
           echo "<td width='15%'>" .  date("F d, Y", strtotime($normalRow["datePublished"])) . "</td>";
         }
@@ -259,7 +258,7 @@ if ($_SESSION["success"] != "") {
         $result2 = mysql_query($sql2);
         $row2 = mysql_fetch_array($result2);
         if(!empty($row2["strStatus"])) {
-          echo $row2["strStatus"];   
+          echo $row2["strStatus"];
         } else {
           echo "No status provided";
         }
@@ -279,10 +278,9 @@ if ($_SESSION["success"] != "") {
       }
         ?>
 
-    <a href="getNotified.php"><img style="border:1px solid #dedede;" src="img/signupalerts.jpg" alt="sign up for alerts" /></a>
+    <a href="getNotified.php"><img style="border:1px solid #dedede; width:100%; " src="img/signupalerts.jpg" alt="sign up for alerts" /></a>
 
     <?php
 // global includes
 include_once('includes/footer.php'); // authenticate users, includes db connection
 ?>
- 

@@ -55,7 +55,7 @@ include_once("includes/publicHeader.php");
   <body>
 
     <div class="container">
-      
+
       <?php if($_GET["action"] == "unsub") { ?>
         <form class="form-signin" method="post" action="functions/doGetNotified.php?action=unsub">
       <?php } else { ?>
@@ -104,7 +104,7 @@ include_once("includes/publicHeader.php");
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
- 
+
     <script type="text/javascript">
     $(function () {
         $("[rel='tooltip']").tooltip();
