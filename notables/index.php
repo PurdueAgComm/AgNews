@@ -18,7 +18,7 @@
 <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
 <!-- Font Awesome -->
-<link href="//netdna.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.css" rel="stylesheet"/>
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
 <!-- Main CSS -->
 <link href="css/styles.css" rel="stylesheet"/>
 
@@ -119,7 +119,7 @@ google.setOnLoadCallback(function() {
 <div class="breadcrumb">
   <div class="container">
     <div class="row">
-      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="content1.html">Homepage</a></li></ol></div>
+      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="index.php">Purdue Agriculture Notables</a></li></ol></div>
     </div>
   </div>
 </div>
@@ -134,16 +134,16 @@ google.setOnLoadCallback(function() {
 <h1>Notables</h1>
 <p>Appointments, Honors, and Notables from the College of Agriculture. Nunc laoreet mi vel augue malesuada, nec pulvinar mi viverra. Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
 
-<h2>This is the First Story</h2>
-<p> <strong> June 15, 2015</strong> </p>
+<h2><a href="notable.php">This is the First Story</a></h2>
+<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
 <p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
 
-<h2>This is the Second Story</h2>
-<p> <strong> June 15, 2015</strong> </p>
+<h2><a href="notable.php">This is the Second Story</a></h2>
+<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
 <p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
 
-<h2>This is the Third Story</h2>
-<p> <strong> June 15, 2015</strong> </p>
+<h2><a href="notable.php">This is the Third Story</a></h2>
+<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
 <p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
 
 
@@ -248,5 +248,7 @@ google.setOnLoadCallback(function() {
 <!-- Bootstrap core JavaScript
 ================================================== --><!-- Placed at the end of the document so the pages load faster -->
 <script async="true" src="//www.purdue.edu/purdue/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/tota11y.min.js"></script>
+
 </body><!-- v2015.03 - Created by Office of Marketing and Media -->
 </html>

@@ -1030,7 +1030,7 @@ a .caption,
 }
 .breadcrumb ol li,
 .breadcrumb ol li a {
-	color:#bbb;
+	color:#515151;
     text-decoration:none;
 }
 .hero,
@@ -1816,6 +1816,8 @@ a .caption,
 	.blackbar.navbar-inverse .navbar-nav > li > a {
 		color:#fff;
 	}
+
+
 	/*.blackbar .navbar-nav .dropdown .dropdown-menu .dropdown-submenu .dropdown-menu,
 	.blackbar .navbar-nav .open .dropdown-menu .dropdown-submenu .dropdown-menu {
 		display:none;
@@ -2326,6 +2328,9 @@ a .caption,
 
 }
 
+.noteDate {
+	margin-top: -5px;
+}
 
 /* Non-Mobile */
 @media only screen and (min-width: 768px) {

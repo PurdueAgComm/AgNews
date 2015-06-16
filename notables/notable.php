@@ -120,7 +120,7 @@ google.setOnLoadCallback(function() {
 <div class="breadcrumb">
   <div class="container">
     <div class="row">
-      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="content1.html">Notable</a></li></ol></div>
+      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="index.php">Purdue Agriculture Notables</a></li><li><a href="notable.php">Title of the Notable</a></li></ol></div>
     </div>
   </div>
 </div>
@@ -131,14 +131,14 @@ google.setOnLoadCallback(function() {
 
 
 <h1>Title of the Notable</h1>
-<p> <strong> June 15, 2015</strong> </p>
+<p class="noteDate"><i class="fa fa-calendar"></i> June 15, 2015</p>
 <p> Content goes here. Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo.Cras nisl lacus, ultrices vitae eros eget, pulvinar venenatis sem. Nullam quis magna et quam pharetra rutrum in id justo. Nullam consectetu.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae lacinia dui, ac lacinia dolor. Maecenas mattis nulla ac purus mattis, sit amet facilisis dolor luctus. Donec luctus convallis arcu. Nullam adipiscing, magna porttitor pellentesque ornare.</p>
 
       </div>
 
       <div class="sidenav col-lg-3 col-md-3 col-sm-3">
         <h5 class="header">Recent Notables</h5>
-        <ul><li><a href="content1.html">Title of Recent Notable</a></li><li><a href="content2.html">Title of Recent Notable 2</a></li><li><a href="content3.html">Title of Recent Notable 3</a></li></ul>
+        <ul><li><a href="content1.html">Title of Recent Notable</a></li><li><a href="content2.html">Title of Recent Notable 2</a></li><li><a href="content3.html">Title of Recent Notable 3</a></li><li><a href="archives.html">All Notables</a></li></ul>
       </div>
       <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
 
