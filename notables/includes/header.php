@@ -133,14 +133,3 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <!--/.nav-collapse -->
   </div>
 </div>
-<div class="breadcrumb">
-  <div class="container">
-    <div class="row">
-      <div id="breadcrumbs"><ol class="col-lg-12 col-md-12 col-sm-12"><li><a href="index.php">Purdue Agriculture Notables</a></li></ol></div>
-    </div>
-  </div>
-</div>
-<div class="content">
-  <div class="container">
-    <div class="row">
-      <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
