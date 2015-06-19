@@ -2332,6 +2332,8 @@ a .caption,
 	margin-top: -5px;
 }
 
+
+
 /* Non-Mobile */
 @media only screen and (min-width: 768px) {
 	.footer .container .row div .collapse {
