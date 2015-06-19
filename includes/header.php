@@ -20,7 +20,8 @@ $_SESSION["waitingOnWriter"] = mysql_num_rows($redResult);
     <meta name="author" content="">
 
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
+
     <link href="css/bootstrap-theme.css" rel="stylesheet">
     <link href="css/styles.css" rel="stylesheet"/>
     <link href="css/bootstrap-responsive.css" rel="stylesheet">

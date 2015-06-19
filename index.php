@@ -23,7 +23,7 @@ $numNormal = mysql_num_rows($normalResult);
 
 if(!empty($_SESSION["error"])) {
   // if there is an error, display it
-  echo "<div class='alert alert-error alert-block'><h4>Houston, we have a problem!</h4><p>" . $_SESSION["error"] . "</p></div>";
+  echo "<div class='alert alert-danger alert-block'><h4>Houston, we have a problem!</h4><p>" . $_SESSION["error"] . "</p></div>";
   $_SESSION["error"] = "";
 }
 if ($_SESSION["success"] != "") {
@@ -39,7 +39,7 @@ if ($_SESSION["success"] != "") {
         $today = strtotime('now');
         $yesterday = strtotime('-1 day', $today);
 
-        echo "<h3>Recent Activity<span rel='tooltip' title='Shows activity in the last 48 hours made by others.'><i class='icon-question-sign'></i></span></h3>";
+        echo "<h3>Recent Activity<span rel='tooltip' title='Shows activity in the last 48 hours made by others.'><i class='fa fa-question-circle'></i></span></h3>";
         echo "<div class='row-fluid'>";
 
 
@@ -145,16 +145,17 @@ if ($_SESSION["success"] != "") {
       <p>This section is populated with stories that involve you. <a href="viewAllStories.php">View all stories</a>.</p>
 
        <div class="clearfix">
-        <a href="addStory.php" style="margin-left: 5px;" class="pull-right btn">Add Story <i class="icon-plus-sign"></i></a>
+        <a href="addStory.php" style="margin-left: 5px; margin-bottom:5px;" class="pull-right btn btn-default">Add Story <i class="fa fa-plus-circle"></i></a>
 
-        <div class="input-append pull-right">
-          <form action="searchResults.php" method="get" style="margin-bottom: -5px;">
-            <input class="span2" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
-            <button class="btn" type="submit"><i class='icon-search' onClick="setConfirmUnload(false);"></i></button>
+        <div class="form-group pull-right">
+          <form action="searchResults.php" method="get" style="margin-top:5px;">
+            <input class="col-md-9" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
+            <button class=".btn .btn-default" type="submit"><i class='fa fa-search' onClick="setConfirmUnload(false);"></i></button>
           </form>
         </div>
         </div>
 
+      <div class="panel panel-default"> <!-- for round corners -->
       <table class="table table-striped table-hover table-bordered">
       <tr>
         <td align="center" width="3%"></td>
@@ -171,8 +172,8 @@ if ($_SESSION["success"] != "") {
         // check date
 
 
-        echo "<tr class='error'>";
-        echo "<td align='center' width='3%''><i rel='tooltip' title='This story is waiting on the writer(s).' class='icon-remove-sign'></i></td>";
+        echo "<tr class='danger'>";
+        echo "<td align='center' width='3%''><i rel='tooltip' title='This story is waiting on the writer(s).' class='fa fa-minus-circle'></i></td>";
         echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
 
         if($redRow["datePublished"] != "0000-00-00") {
@@ -192,7 +193,7 @@ if ($_SESSION["success"] != "") {
           echo "No status provided";
         }
         echo "</td>";
-        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strFilename'] . "'><i class='icon-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strFilename'] . "'><i class='icon-remove'></i></a></td>";
+        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strFilename'] . "'> <i class='fa fa-edit'> </i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strFilename'] . "'><i class='fa fa-remove'></i></a></td>";
         echo "</tr>";
       }
 
@@ -208,7 +209,7 @@ if ($_SESSION["success"] != "") {
 
 
         echo "<tr class='warning'>";
-        echo "<td align='center' width='3%''><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='icon-minus-sign'></i></td>";
+        echo "<td align='center' width='3%''><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='fa fa-minus-circle'></i></td>";
         echo "<td width='55%'><a href='beholdStory.php?newsID=" . $yellowRow['newsID'] . "'>" . $yellowRow['strFilename'] . "</a></td>";
 
         if($yellowRow["datePublished"] != "0000-00-00") {
@@ -228,7 +229,7 @@ if ($_SESSION["success"] != "") {
           echo "No status provided";
         }
         echo "</td>";
-        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $yellowRow["newsID"] . "' rel='tooltip' title='Edit " . $yellowRow['strFilename'] . "'><i class='icon-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $yellowRow["newsID"] . "' rel='tooltip' title='Remove " . $yellowRow['strFilename'] . "'><i class='icon-remove'></i></a></td>";
+        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $yellowRow["newsID"] . "' rel='tooltip' title='Edit " . $yellowRow['strFilename'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $yellowRow["newsID"] . "' rel='tooltip' title='Remove " . $yellowRow['strFilename'] . "'><i class='fa fa-remove'></i></a></td>";
         echo "</tr>";
       }
 
@@ -243,7 +244,7 @@ if ($_SESSION["success"] != "") {
           $datePublished = date("m/d/y", $ts);
 
         echo "<tr>";
-        echo "<td align='center' width='3%''><i rel='tooltip' title='This story has been published successfully.' class='icon-ok-sign'></i></td>";
+        echo "<td align='center' width='3%''><i rel='tooltip' title='This story has been published successfully.' class='fa fa-check-circle-o'></i></td>";
         echo "<td width='55%'><a href='beholdStory.php?newsID=" . $normalRow['newsID'] . "'>" . $normalRow['strFilename'] . "</a></td>";
 
         if($normalRow["datePublished"] != "0000-00-00") {
@@ -263,7 +264,7 @@ if ($_SESSION["success"] != "") {
           echo "No status provided";
         }
         echo "</td>";
-        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Edit " . $normalRow['strFilename'] . "'><i class='icon-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Remove " . $normalRow['strFilename'] . "'><i class='icon-remove'></i></a></td>";
+        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Edit " . $normalRow['strFilename'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Remove " . $normalRow['strFilename'] . "'><i class='fa fa-times'></i></a></td>";
         echo "</tr>";
       }
 
@@ -272,6 +273,8 @@ if ($_SESSION["success"] != "") {
 
 
         echo "</table>";
+
+        echo "</div>";
       } // end if (regarding if there are news stories)
       else {
         echo "<div class='alert alert-info'>You have no news stories. <a href='addStory.php'>Create one</a>.</div>";
