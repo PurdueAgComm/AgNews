@@ -46,12 +46,12 @@
             </div>
             <div class="panel-collapse collapse" id="footerthree">
               <div class="panel-body">
-                <ul>
-                  <li><a href="http://www.itap.purdue.edu/learning/tools/blackboard/">Blackboard</a></li>
-                  <li><a href="http://www.purdue.edu/ehps/">Environmental Health &amp; Public Safety</a></li>
-                  <li><a href="https://www.lib.purdue.edu/">Libraries</a></li>
-                  <li><a href="https://www.itap.purdue.edu/">ITaP</a></li>
-                  <li><a href="https://www.purdue.edu/hr/CHL/index.html">Center for Healthy Living</a></li>
+              <ul>
+                  <li><a href="http://www.agriculture.purdue.edu/in_focus/index.htm" id="ResourceMagazine" class="ResourceMagaziner2c1">In Focus</a></li>
+                  <li> <a href="/pages/directory.aspx" id="ResourceLink" class="ResourceLinkr2c2">Directory</a> </li>
+                  <li><a href="https://intranet2.ag.purdue.edu" id="ResourceLink" class="ResourceLinkr2c3">Intranet</a></li>
+                  <li> <a href="/Lists/Agriculture%20Calendar/calendar.aspx" id="ResourceLink" class="ResourceLinkr2c4">Calendar</a></li>
+                  <li><a href="http://www.ag.purdue.edu/agit" id="ResourceLink" class="ResourceLinkr2c5">Information Technology</a></li>
                 </ul>
               </div>
             </div>
@@ -63,11 +63,11 @@
             <div class="panel-collapse collapse" id="footerfour">
               <div class="panel-body">
                 <ul>
-                  <li><a href="http://www.purdueofficialstore.com/">Shop</a></li>
-                  <li><a href="http://www.purdue.edu/ethics/clery.html">Clery Reporting Act</a></li>
-                  <li><a href="https://www.purdue.edu/bursar/tuition/calculator/">Tuition Calculator</a></li>
-                  <li><a href="https://www.purdue.edu/ethics/">Ethics &amp; Compliance</a></li>
-                  <li><a href="http://www.purdue.edu/hotline/">Speak Up</a></li>
+                  <li><a href="http://www.agriculture.purdue.edu/agricultures/index.html" id="ResourceMagazine" class="ResourceMagazine">Agricultures</a> </li>
+                  <li> <a href="http://www.agriculture.purdue.edu/connections/" id="ResourceMagazine" class="ResourceMagazine">Connections</a> </li>
+                  <li> <a href="http://www.ag.purdue.edu/destination/" id="ResourceMagazine" class="ResourceMagazine">Destination Purdue</a>  </li>
+                  <li><a href="https://mdc.itap.purdue.edu/" id="ResourceLink" class="ResourceLink">The Education Store</a> </li>
+                  <li><a href="/Pages/map.aspx" id="ResourceLink" class="ResourceLink">Maps/Directions</a></li>
                 </ul>
               </div>
             </div>
