@@ -65,7 +65,7 @@ include_once("includes/publicHeader.php");
 
         <?php
           if($_SESSION["error"] != "") {
-            echo "<div class='alert alert-error'>" . $_SESSION["error"] . "</div>";
+            echo "<div class='alert alert-danger'>" . $_SESSION["error"] . "</div>";
             $_SESSION["error"] = "";
           }
 

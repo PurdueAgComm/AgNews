@@ -11,7 +11,7 @@ $num_results = mysql_num_rows($redResult);
 
 ?>
       <h3>All News Stories</h3>
-      
+
 
       <?php
       // if there are news stories, post them in table format
@@ -21,14 +21,14 @@ $num_results = mysql_num_rows($redResult);
 
 
        <div class="clearfix">
-        <a href="addStory.php" style="margin-left: 5px;" class="pull-right btn">Add Story <i class="icon-plus-sign"></i></a>
-        
-        <div class="input-append pull-right">
-          <form action="searchResults.php" method="get" style="margin-bottom: -5px;">
-            <input class="span2" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
-            <button class="btn" type="submit" type="submit" onClick="setConfirmUnload(false);"><i class='icon-search'></i></button>
+         <a href="addStory.php" style="margin-left: 5px; margin-bottom:5px;" class="pull-right btn btn-default">Add Story <i class="fa fa-plus-circle"></i></a>
+
+        <div class="form-group pull-right">
+          <form action="searchResults.php" method="get" style="margin-top:5px;">
+            <input class="col-md-9" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
+            <button class=".btn .btn-default" type="submit"><i class='fa fa-search' onClick="setConfirmUnload(false);"></i></button>
           </form>
-        </div> 
+        </div>
         </div>
 
       <table class="table table-striped table-hover table-bordered">
@@ -39,17 +39,17 @@ $num_results = mysql_num_rows($redResult);
         <td width="20%">Status</td>
         <td width="5%">Admin</td>
       </tr>
-      
+
       <?php
 
       // display stories that require their attention first
-      while($redRow = mysql_fetch_array($redResult)) { 
+      while($redRow = mysql_fetch_array($redResult)) {
 
 	      if($redRow["statusID"] == 1) {
-	        
 
-	        echo "<tr class='error'>";
-	        echo "<td align='center' width='3%''><i rel='tooltip' title='This story is waiting on the writer(s).' class='icon-remove-sign'></i></td>";
+
+	        echo "<tr class='danger'>";
+	        echo "<td align='center' width='3%''><i rel='tooltip' title='This story is waiting on the writer(s).' class='fa fa-times'></i></td>";
 
 	        if(!empty($redRow["strHeadline"])) {
 	        	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
@@ -71,23 +71,23 @@ $num_results = mysql_num_rows($redResult);
 	        $result2 = mysql_query($sql2);
 	        $row2 = mysql_fetch_array($result2);
 	        if(!empty($row2["strStatus"])) {
-	          echo $row2["strStatus"];   
+	          echo $row2["strStatus"];
 	        } else {
 	          echo "No status provided";
 	        }
 	        echo "</td>";
-	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='icon-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='icon-remove'></i></a></td>";
+	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
 	        echo "</tr>";
 	      }
-	
+
 
 		  if($redRow["statusID"] == 2) {
 	      // next, display stories that are not published and are waiting on the approval from others
 
 
 	        echo "<tr class='warning'>";
-	        echo "<td align='center' width='3%''><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='icon-minus-sign'></i></td>";
-		
+	        echo "<td align='center' width='3%''><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='fa fa-minus-circle'></i></td>";
+
 		   if(!empty($redRow["strHeadline"])) {
 			 	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
 	        }
@@ -107,19 +107,19 @@ $num_results = mysql_num_rows($redResult);
 	        $result2 = mysql_query($sql2);
 	        $row2 = mysql_fetch_array($result2);
 	        if(!empty($row2["strStatus"])) {
-	          echo $row2["strStatus"];   
+	          echo $row2["strStatus"];
 	        } else {
 	          echo "No status provided";
 	        }
 	        echo "</td>";
-	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='icon-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='icon-remove'></i></a></td>";
+	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
 	        echo "</tr>";
 	  }
 
 	 	if($redRow["statusID"] == 3) {
 
 	        echo "<tr>";
-	        echo "<td align='center' width='3%''><i rel='tooltip' title='This story has been published succesfully.' class='icon-ok-sign'></i></td>";
+	        echo "<td align='center' width='3%''><i rel='tooltip' title='This story has been published succesfully.' class='fa fa-check-circle-o'></i></td>";
 
 		    if(!empty($redRow["strHeadline"])) {
 			 	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
@@ -140,12 +140,12 @@ $num_results = mysql_num_rows($redResult);
 	        $result2 = mysql_query($sql2);
 	        $row2 = mysql_fetch_array($result2);
 	        if(!empty($row2["strStatus"])) {
-	          echo $row2["strStatus"];   
+	          echo $row2["strStatus"];
 	        } else {
 	          echo "No status provided";
 	        }
 	        echo "</td>";
-	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='icon-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='icon-remove'></i></a></td>";
+	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
 	        echo "</tr>";
   		}
   	}

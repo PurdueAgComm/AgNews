@@ -30,7 +30,7 @@ include_once('includes/header.php');
 			}
 		}
 
-		return $out;	
+		return $out;
 	}
 
 	function search_pretty_terms($terms_html){
@@ -56,7 +56,7 @@ if(!empty($_GET["q"])) {
 			$parts[] = "strFilename RLIKE '$term'";
 		}
 	}
-	
+
 	$parts = implode(' AND ', $parts);
 	$sql = "SELECT * FROM tblNews WHERE isHidden=0 AND $parts";
 	$result = mysql_query($sql);
@@ -66,7 +66,7 @@ if(!empty($_GET["q"])) {
 	{
 		$numResult = "no";
 	}
-	
+
 	if(!empty($_GET["h"])) {
 
 		if($_GET["h"] == "yes") {
@@ -74,7 +74,7 @@ if(!empty($_GET["q"])) {
 			mysql_query($sql) or die(mysql_error());
 
 		}
-		
+
 		if($_GET["h"] == "no") {
 			$sql = "INSERT INTO tblActivity (newsID, peopleID, strFirstName, strLastName, strActivity) VALUES (NULL, " . $_SESSION["userID"] . ", '" . $_SESSION["firstName"] .  "', '" . $_SESSION["lastName"] . "', 'Searched for <em>" . $term_list . "</em> and found it <span class=\'text text-error\'>not helpful</span>.');";
 			mysql_query($sql);
@@ -101,21 +101,21 @@ if(!empty($_GET["q"])) {
 		  	<small>Were your results useful? </small>
 		  	<a href="searchResults.php?q=<?php echo $_GET['q'] ?>&h=yes" class="btn btn-mini" style="margin-right: 0px;">Yes</a>
 		  	<a href="searchResults.php?q=<?php echo $_GET['q'] ?>&h=no" class="btn btn-mini"  style="margin-left: 0px; position: relative; left: -6px;">No</a>
-	    </div> 
+	    </div>
 	 <?php } else { ?>
-	 	<div class="pull-right"><span class="text text-success"><small><span class='label label-success'><i class='icon-ok-sign icon-white'></i></span> Thanks for your feedback!</small></span></div>
+	 	<div class="pull-right"><span class="text text-success"><small><span class='label label-success'><i class='fa fa-check-circle-o icon-white'></i></span> Thanks for your feedback!</small></span></div>
 	 <?php } ?>
 
  	<?php
  	if($numResult > 0) { ?>
-		
+
 		<h3>Search Results (<?php echo $numResult ?>)</h3>
 		<div class="input-append pull-right">
           <form action="searchResults.php" method="get" style="margin-bottom: -5px;">
             <input id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
             <button class="btn" type="submit" onClick="setConfirmUnload(false);" type="submit"><i class='icon-search'></i></button>
           </form>
-        </div> 
+        </div>
 		  <table class="table table-striped table-hover table-bordered">
 	      <tr>
 	        <td width="55%">Headline</td>
@@ -123,12 +123,12 @@ if(!empty($_GET["q"])) {
 	      </tr>
 
 
-		<?php	
+		<?php
 			if(!empty($_GET["q"]) AND $numResult > 0) {
 				while($row = mysql_fetch_array($result)) {
 						echo "<tr>";
 						echo "<td><a href='beholdStory.php?newsID=" . $row["newsID"] . "'>" . $row["strFilename"] . "</a></td>";
-						
+
 						if($row["datePublished"] != "0000-00-00") {
 							echo "<td>" . $row["datePublished"] . "</td>";
 						}
@@ -160,7 +160,7 @@ if(!empty($_GET["q"])) {
 	<?php } ?>
 
 </div>
-<?php 
+<?php
 
 include_once("includes/footer.php");
 ?>
