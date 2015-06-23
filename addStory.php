@@ -67,45 +67,37 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
     ?>
 
       <h2>Create A New Story</h2>
+          <form class="form-group"  name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doAddStory.php">
+            <?php
+             if($_SESSION['storyError'] == 1) {
+               echo "<div class='alert alert-danger'><i class='fa fa-exclamation-circle'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
+             }
 
+              //display general error with information
+              if ($_GET["isComplete"] == "false") {
+                echo "<div class='alert alert-danger'><h4>We need your attention! <span class='badge badge-important' style='position: relative; top: -2px;'>" . $_GET['count'] . " items</span></h4><p>" . $_SESSION['error'] . "</p></div>";
+                $_SESSION["error"] = "";
+              }
+              if ($_SESSION["success"] != "") {
+                echo "<div class='alert alert-success alert-block'><h4>Success!</h4><p>" . $_SESSION["success"] . "</p></div>";
+                $_SESSION["success"] = "";
+              }
+              ?>
 
             <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">News Story</h3>
                   </div>
-              <div class="panel-body">
-               <form class="form-group"  name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doAddStory.php">
-                       <?php
-                       if($_SESSION['storyError'] == 1) {
-                         echo "<div class='alert alert-error'><i class='fa fa-exclamation-circle'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
-                       } ?>
-
-                       <textarea style="width: 98%; height: 200px;" id="tinymce" name="story"><?= htmlspecialchars_decode($_SESSION['story']);?></textarea>
-                              </form>
+              <div class="panel-body form-horizontal">
+                <textarea style="width: 98%; height: 200px;" id="tinymce" name="story"><?= htmlspecialchars_decode($_SESSION['story']);?></textarea>
               </div>
-            </div>
-
-      <?php
-
-       //display general error with information
-        if ($_GET["isComplete"] == "false") {
-          echo "<div class='alert alert-error alert-block'><h4>We need your attention! <span class='badge badge-important' style='position: relative; top: -2px;'>" . $_GET['count'] . " items</span></h4><p>" . $_SESSION['error'] . "</p></div>";
-          $_SESSION["error"] = "";
-        }
-        if ($_SESSION["success"] != "") {
-          echo "<div class='alert alert-success alert-block'><h4>Success!</h4><p>" . $_SESSION["success"] . "</p></div>";
-          $_SESSION["success"] = "";
-        }
-
-      ?>
-
+            </div> <!-- /.panel -->
 
             <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Internal Information</h3>
                   </div>
-              <div class="panel-body">
-                <form class="form-horizontal">
+              <div class="panel-body form-horizontal">
 
                     <div class="form-group <?php if($_SESSION['filenameError'] == 1) echo 'error'; ?>">
                         <label class="col-sm-2 control-label" for="filename">Filename</label>
@@ -165,7 +157,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
                           </div>
                         </div>
 
-                </form>
+
 
                 </div>
              </div>
@@ -180,21 +172,16 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <div class="panel-heading">
             <h3 class="panel-title">General Information</h3>
           </div>
-          <div class="panel-body">
-            <form class="form-horizontal">
-                <div class="form-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
-                  <label class="col-sm-2 control-label" for="headline">Headline</label>
-                  <div class="col-sm-4">
-                    <input type="text" class="form-control" id="headline" placeholder="Create a headline" name="headline" value="<?= $_SESSION['headline'];?>" > <?php if($_SESSION['headlineError'] == 1) echo "<i class='icon-exclamation-sign' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
-                  </div>
+          <div class="panel-body form-horizontal">
+              <div class="form-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
+                <label class="col-sm-2 control-label" for="headline">Headline</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="headline" placeholder="Create a headline" name="headline" value="<?= $_SESSION['headline'];?>" > <?php if($_SESSION['headlineError'] == 1) echo "<i class='icon-exclamation-sign' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
                 </div>
+              </div>
 
-          <div class="alert alert-info" style marg>
-            <p><strong><i class="icon fa fa-share"></i> Rockin' the Twitterverse</strong> <small>new in v1.2</small></p>
-            <p>You can now specify a custom tweet in the field below. We'll save it for you (you can edit it later) and then use this instead of the headline once you publish the story. Cool, right? Since we're using Twitter, make sure to keep it 140 characters or less!</p>
-          </div>
 
-          <div class="form-group info <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
+          <div class="form-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
             <label class="col-sm-2 control-label" for="tweet">Tweet</label>
             <div class="col-sm-4">
               <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= $_SESSION['tweet'];?>
@@ -279,7 +266,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
        </div>
 
 
-            </form>
+
 
           </div>
         </div>
@@ -292,8 +279,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
                   <div class="panel-heading">
                     <h3 class="panel-title">Define Metadata</h3>
                   </div>
-              <div class="panel-body">
-                <form class="form-horizontal">
+              <div class="panel-body form-horizontal">
 
       <div class="form-group">
           <label class="col-sm-2 control-label metadata" for="isTopStory">This is an  <strong>Agriculture Top Story</strong></label>
@@ -466,7 +452,6 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
            </div>
         </div>
-      </form>
     </div>
   </div>
 <!-- End MetaData Checkboxes --><!-- End MetaData Checkboxes --><!-- End MetaData Checkboxes --><!-- End MetaData Checkboxes -->
@@ -476,8 +461,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               <div class="panel-heading">
                 <h3 class="panel-title">Multimedia</h3>
               </div>
-          <div class="panel-body">
-            <form class="form-horizontal">
+          <div class="panel-body form-horizontal">
 
               <div class="form-group">
                 <label class="col-sm-2 control-label" for="youtube">Youtube Video URL</label>
@@ -580,12 +564,6 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             ?>
           </div>
         </div>
-
-
-
-
-
-            </form>
           </div>
       </div>
 
@@ -659,7 +637,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
   </div>
 
 </div>
-
+</form>
 
 <!-- ************************************************************************-->
 <!-- END MODAL WINDOW -->
@@ -800,7 +778,7 @@ function hideWebsites() {
 
 
   $('#writer1').typeahead({source: writer});
-  $('#writer2').typeahead({source: writer1});
+  $('#writer2').typeahead({source: writer});
   $('#writer3').typeahead({source: writer});
   $('#writer4').typeahead({source: writer});
   $('#writer5').typeahead({source: writer});
