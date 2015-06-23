@@ -21,12 +21,12 @@ $num_results = mysql_num_rows($redResult);
 
 
        <div class="clearfix">
-         <a href="addStory.php" style="margin-left: 5px; margin-bottom:5px;" class="pull-right btn btn-default">Add Story <i class="fa fa-plus-circle"></i></a>
+         <a href="addStory.php" style="margin-left: 5px;" class="pull-right btn btn-default">Add Story <i class="fa fa-plus-circle"></i></a>
 
-        <div class="form-group pull-right">
-          <form action="searchResults.php" method="get" style="margin-top:5px;">
-            <input class="col-md-9" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
-            <button class=".btn .btn-default" type="submit"><i class='fa fa-search' onClick="setConfirmUnload(false);"></i></button>
+        <div class="form-group form-inline pull-right">
+          <form action="searchResults.php" method="get">
+            <input class="form-control" id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
+            <button class="btn btn-default" type="submit"><i class='fa fa-search' onClick="setConfirmUnload(false);"></i></button>
           </form>
         </div>
         </div>

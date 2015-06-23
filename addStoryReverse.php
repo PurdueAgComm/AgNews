@@ -11,7 +11,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
       $result = mysql_query($sql);
       $i = 0;
       while($row = mysql_fetch_array($result)) {
-       
+
         if($row["isWriter"] == 1) {
             $writerID[$i] = $row["peopleID"];
             $writerName[$i] = $row["strLastName"] . ", " . $row["strFirstName"];
@@ -67,9 +67,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         $i++;
       }
     ?>
- 
 
- 
+
+
       <h1>Create A New Story</h1>
 
 
@@ -86,12 +86,12 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         }
 
       ?>
-    
+
       <form class="form-horizontal" name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doAddStory.php">
 
           <div class="well">
            <h3>News Story</h3>
-             <?php 
+             <?php
              if($_SESSION['storyError'] == 1) {
                echo "<div class='alert alert-error'><i class='icon-exclamation-sign'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
              } ?>
@@ -111,7 +111,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             <div class="control-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
               <label class="control-label" for="writer">Writer(s)<br /></label>
               <div class="controls" id="writers">
-              <input type="text" class="span3" id="writer1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a writer" name="writer1"  value="<?php if(!empty($_SESSION['writerID1'])) { echo $_SESSION['writerID1']; } else { echo $_SESSION['lastName'] . ', ' . $_SESSION['firstName'];}?>" /> <span id="writerControls"> <a onClick="addWriter();" rel="tooltip" title="Show more Writer fields" class="btn btn-small"><i class="icon-list"></i></a></span> <br />   
+              <input type="text" class="span3" id="writer1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a writer" name="writer1"  value="<?php if(!empty($_SESSION['writerID1'])) { echo $_SESSION['writerID1']; } else { echo $_SESSION['lastName'] . ', ' . $_SESSION['firstName'];}?>" /> <span id="writerControls"> <a onClick="addWriter();" rel="tooltip" title="Show more Writer fields" class="btn btn-small"><i class="fa fa-list"></i></a></span> <br />
 
 <!--here-->
               <div id="shameHideWriters">
@@ -168,7 +168,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         <div class="control-group  <?php if($_SESSION['sourceError'] == 1) echo 'error'; ?>">
           <label class="control-label" for="source">Sources(s)</label>
           <div class="controls">
-            <input type="text" class="span3" id="source1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source1"  value="<?= $_SESSION['sourceID1'];?>"  /> <span id="sourceControls"><a onClick="addSources();" rel="tooltip" title="Show more Source fields" class="btn btn-small"><i class="icon-list"></i></a></span> <a rel="tooltip" tabindex="-1" title="Create a new Source profile" data-toggle="modal" href="#myModal" role="button" class="btn btn-small"><i class="icon-plus-sign"></i></a> <br />
+            <input type="text" class="span3" id="source1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source1"  value="<?= $_SESSION['sourceID1'];?>"  /> <span id="sourceControls"><a onClick="addSources();" rel="tooltip" title="Show more Source fields" class="btn btn-small"><i class="fa fa-list"></i></a></span> <a rel="tooltip" tabindex="-1" title="Create a new Source profile" data-toggle="modal" href="#myModal" role="button" class="btn btn-small"><i class="icon-plus-sign"></i></a> <br />
             <div id="shameHideSources">
               <input type="text" class="span3" id="source2" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source2"  value="<?= $_SESSION['sourceID2'];?>"/><br />
               <input type="text" class="span3" id="source3" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source3"  value="<?= $_SESSION['sourceID3'];?>"/><br />
@@ -180,7 +180,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         <div class="control-group  <?php if($_SESSION['departmentError'] == 1) echo 'error'; ?>">
           <label class="control-label" for="department">Department(s)</label>
           <div class="controls">
-            <input type="text" class="span3" id="department1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a department" name="department1"  value="<?= $_SESSION['departmentID1'];?>" /> <span id="departmentControls"><a onClick="addDepartments();" rel="tooltip" title="Show more Department fields" class="btn btn-small"><i class="icon-list"></i></a></span><br/>
+            <input type="text" class="span3" id="department1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a department" name="department1"  value="<?= $_SESSION['departmentID1'];?>" /> <span id="departmentControls"><a onClick="addDepartments();" rel="tooltip" title="Show more Department fields" class="btn btn-small"><i class="fa fa-list"></i></a></span><br/>
             <div id="shameHideDepartments">
               <input type="text" class="span3" id="department2" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a department" name="department2"  value="<?= $_SESSION['departmentID2'];?>"/><br />
               <input type="text" class="span3" id="department3" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a department" name="department3"  value="<?= $_SESSION['departmentID3'];?>"/><br />
@@ -189,11 +189,11 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             </div>
           </div>
         </div>
-        
+
          <div class="control-group  <?php if($_SESSION['affiliationError'] == 1) echo 'error'; ?>">
           <label class="control-label" for="affiliation">Affiliation(s)</label>
           <div class="controls">
-            <input type="text" class="span3" id="affiliation1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify an affiliation" name="affiliation1"  value="<?= $_SESSION['affiliationID1'];?>" /> <span id="affiliationControls"><a onClick="addAffiliations();" rel="tooltip" title="Show more Affiliation fields" class="btn btn-small"><i class="icon-list"></i></a></span><br />
+            <input type="text" class="span3" id="affiliation1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify an affiliation" name="affiliation1"  value="<?= $_SESSION['affiliationID1'];?>" /> <span id="affiliationControls"><a onClick="addAffiliations();" rel="tooltip" title="Show more Affiliation fields" class="btn btn-small"><i class="fa fa-list"></i></a></span><br />
             <div id="shameHideAffiliations">
               <input type="text" class="span3" id="affiliation2" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify an affiliation" name="affiliation2"  value="<?= $_SESSION['affiliationID2'];?>" /><br />
               <input type="text" class="span3" id="affiliation3" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify an affiliation" name="affiliation3"  value="<?= $_SESSION['affiliationID3'];?>" /><br />
@@ -207,10 +207,10 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <label class="control-label" for="datePublished">Publish Date</label>
           <div class="controls">
             <div class="input-append date datePicker" id="dp3" data-date-format="yyyy-mm-dd">
-               <?php 
+               <?php
               if($_SESSION['datePublished'] == "") {
                 $datePub = "";
-              } 
+              }
               else {
                 $datePub = $_SESSION['datePublished'];
               }
@@ -231,9 +231,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <div class="controls">
             <label class="checkbox">
              <?php if($_SESSION["isTopStory"] == 1) { ?>
-                <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isTopStory"> Yes   
+                <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isTopStory"> Yes
               <?php } else { ?>
-                <input type="checkbox" id="inlineCheckbox1" value="1" name="isTopStory"> Yes   
+                <input type="checkbox" id="inlineCheckbox1" value="1" name="isTopStory"> Yes
               <?php } ?>
             </label>
         </div>
@@ -244,9 +244,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <div class="controls">
             <label class="checkbox">
              <?php if($_SESSION["isExtTopStory"] == 1) { ?>
-                <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isExtTopStory"> Yes   
+                <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isExtTopStory"> Yes
               <?php } else { ?>
-                <input type="checkbox" id="inlineCheckbox1" value="1" name="isExtTopStory"> Yes   
+                <input type="checkbox" id="inlineCheckbox1" value="1" name="isExtTopStory"> Yes
               <?php } ?>
             </label>
         </div>
@@ -258,10 +258,10 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <div class="controls">
             <label class="checkbox">
               <?php if($_SESSION["isScience"] == 1) { ?>
-                <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isScience"> Yes   
+                <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isScience"> Yes
               <?php } else { ?>
-                <input type="checkbox" id="inlineCheckbox1" value="1" name="isScience"> Yes   
-              <?php } ?> 
+                <input type="checkbox" id="inlineCheckbox1" value="1" name="isScience"> Yes
+              <?php } ?>
             </label>
         </div>
       </div>
@@ -274,9 +274,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               $sql = "SELECT * FROM tblArea;";
               $result = mysql_query($sql);
               $i = 0;
-              
+
               while($row = mysql_fetch_array($result)) {
-                
+
               if($_SESSION["area"][$i] != 0) {
                 echo "<label class='checkbox inline'>";
                 echo "<input type='checkbox' id='" . $row["areaID"] . "' value='" . $row["areaID"] . "' name='area[" . $i . "]' checked='checked'> " . $row["strArea"];
@@ -305,9 +305,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               $sql = "SELECT * FROM tblTopic WHERE isHidden='0';";
               $result = mysql_query($sql);
               $i = 0;
-              
+
               while($row = mysql_fetch_array($result)) {
-                
+
               if($_SESSION["topic"][$i] != 0) {
                 echo "<label class='checkbox'>";
                 echo "<input type='checkbox' id='" . $row["topicID"] . "' value='" . $row["topicID"] . "' name='topic[" . $i . "]' checked='checked'> " . $row["strTopic"];
@@ -339,9 +339,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               $sql = "SELECT * FROM tblIssues WHERE isHidden='0';";
               $result = mysql_query($sql);
               $i = 0;
-              
+
               while($row = mysql_fetch_array($result)) {
-                
+
               if($_SESSION["issues"][$i] != 0) {
                 echo "<label class='checkbox'>";
                 echo "<input type='checkbox' id='" . $row["issuesID"] . "' value='" . $row["issuesID"] . "' name='issues[" . $i . "]' checked='checked'> " . $row["strIssues"];
@@ -367,23 +367,23 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             <?php if($_SESSION["isConnections"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isConnections"> Connections
             <?php } else { ?>
-              <input type="checkbox" id="inlineCheckbox1" value="1" name="isConnections"> Connections 
+              <input type="checkbox" id="inlineCheckbox1" value="1" name="isConnections"> Connections
             <?php } ?>
             </label>
 
             <label class="checkbox">
             <?php if($_SESSION["isAgricultures"] == 1) { ?>
-              <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isAgricultures"> Agricultures  
+              <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isAgricultures"> Agricultures
             <?php } else { ?>
-              <input type="checkbox" id="inlineCheckbox1" value="1" name="isAgricultures"> Agricultures   
+              <input type="checkbox" id="inlineCheckbox1" value="1" name="isAgricultures"> Agricultures
             <?php } ?>
             </label>
 
             <label class="checkbox">
             <?php if($_SESSION["isColumn"] == 1) { ?>
-              <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isColumn"> Columns   
+              <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isColumn"> Columns
             <?php } else { ?>
-              <input type="checkbox" id="inlineCheckbox1" value="1" name="isColumn"> Columns   
+              <input type="checkbox" id="inlineCheckbox1" value="1" name="isColumn"> Columns
             <?php } ?>
             </label>
 
@@ -396,18 +396,18 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
       <div class="well">
       <h3>Multimedia</h3>
-      
+
         <div class="control-group">
           <label class="control-label" for="youtube">Youtube Video URL</label>
           <div class="controls">
             <input type="text" class="span3" id="youtube" name="youtube" placeholder="http://www.youtube.com"  value="<?= $_SESSION['youtube'];?>"/>
           </div>
         </div>
-        
+
         <div class="control-group">
           <label class="control-label" for="website1">Related Website</label>
           <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite1" name="nameWebsite1" placeholder="Website Title"  value="<?= $_SESSION['websiteName1'];?>"/> Link: <input type="text" class="span3" id="website1" name="website1" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL1'];?>"/> <span id="websiteControls"><a onClick="addWebsites();" rel="tooltip" title="Show more Related Website fields" class="btn btn-small"><i class="icon-list"></i></a></span> <span class="muted inline-help">Start with <strong>http://</strong></span> <br />
+            Title: <input type="text" class="span3" id="nameWebsite1" name="nameWebsite1" placeholder="Website Title"  value="<?= $_SESSION['websiteName1'];?>"/> Link: <input type="text" class="span3" id="website1" name="website1" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL1'];?>"/> <span id="websiteControls"><a onClick="addWebsites();" rel="tooltip" title="Show more Related Website fields" class="btn btn-small"><i class="fa fa-list"></i></a></span> <span class="muted inline-help">Start with <strong>http://</strong></span> <br />
           </div>
         </div>
 
@@ -448,7 +448,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <label class="control-label" for="college">Included Media</label>
           <div class="controls">
               <?php
-                
+
               if($_SESSION["isPhoto"] != 0) {
                 echo "<label class='checkbox inline'>";
                 echo "<input type='checkbox' value='1' name='isPhoto' checked='checked'> Photo";
@@ -505,7 +505,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
       </div> <!-- end well -->
 
-      <div class="well">      
+      <div class="well">
         <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-large btn-block btn-primary" value="Create Story" />
       </div>
 
@@ -517,60 +517,60 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Add a Source</h3>
   </div>
-  
+
   <div class="modal-body">
 
-      <div class="control-group <?php if($_SESSION['fname01Error'] == 1) echo 'error'; ?>">             
-               <label class="control-label" for="fName01">First Name</label>  
+      <div class="control-group <?php if($_SESSION['fname01Error'] == 1) echo 'error'; ?>">
+               <label class="control-label" for="fName01">First Name</label>
          <div class="controls">
                <input type="text" class="span3" id="fName01" placeholder="John" name="fname01"  value="<?= $_SESSION['fname01'];?>" />
-              
+
          </div>
       </div>
-               
-      <div class="control-group <?php if($_SESSION['lname01Error'] == 1) echo 'error'; ?>">                 
+
+      <div class="control-group <?php if($_SESSION['lname01Error'] == 1) echo 'error'; ?>">
               <label class="control-label" for="lName01">Last Name</label>
-         <div class="controls">             
+         <div class="controls">
                <input type="text" class="span3" id="lName01" placeholder="Doe" name="lname01" value="<?= $_SESSION['lname01'];?>" />
-          
-         </div>             
+
+         </div>
       </div>
-      
+
       <div class="control-group <?php if($_SESSION['dept01Error'] == 1) echo 'error'; ?>">
               <label class="control-label" for="dept01">Department</label>
-         <div class="controls">              
+         <div class="controls">
                <input type="text" class="span3" id="dept01" placeholder="Food Sciences" class="typeahead" data-provide="typeahead" data-items="4" name="dept01" value="<?= $_SESSION['dept01'];?>" />
 
          </div>
        </div>
 
-      <div class="control-group <?php if($_SESSION['email01Error'] == 1) echo 'error'; ?>">                  
+      <div class="control-group <?php if($_SESSION['email01Error'] == 1) echo 'error'; ?>">
               <label class="control-label" for="email01">Email</label>
-         <div class="controls">              
+         <div class="controls">
                <input type="text" class="span3" id="email01" placeholder="john@purdue.edu" name="email01" value="<?= $_SESSION['email01'];?>" />
-               
+
          </div>
        </div>
-               
-      <div class="control-group <?php if($_SESSION['phone01Error'] == 1) echo 'error'; ?>"> 
+
+      <div class="control-group <?php if($_SESSION['phone01Error'] == 1) echo 'error'; ?>">
               <label class="control-label" for="phone01">Phone Number</label>
          <div class="controls">
                <input type="text" class="span3" id="phone01" placeholder="XXX-XXX-XXXX" name="phone01" title="Phone Format" data-toggle="tooltip" data-placement ="right" value="<?= $_SESSION['phone01'];?>" />
                <span class="help-block muted">Telephone Number Format: XXX-XXX-XXXX</span>
          </div>
       </div>
-                        
+
   </div>
-  
-  
-  
+
+
+
   <div class="modal-footer">
     <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <input type="submit" onClick="setConfirmUnload(false);" name="source" class="btn btn-primary" id="save" value="Add Source" />
-    
-  
+
+
   </div>
- 
+
 </div>
 
  </form>
@@ -582,7 +582,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
 
     <?php
-	
+
 	$_SESSION["fname01Error"] = 0;
 	$_SESSION["lname01Error"] = 0;
 	$_SESSION["email01Error"] = 0;
@@ -596,17 +596,17 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 	$_SESSION['email01'] = "";
 	$_SESSION['phone01'] = "";
     $_SESSION["writerID1"]= "";
-	
+
 // global includes
-include_once('includes/footer.php'); // authenticate users, includes db connection	
+include_once('includes/footer.php'); // authenticate users, includes db connection
 
 ?>
 
- 
- <!-- PAGE-SPECIFIC SCRIPTS // addStory.php --> 
+
+ <!-- PAGE-SPECIFIC SCRIPTS // addStory.php -->
 
 <script type="text/javascript">
-   
+
    $("#shameHideWriters").hide();
    $("#shameHideDepartments").hide();
    $("#shameHideSources").hide();
@@ -677,31 +677,31 @@ function hideWebsites() {
 // Allows users to type and will match selection according to available data
 
  var writer = <?php echo "[";
-               foreach($writerName as $wName) { 
+               foreach($writerName as $wName) {
                 echo "'" . $wName . "',";
               }
               echo "];"; ?>
 
  var writer1 = <?php echo "[";
-               foreach($writerName as $wName) { 
+               foreach($writerName as $wName) {
                 echo "'" . $wName . "',";
               }
               echo "];"; ?>
-  
+
  var department = <?php echo "[";
-               foreach($deptName as $dName) { 
+               foreach($deptName as $dName) {
                 echo "'" . $dName . "',";
               }
-              echo "];"; ?> 
+              echo "];"; ?>
 
  var source = <?php echo "[";
-               foreach($sourceName as $sName) { 
+               foreach($sourceName as $sName) {
                 echo "'" . $sName . "',";
               }
               echo "];"; ?>
 
  var affiliation = <?php echo "[";
-               foreach($affiliationName as $aName) { 
+               foreach($affiliationName as $aName) {
                 echo "'" . $aName . "',";
               }
               echo "];"; ?>
@@ -754,7 +754,7 @@ function hideWebsites() {
 <script type="text/javascript" src="includes/ICE/ice-master.min.js"></script>
 <script type="text/javascript" src="includes/ICE/lib/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
-// ICE tracks changes by user and allows users to accept or reject changes using tinyMCE. 
+// ICE tracks changes by user and allows users to accept or reject changes using tinyMCE.
 // TODO: username from database with id
 
     tinymce.init({
