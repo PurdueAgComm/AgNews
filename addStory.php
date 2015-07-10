@@ -66,77 +66,72 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
       }
     ?>
 
-
-
       <h2>Create A New Story</h2>
+          <form class="form-group"  name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doAddStory.php">
+            <?php
+             if($_SESSION['storyError'] == 1) {
+               echo "<div class='alert alert-danger'><i class='fa fa-exclamation-circle'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
+             }
 
+              //display general error with information
+              if ($_GET["isComplete"] == "false") {
+                echo "<div class='alert alert-danger'><h4>We need your attention! <span class='badge badge-important' style='position: relative; top: -2px;'>" . $_GET['count'] . " items</span></h4><p>" . $_SESSION['error'] . "</p></div>";
+                $_SESSION["error"] = "";
+              }
+              if ($_SESSION["success"] != "") {
+                echo "<div class='alert alert-success alert-block'><h4>Success!</h4><p>" . $_SESSION["success"] . "</p></div>";
+                $_SESSION["success"] = "";
+              }
+              ?>
 
-      <?php
-
-       //display general error with information
-        if ($_GET["isComplete"] == "false") {
-          echo "<div class='alert alert-error alert-block'><h4>We need your attention! <span class='badge badge-important' style='position: relative; top: -2px;'>" . $_GET['count'] . " items</span></h4><p>" . $_SESSION['error'] . "</p></div>";
-          $_SESSION["error"] = "";
-        }
-        if ($_SESSION["success"] != "") {
-          echo "<div class='alert alert-success alert-block'><h4>Success!</h4><p>" . $_SESSION["success"] . "</p></div>";
-          $_SESSION["success"] = "";
-        }
-
-      ?>
-
-
-         <form class="form-group"  name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doAddStory.php">
-
-            <div style="border:solid; border-color: #ddd; border-width: 1px; border-radius: 4px; margin-bottom: 10px;">
-              <div class="well-lg">
-               <h3>News Story</h3>
-                 <?php
-                 if($_SESSION['storyError'] == 1) {
-                   echo "<div class='alert alert-error'><i class='fa fa-exclamation-circle'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
-                 } ?>
-
-                 <textarea style="width: 98%; height: 200px;" id="tinymce" name="story"><?= htmlspecialchars_decode($_SESSION['story']);?></textarea>
+            <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">News Story</h3>
+                  </div>
+              <div class="panel-body form-horizontal">
+                <textarea style="width: 98%; height: 200px;" id="tinymce" name="story"><?= htmlspecialchars_decode($_SESSION['story']);?></textarea>
               </div>
-            </div>
-        </form>
+            </div> <!-- /.panel -->
 
             <div class="panel panel-default">
                   <div class="panel-heading">
                     <h3 class="panel-title">Internal Information</h3>
                   </div>
-              <div class="panel-body">
-                <form class="form-horizontal">
+              <div class="panel-body form-horizontal">
 
                     <div class="form-group <?php if($_SESSION['filenameError'] == 1) echo 'error'; ?>">
                         <label class="col-sm-2 control-label" for="filename">Filename</label>
-                         <div class="col-sm-8">
+                         <div class="col-sm-4">
                              <input type="text" class="form-control" id="filename" placeholder="Create a filename" name="filename" value="<?= $_SESSION['filename'];?>" >
-                             <span class="inline-help text-error">Required</span>
                          </div>
+                             <span class="text-danger help-block">Required</span>
+
                      </div>
 
-                    <div class="form-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
-                        <label class="col-sm-2 control-label" for="writer">Writer(s)<br /></label>
-                        <div class="col-sm-8" id="writers">
-
-                                  <!-- **07-27: htmlspecialchars(stripslashes) is good here to allow the browser to see the apostrophes AND escape the slashes. This is important for refresh or if there is an error on the page  -->
+                      <div class="form-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
+                          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="writer">Writer(s)</label>
+                          <div class="col-sm-4" id="writers">
+                            <!-- **07-27: htmlspecialchars(stripslashes) is good here to allow the browser to see the apostrophes AND escape the slashes. This is important for refresh or if there is an error on the page  -->
                                   <input type="text" class="form-control" id="writer1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer1" value="<?php if(!empty($_SESSION["writerID1"])) { echo htmlspecialchars_decode(stripslashes($_SESSION["writerID1"]), ENT_QUOTES); } else { echo htmlspecialchars_decode(stripslashes($_SESSION["firstName"]), ENT_QUOTES) . ' ' . htmlspecialchars_decode(stripslashes($_SESSION["lastName"]), ENT_QUOTES);}?>" />
+                          </div>
+
+                            <span id="writerControls"><a onClick="addWriter();" rel="tooltip" title="Show more writer fields" class="btn btn-default">
+                            <i class="fa fa-list"></i></a></span><br />
+
+                          <div class="col-sm-4">
+                            <div id="shameHideWriters" style="margin-top: 20px;">
+                              <input type="text" class="form-control" id="writer2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID2']), ENT_QUOTES);?>" /><br />
+                              <input type="text" class="form-control" id="writer3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID3']), ENT_QUOTES);?>" /><br />
+                              <input type="text" class="form-control" id="writer4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID4']), ENT_QUOTES);?>" /><br />
+                              <input type="text" class="form-control" id="writer5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID5']), ENT_QUOTES);?>" /><br />
+                            </div>
+                          </div>
                         </div>
-                        <span id="writerControls"> <a onClick="addWriter();" rel="tooltip" title="Show more Writer fields" class="btn btn-default"><i class="fa fa-list"></i></a></span>
-                         <div id="shameHideWriters" style="col-sm-2">
-                                    <!-- **07-27: htmlspecialchars(stripslashes) is good here to allow the browser to see the apostrophes AND escape the slashes. This is important for refresh or if there is an error on the page  -->
-                                    <input type="text" class="col-sm-2" id="writer2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID2']), ENT_QUOTES);?>" />
-                                    <input type="text" class="col-sm-2" id="writer3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID3']), ENT_QUOTES);?>" />
-                                    <input type="text" class="col-sm-2" id="writer4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID4']), ENT_QUOTES);?>" />
-                                    <input type="text" class="col-sm-2" id="writer5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a writer" name="writer5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['writerID5']), ENT_QUOTES);?>" />
-                        </div>
-                    </div>
 
                         <div class="form-group <?php if($_SESSION['intentError'] == 1) echo 'error'; ?> ">
                           <label class="col-sm-2 control-label" for="intent">Intent</label>
                           <div class="col-sm-4">
-                            <textarea class="col-sm-10" name="intent">
+                            <textarea class="form-control" name="intent">
                               <?= $_SESSION['intent'];?> </textarea>
                           </div>
                         </div>
@@ -162,83 +157,99 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
                           </div>
                         </div>
 
-                </form>
+
 
                 </div>
              </div>
 
-          <div class="panel">
-           <input type="submit" name="story2" onClick="setConfirmUnload(false);" class="btn-default btn-lg btn-block" value="Create Story" />
-         </div>
+
+           <input type="submit" name="story2" onClick="setConfirmUnload(false);" class="btn btn-default btn-lg btn-block" value="Create Story" />
+           <br />
 
 
-        <div class="well">
-          <h3>General Information</h3>
-        <div class="form-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="headline">Headline</label>
-          <div class="controls">
-            <input type="text" class="span3" id="headline" placeholder="Create a headline" name="headline" value="<?= $_SESSION['headline'];?>" > <?php if($_SESSION['headlineError'] == 1) echo "<i class='icon-exclamation-sign' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">General Information</h3>
           </div>
-        </div>
+          <div class="panel-body form-horizontal">
+              <div class="form-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
+                <label class="col-sm-2 control-label" for="headline">Headline</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="headline" placeholder="Create a headline" name="headline" value="<?= $_SESSION['headline'];?>" > <?php if($_SESSION['headlineError'] == 1) echo "<i class='icon-exclamation-sign' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
+                </div>
+              </div>
 
-        <div class="alert alert-info">
-          <p><strong><i class="icon icon-share"></i> Rockin' the Twitterverse</strong> <small>new in v1.2</small></p>
-          <p>You can now specify a custom tweet in the field below. We'll save it for you (you can edit it later) and then use this instead of the headline once you publish the story. Cool, right? Since we're using Twitter, make sure to keep it 140 characters or less!</p>
 
-        </div>
-
-        <div class="form-group info <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="tweet">Tweet</label>
-          <div class="controls">
-            <input type="text" class="span3" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= $_SESSION['tweet'];?>"> <span id="count" class="muted"></span>
+          <div class="form-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
+            <label class="col-sm-2 control-label" for="tweet">Tweet</label>
+            <div class="col-sm-4">
+              <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= $_SESSION['tweet'];?>
+              ">
+              <span id="count" class="muted"></span>
+            </div>
           </div>
-        </div>
-
-
 
         <div class="form-group  <?php if($_SESSION['sourceError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="source">Source(s)</label>
-          <div class="controls">
-            <input type="text" class="span3" id="source1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off"  placeholder="Specify a source" name="source1"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID1']), ENT_QUOTES); ?>"  /> <span id="sourceControls"><a onClick="addSources();" rel="tooltip" title="Show more Source fields" class="btn btn-default"><i class="fa fa-list"></i></a></span> <a rel="tooltip" tabindex="-1" title="Create a new Source profile" data-toggle="modal" href="#myModal" role="button" class="btn btn-default"><i class="icon-plus-sign"></i></a> <br />
-            <div id="shameHideSources">
-              <input type="text" class="span3" id="source2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID2']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="source3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID3']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="source4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID4']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="source5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID5']), ENT_QUOTES);?>" /><br />
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="source">Source(s)</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="source1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off"  placeholder="Specify a source" name="source1"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID1']), ENT_QUOTES); ?>"  />
+          </div>
+
+            <span id="sourceControls"><a onClick="addSources();" rel="tooltip" title="Show more Source fields" class="btn btn-default">
+            <i class="fa fa-list"></i></a></span> <a rel="tooltip" tabindex="-1" title="Create a new Source profile" data-toggle="modal" href="#myModal" role="button" class="btn btn-default">
+            <i class="fa fa-plus-circle"></i></a> <br />
+          <div class="col-sm-4">
+            <div id="shameHideSources" style="margin-top: 20px;">
+              <input type="text" class="form-control" id="source2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID2']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="source3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID3']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="source4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID4']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="source5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a source" name="source5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['sourceID5']), ENT_QUOTES);?>" /><br />
             </div>
           </div>
         </div>
 
         <div class="form-group  <?php if($_SESSION['departmentError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="department">Department(s)</label>
-          <div class="controls">
-            <input type="text" class="span3" id="department1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department1"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID1']), ENT_QUOTES);?>" /> <span id="departmentControls"><a onClick="addDepartments();" rel="tooltip" title="Show more Department fields" class="btn btn-default"><i class="fa fa-list"></i></a></span><br/>
-            <div id="shameHideDepartments">
-              <input type="text" class="span3" id="department2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID2']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="department3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID3']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="department4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID4']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="department5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID5']), ENT_QUOTES);?>" /><br />
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="department">Department(s)</label>
+
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="department1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department1"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID1']), ENT_QUOTES);?>" />
+          </div>
+             <span id="departmentControls"><a onClick="addDepartments();" rel="tooltip" title="Show more Department fields" class="btn btn-default"><i class="fa fa-list"></i></a></span><br/>
+
+          <div class="col-sm-4">
+            <div id="shameHideDepartments" style="margin-top: 20px;">
+              <input type="text" class="form-control" id="department2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID2']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="department3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID3']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="department4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID4']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="department5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify a department" name="department5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['departmentID5']), ENT_QUOTES);?>" /><br />
             </div>
           </div>
         </div>
 
          <div class="form-group  <?php if($_SESSION['affiliationError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="affiliation">Affiliation(s)</label>
-          <div class="controls">
-            <input type="text" class="span3" id="affiliation1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation1"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID1']), ENT_QUOTES);?>" /> <span id="affiliationControls"><a onClick="addAffiliations();" rel="tooltip" title="Show more Affiliation fields" class="btn btn-default"><i class="fa fa-list"></i></a></span><br />
-            <div id="shameHideAffiliations">
-              <input type="text" class="span3" id="affiliation2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID2']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="affiliation3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID3']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="affiliation4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID4']), ENT_QUOTES);?>" /><br />
-              <input type="text" class="span3" id="affiliation5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID5']), ENT_QUOTES);?>" /><br />
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="affiliation">Affiliation(s)</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="affiliation1" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation1"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID1']), ENT_QUOTES);?>" />
+          </div>
+
+             <span id="affiliationControls"><a onClick="addAffiliations();" rel="tooltip" title="Show more Affiliation fields" class="btn btn-default"><i class="fa fa-list"></i></a></span><br />
+
+           <div class="col-sm-4">
+            <div id="shameHideAffiliations" style="margin-top: 20px;">
+              <input type="text" class="form-control" id="affiliation2" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation2"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID2']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="affiliation3" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation3"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID3']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="affiliation4" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation4"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID4']), ENT_QUOTES);?>" /><br />
+              <input type="text" class="form-control" id="affiliation5" class="typeahead" data-provide="typeahead" data-items="4" autocomplete="off" placeholder="Specify an affiliation" name="affiliation5"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION['affiliationID5']), ENT_QUOTES);?>" /><br />
             </div>
           </div>
         </div>
 
+
         <div class="form-group <?php if($_SESSION['datePublishedError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="datePublished">Publish Date</label>
-          <div class="controls">
-            <div class="input-append date datePicker" id="dp3" data-date-format="yyyy-mm-dd">
+          <label class="col-sm-2 control-label" for="datePublished">Publish Date</label>
+          <div class="col-sm-4">
+            <div class="input-group date datePicker" id="dp3" data-date-format="yyyy-mm-dd">
                <?php
               if($_SESSION['datePublished'] == "") {
                 $datePub = "";
@@ -248,20 +259,32 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               }
              ?>
 
-              <input class="span2" name="datePublished" size="16" type="text" value="<?= $datePub;?>" readonly><span class="add-on"><i class="icon-th"></i></span>
+              <input class="form-control" name="datePublished" size="16" type="text" value="<?= $datePub;?>" readonly>
+              <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
           </div>
         </div>
        </div>
-     </div> <!-- end well -->
 
 
-      <div class="well">
-      <h3>Define Metadata</h3>
+
+
+          </div>
+        </div>
+
+
+ <!-- end well -->
+
+ <!-- Start Metadata Checkboxes -->
+      <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Define Metadata</h3>
+                  </div>
+              <div class="panel-body form-horizontal">
 
       <div class="form-group">
-          <label class="control-label" for="isTopStory">This is an  <strong>Agriculture Top Story</strong></label>
-          <div class="controls">
-            <label class="checkbox">
+          <label class="col-sm-2 control-label metadata" for="isTopStory">This is an  <strong>Agriculture Top Story</strong></label>
+          <div class="col-sm-4">
+            <label class="checkbox-inline">
              <?php if($_SESSION["isTopStory"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isTopStory"> Yes
               <?php } else { ?>
@@ -272,9 +295,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
       </div>
 
       <div class="form-group">
-          <label class="control-label" for="isTopStory">This is an  <strong>Extension Top Story</strong></label>
-          <div class="controls">
-            <label class="checkbox">
+          <label class="col-sm-2 control-label metadata" for="isTopStory">This is an  <strong>Extension Top Story</strong></label>
+          <div class="col-sm-4">
+            <label class="checkbox-inline">
              <?php if($_SESSION["isExtTopStory"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isExtTopStory"> Yes
               <?php } else { ?>
@@ -286,9 +309,9 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
 
       <div class="form-group">
-          <label class="control-label" for="isScience">This story is <strong>science news</strong> </label>
-          <div class="controls">
-            <label class="checkbox">
+          <label class="col-sm-2 control-label metadata" for="isScience">This story is <strong>Science News</strong> </label>
+          <div class="col-sm-4">
+            <label class="checkbox-inline">
               <?php if($_SESSION["isScience"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isScience"> Yes
               <?php } else { ?>
@@ -300,8 +323,8 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
 
         <div class="form-group <?php if($_SESSION['areaError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Story Type*</label>
-          <div class="controls">
+          <label class="col-sm-2 control-label metadata" for="college">Story Type*</label>
+          <div class="col-sm-4">
               <?php
               $sql = "SELECT * FROM tblArea;";
               $result = mysql_query($sql);
@@ -331,8 +354,8 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         </div>
 
        <div class="form-group <?php if($_SESSION['topicError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Background Topic(s)</label>
-          <div class="controls">
+          <label class="col-sm-2 control-label metadata" for="college">Background Topic(s)</label>
+          <div class="col-sm-4">
               <?php
               $sql = "SELECT * FROM tblTopic WHERE isHidden='0' ORDER BY strTopic;";
               $result = mysql_query($sql);
@@ -365,8 +388,8 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
 
        <div class="form-group <?php if($_SESSION['issueError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Critical Issue(s)</label>
-          <div class="controls">
+          <label class="col-sm-2 control-label metadata" for="college">Critical Issue(s)</label>
+          <div class="col-sm-4">
               <?php
               $sql = "SELECT * FROM tblIssues WHERE isHidden='0'ORDER BY strIssues;";
               $result = mysql_query($sql);
@@ -393,8 +416,8 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="isConnections">Featured in:</label>
-          <div class="controls">
+          <label class="col-sm-2 control-label metadata" for="isConnections">Featured in:</label>
+          <div class="col-sm-4">
             <label class="checkbox">
             <?php if($_SESSION["isConnections"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isConnections"> Connections
@@ -429,64 +452,69 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
            </div>
         </div>
+    </div>
+  </div>
+<!-- End MetaData Checkboxes --><!-- End MetaData Checkboxes --><!-- End MetaData Checkboxes --><!-- End MetaData Checkboxes -->
 
 
+      <div class="panel panel-default">
+              <div class="panel-heading">
+                <h3 class="panel-title">Multimedia</h3>
+              </div>
+          <div class="panel-body form-horizontal">
 
-      </div> <!-- end well -->
+              <div class="form-group">
+                <label class="col-sm-2 control-label" for="youtube">Youtube Video URL</label>
+                <div class="col-sm-4">
+                  <input type="text" class="form-control" id="youtube" name="youtube" placeholder="http://www.youtube.com"  value="<?= $_SESSION['youtube'];?>"/></div>
+              </div>
 
-      <div class="well">
-      <h3>Multimedia</h3>
-
-        <div class="form-group">
-          <label class="control-label" for="youtube">Youtube Video URL</label>
-          <div class="controls">
-            <input type="text" class="span3" id="youtube" name="youtube" placeholder="http://www.youtube.com"  value="<?= $_SESSION['youtube'];?>"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label" for="website1">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite1" name="nameWebsite1" placeholder="Website Title"  value="<?= $_SESSION['websiteName1'];?>"/> Link: <input type="text" class="span3" id="website1" name="website1" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL1'];?>"/> <span id="websiteControls"><a onClick="addWebsites();" rel="tooltip" title="Show more Related Website fields" class="btn btn-default"><i class="fa fa-list"></i></a></span> <span class="muted inline-help">Start with <strong>http://</strong></span> <br />
-          </div>
-        </div>
-
-        <div id="shameHideWebsites">
-
-        <div class="form-group">
-          <label class="control-label" for="website2">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite2" name="nameWebsite2" placeholder="Website Title"  value="<?= $_SESSION['websiteName2'];?>"/> Link: <input type="text" class="span3" id="website2" name="website2" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL2'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label class="control-label" for="website3">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite3" name="nameWebsite3" placeholder="Website Title"  value="<?= $_SESSION['websiteName3'];?>"/> Link: <input type="text" class="span3" id="website3" name="website3" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL3'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website1">Related Website</label>
+          <div class="col-sm-10">
+          Title: <input type="text" class="form-control" id="nameWebsite1" name="nameWebsite1" placeholder="Website Title"  value="<?= $_SESSION['websiteName1'];?>"/> Link: <input type="text" class="form-control" id="website1" name="website1" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL1'];?>"/>
+          <span id="websiteControls"><a onClick="addWebsites();" rel="tooltip" title="Show more Related Website fields" class="btn btn-default"><i class="fa fa-list"></i></a></span> <span>Start with <strong>http://</strong> </span><br />
           </div>
         </div>
 
 
-        <div class="form-group">
-          <label class="control-label" for="website4">Related Website</label>
-          <div class="controls">
-             Title: <input type="text" class="span3" id="nameWebsite4" name="nameWebsite4" placeholder="Website Title"  value="<?= $_SESSION['websiteName4'];?>"/> Link: <input type="text" class="span3" id="website4" name="website4" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL4'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+
+      <div id="shameHideWebsites">
+
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website2">Related Website</label>
+          <div class="col-sm-10">
+            Title: <input type="text" class="form-control" id="nameWebsite2" name="nameWebsite2" placeholder="Website Title"  value="<?= $_SESSION['websiteName2'];?>"/> Link: <input type="text" class="form-control" id="website2" name="website2" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL2'];?>"/> <span class="muted inline-help"></span> <span>Start with <strong>http://</strong></span>
+          </div>
+        </div>
+
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website3">Related Website</label>
+          <div class="col-sm-10">
+            Title: <input type="text" class="form-control" id="nameWebsite3" name="nameWebsite3" placeholder="Website Title"  value="<?= $_SESSION['websiteName3'];?>"/> Link: <input type="text" class="form-control" id="website3" name="website3" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL3'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
           </div>
         </div>
 
 
-        <div class="form-group">
-          <label class="control-label" for="website5">Related Website</label>
-          <div class="controls">
-           Title: <input type="text" class="span3" id="nameWebsite5" name="nameWebsite5" placeholder="Website Title"  value="<?= $_SESSION['websiteName5'];?>"/> Link: <input type="text" class="span3" id="website5" name="website5" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL5'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website4">Related Website</label>
+          <div class="col-sm-10">
+             Title: <input type="text" class="form-control" id="nameWebsite4" name="nameWebsite4" placeholder="Website Title"  value="<?= $_SESSION['websiteName4'];?>"/> Link: <input type="text" class="form-control" id="website4" name="website4" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL4'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+          </div>
+        </div>
+
+
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website5">Related Website</label>
+          <div class="col-sm-10">
+           Title: <input type="text" class="form-control" id="nameWebsite5" name="nameWebsite5" placeholder="Website Title"  value="<?= $_SESSION['websiteName5'];?>"/> Link: <input type="text" class="form-control" id="website5" name="website5" placeholder="http://www.thewebsite.com"  value="<?= $_SESSION['websiteURL5'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
           </div>
         </div>
         </div>
 
         <div class="form-group">
-          <label class="control-label" for="college">Included Media</label>
-          <div class="controls">
+          <label class="col-sm-2 control-label" for="college">Included Media</label>
+          <div class="col-sm-10">
               <?php
 
               if($_SESSION["isPhoto"] != 0) {
@@ -536,13 +564,11 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             ?>
           </div>
         </div>
-
-
-      </div> <!-- end well -->
-
-      <div class="well">
-        <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-large btn-block btn-primary" value="Create Story" />
+          </div>
       </div>
+
+        <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-default btn-lg btn-block btn-primary" value="Create Story" />
+
 
 
 <!-- ************************************************************************-->
@@ -611,8 +637,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
   </div>
 
 </div>
-
- </form>
+</form>
 
 <!-- ************************************************************************-->
 <!-- END MODAL WINDOW -->
@@ -701,7 +726,7 @@ function hideAffiliations() {
 
 function addWebsites() {
   $("#shameHideWebsites").show();
-  $("#websiteControls").html("<a onClick='hideWebsites()' class='btn btn-default'><i class='fa-eye-slash'></i></a>");
+  $("#websiteControls").html("<a onClick='hideWebsites()' class='btn btn-default'><i class='fa fa-eye-slash'></i></a>");
 }
 
 function hideWebsites() {
@@ -753,7 +778,7 @@ function hideWebsites() {
 
 
   $('#writer1').typeahead({source: writer});
-  $('#writer2').typeahead({source: writer1});
+  $('#writer2').typeahead({source: writer});
   $('#writer3').typeahead({source: writer});
   $('#writer4').typeahead({source: writer});
   $('#writer5').typeahead({source: writer});

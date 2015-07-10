@@ -21,11 +21,12 @@ if($_SESSION["isAdmin"] != 1) {
 
 
 
-<form class="form-horizontal" action="functions/doEditRole.php" method="post">
- <div class="control-group <?php if($_SESSION['coordinatorError'] == 1) echo 'error'; ?>">             
-         <label class="control-label" for="fName01">Coordinator</label>  
+<form class="form-group form-horizontal" action="functions/doEditRole.php" method="post">
+ <div class="<?php if($_SESSION['coordinatorError'] == 1) echo 'error'; ?>">
+         <label class="col-sm-2 control-label" for="fName01">Coordinator</label>
          <div class="controls">
-               <select name="coordinator">
+         <div class="col-sm-4">
+               <select class="form-control" name="coordinator">
 				<?php
 					$sql = "SELECT * FROM tblPeople WHERE (strRole <> 'MM' AND strRole <> 'IT') AND isAdmin=1 ORDER BY strLastName";
 					$result = mysql_query($sql);
@@ -43,18 +44,21 @@ if($_SESSION["isAdmin"] != 1) {
 				?>
 
                </select>
-               <input type="hidden" name="roleAction" value="coordinator" />
-               <button class="btn btn-success" action="submit" onClick="setConfirmUnload(false);"><i class="icon-ok icon-white" ></i></button>
-               <span rel='tooltip' title='The Coordinator of the News Unit will receive updates when stories are progressed to the "Coordinator Review" status.'><i class='icon-question-sign'></i>
+                 <input type="hidden" name="roleAction" value="coordinator" />
+               </div>
+
+               <button class="btn btn-success" action="submit" onClick="setConfirmUnload(false);"><i class="fa fa-check icon-white" ></i></button>
+               <span rel='tooltip' title='The Coordinator of the News Unit will receive updates when stories are progressed to the "Coordinator Review" status.'><i class='fa fa-question-circle'></i>
          </div>
       </div>
 </form>
 
-<form class="form-horizontal" action="functions/doEditRole.php" method="post">
- <div class="control-group <?php if($_SESSION['adminError'] == 1) echo 'error'; ?>">             
-         <label class="control-label" for="fName01">News Assistant</label>  
+<form class="form-group form-horizontal" action="functions/doEditRole.php" method="post">
+ <div class="<?php if($_SESSION['adminError'] == 1) echo 'error'; ?>">
+         <label class="col-sm-2 control-label" for="fName01">News Assistant</label>
          <div class="controls">
-               <select name="assistant">
+         <div class="col-sm-4">
+               <select class="form-control" name="assistant">
 				<?php
 					$sql = "SELECT * FROM tblPeople WHERE (strRole <> 'MM' AND strRole <> 'IT') AND isAdmin=1 || isSupport=1 ORDER BY strLastName";
 					$result = mysql_query($sql);
@@ -73,17 +77,19 @@ if($_SESSION["isAdmin"] != 1) {
 
                </select>
                <input type="hidden" name="roleAction" value="assistant" />
-               <button class="btn btn-success" onClick="setConfirmUnload(false);" action="submit"><i class="icon-ok icon-white"></i></button>
-               <span rel='tooltip' title='The News Assistant Role receives an email update when stories are progressed to the "M&M Review" status prompting them to log in, update the story URL, and publish the story.'><i class='icon-question-sign'></i>
+           </div>
+               <button class="btn btn-success" onClick="setConfirmUnload(false);" action="submit"><i class="fa fa-check icon-white"></i></button>
+               <span rel='tooltip' title='The News Assistant Role receives an email update when stories are progressed to the "M&M Review" status prompting them to log in, update the story URL, and publish the story.'><i class='fa fa-question-circle'></i>
          </div>
       </div>
 </form>
 
-<form class="form-horizontal" action="functions/doEditRole.php" method="post">
- <div class="control-group <?php if($_SESSION['adminError'] == 1) echo 'error'; ?>">             
-         <label class="control-label" for="fName01">MMU Administrator</label>  
+<form class="form-group form-horizontal" action="functions/doEditRole.php" method="post">
+ <div class="<?php if($_SESSION['adminError'] == 1) echo 'error'; ?>">
+         <label class="col-sm-2 control-label" for="fName01">MMU Administrator</label>
          <div class="controls">
-               <select name="manager">
+         <div class="col-sm-4">
+               <select class="form-control" name="manager">
 				<?php
 					$sql = "SELECT * FROM tblPeople WHERE (strRole <> 'MM' AND strRole <> 'IT') AND isAdmin=1  ORDER BY strLastName";
 					$result = mysql_query($sql);
@@ -102,8 +108,9 @@ if($_SESSION["isAdmin"] != 1) {
 
                </select>
                <input type="hidden" name="roleAction" value="administrator" />
-               <button onClick="setConfirmUnload(false);" class="btn btn-success" action="submit"><i class="icon-ok icon-white"></i></button>
-              <span rel='tooltip' title='The MMU Administrator is the MMU contact for this website. All help emails will be sent to this person.'><i class='icon-question-sign'></i>
+           </div>
+               <button onClick="setConfirmUnload(false);" class="btn btn-success" action="submit"><i class="fa fa-check icon-white"></i></button>
+              <span rel='tooltip' title='The MMU Administrator is the MMU contact for this website. All help emails will be sent to this person.'><i class='fa fa-question-circle'></i>
          </div>
       </div>
 </form>

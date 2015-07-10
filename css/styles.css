@@ -1,4 +1,14 @@
 
+        .control1{
+          width: 31%;
+          float: left;
+          margin:10px;
+        }
+        .middle{
+        display: block;
+        }
+
+
         .h3, h3, .h2 , h2 {
           font-size: 24px;
           font-weight: bold;
@@ -80,3 +90,12 @@
         background-color: #fefefe;
       }
 
+/*
+THIS IS THE CSS FOR BOOTSTRAP CHANGES
+*/
+      .metadata {
+       font-weight: normal;
+      }
+
+
+/*END OF CSS CHANGES FOR BOOTSTRAP */
