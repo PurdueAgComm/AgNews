@@ -28,9 +28,9 @@ if($_SESSION["isAdmin"] != 1) {
   $storyResultsPending = mysql_query($storySQL);
   $pendingNum = mysql_num_rows($storyResultsPending);
 
-if(!empty($_SESSION["error"])) { 
+if(!empty($_SESSION["error"])) {
   // if there is an error, display it
-  echo "<div class='alert alert-error alert-block'><h4>Houston, we have a problem!</h4><p>" . $_SESSION["error"] . "</p></div>";
+  echo "<div class='alert alert-danger alert-block'><h4>Houston, we have a problem!</h4><p>" . $_SESSION["error"] . "</p></div>";
   $_SESSION["error"] = "";
 }
 
@@ -44,9 +44,9 @@ if(!empty($_SESSION["error"])) {
 
 
     <div class="clearfix">
-    <a style="margin-bottom: 5px;" class="btn btn-primary pull-right" href="functions/doSendProjectList.php"><i class="icon-envelope icon-white"></i> Send to M&M</a>
-   
-    <a rel="tooltip" style='margin-right: 5px;' tabindex="-1" title="Update M&M Contact" data-toggle="modal" href="#myModal" role="button" class="btn pull-right"><i class="icon-edit"></i></a>
+    <a style="margin-bottom: 5px;" class="btn btn-primary pull-right" href="functions/doSendProjectList.php"><i class="fa fa-envelope icon-white"></i> Send to M&M</a>
+
+    <a rel="tooltip" style='margin-right: 5px;' tabindex="-1" title="Update M&M Contact" data-toggle="modal" href="#myModal" role="button" class="btn btn-default pull-right"><i class="fa fa-edit"></i></a>
 
     </div>
     <table class="clearfix table table-striped table-hover table-bordered">
@@ -188,7 +188,7 @@ if(!empty($_SESSION["error"])) {
             while($regionalWriter = mysql_fetch_array($resultWriter)) {
               echo $regionalWriter["strFirstName"] . " " . $regionalWriter["strLastName"] . "<br />";
             }
-           
+
             echo "</td>";
             echo "<td>" . $regional["txtIntent"] . "</td>";
             if($regional["datePublished"] != "0000-00-00") {
@@ -264,7 +264,7 @@ if(!empty($_SESSION["error"])) {
             while($nationalWriter = mysql_fetch_array($resultWriter)) {
               echo $nationalWriter["strFirstName"] . " " . $nationalWriter["strLastName"] . "<br />";
             }
-           
+
             echo "</td>";
             echo "<td>" . $national["txtIntent"] . "</td>";
             if($national["datePublished"] != "0000-00-00") {
@@ -340,7 +340,7 @@ if(!empty($_SESSION["error"])) {
             while($globalWriter = mysql_fetch_array($resultWriter)) {
               echo $globalWriter["strFirstName"] . " " . $globalWriter["strLastName"] . "<br />";
             }
-           
+
             echo "</td>";
             echo "<td>" . $global["txtIntent"] . "</td>";
             if($global["datePublished"] != "0000-00-00") {
@@ -417,7 +417,7 @@ if(!empty($_SESSION["error"])) {
             while($pendingWriter = mysql_fetch_array($resultWriter)) {
               echo $pendingWriter["strFirstName"] . " " . $pendingWriter["strLastName"] . "<br />";
             }
-           
+
             echo "</td>";
             echo "<td>" . $pending["txtIntent"] . "</td>";
             if($pending["datePublished"] != "0000-00-00") {
@@ -441,7 +441,7 @@ if(!empty($_SESSION["error"])) {
 
     </table>
     <div class="clearfix">
-    <a style="margin-top: -15px;" class="btn btn-primary pull-right" href="functions/doSendProjectList.php"><i class="icon-envelope icon-white"></i> Send to M&M</a>
+    <a style="margin-top: -15px;" class="btn btn-primary pull-right" href="functions/doSendProjectList.php"><i class="fa fa-envelope icon-white"></i> Send to M&M</a>
     </div>
 
 
@@ -454,29 +454,36 @@ $SQL = "SELECT strEmail FROM tblPeople WHERE strRole='MM';";
 $result = mysql_query($SQL);
 $contact = mysql_fetch_array($result);
 ?>
-<form class="form-horizontal" method="post" action="functions/doUpdateMMContact.php">
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<form class="" method="post" action="functions/doUpdateMMContact.php">
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+ <div class="modal-dialog modal-lg">
+ <div class="modal-content">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Update M&M Contact</h3>
   </div>
   <div class="modal-body">
     <p>This form controls the email address that the Project List will be mailed to. The current email address appears below. If you would like to change the email address, simply replace the email address below with the new address and click the Update Contact button below.</p>
-      <div class="control-group <?php if($_SESSION['emailError'] == 1) echo 'error'; ?>">             
-               <label class="control-label" for="email">Contact Email:</label>  
+      <div style="height:50px;"  class="control-group  <?php if($_SESSION['emailError'] == 1) echo 'error'; ?>">
+               <label class="col-sm-2 control-label" for="email">Contact Email:</label>
          <div class="controls">
-               <input type="text" class="span3" id="email" placeholder="Email Address" name="email"  value="<?php echo $contact['strEmail']; ?>" />
+         <div class="input-append col-sm-4">
+               <input type="text" class="form-control" id="email" placeholder="Email Address" name="email"  value="<?php echo $contact['strEmail']; ?>" />
          </div>
-      </div>                       
+       </div>
+      </div>
   </div>
 
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-    <input type="submit" name="source" class="btn btn-primary" id="save" value="Update Contact" />  
+    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+    <input type="submit" name="source" class="btn btn-primary" id="save" value="Update Contact" />
   </div>
  </form>
 
 </div>
+</div>
+</div> <!--end of modal content-->
+
 
 <!-- END MODAL WINDOW -->
 
