@@ -22,45 +22,48 @@ $_SESSION["waitingOnWriter"] = mysql_num_rows($redResult);
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"/>
 
-    <link href="css/bootstrap-theme.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet"/>
-    <link href="css/bootstrap-responsive.css" rel="stylesheet">
-
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
       <script src="js/html5shiv.js"></script>
     <![endif]-->
 
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-      <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-                    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
-                                   <link rel="shortcut icon" href="ico/favicon.png">
   </head>
 
   <body>
-    <div class="container">
 
-      <div class="masthead">
-        <a href="/agnewsdb"><h2 class="muted">Agricultural Communication News Center</h2></a>
+  <div class="container">
 
-<nav class="navbar navbar-default ">
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/agnewsdb/index.php">AgNews DB</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/agnewsdb/index.php"><span data-container="body" data-placement="bottom" rel='tooltip' title='You have <?php echo  $_SESSION["waitingOnWriter"];?> action(s) waiting' class='badge badge-info'><?php if($_SESSION["waitingOnWriter"] != 0) { echo $_SESSION["waitingOnWriter"]; } ?></span></a></li>
+                <li><a href="viewAllStories.php"><i class="fa fa-newspaper-o"></i> News Stories</a></li>
+                <li><a href="addStory.php"><i class="fa fa-plus-circle"></i> Add Story</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="help.php"><i class="fa fa-question-circle"></i> Help</a></li>
+              <?php if($_SESSION["isAdmin"]) : ?>
+                <li><a href="controlPanel.php"><i class="fa fa-cogs"></i> Control Panel</a></li>
+              <?php endif; ?>
+              <li><a href="?logout=1"><i class="fa fa-sign-out"></i> Logout</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
 
-     <ul class="nav navbar-nav">
-                <li><a href="index.php">Home <span rel='tooltip' title='You have <?php echo  $_SESSION["waitingOnWriter"];?> stories that are waiting on you.' class='badge badge-info'><?php if($_SESSION["waitingOnWriter"] != 0) { echo $_SESSION["waitingOnWriter"]; } ?></span></a> </li>
-                <li><a href="viewAllStories.php">News Stories</a></li>
-                <li><a href="addStory.php">Add Story</a></li>
-                <li><a href="help.php">Help</a></li>
-                <?php if($_SESSION["isAdmin"]) : ?>
-                <li><a href="controlPanel.php">Control Panel</a></li>
-                <?php endif; ?>
-                <li><a href="?logout=1">Logout</a></li>
-       </ul>
 
-</nav> <!-- /.navbar -->
 
-      </div>
 
 
 
