@@ -929,11 +929,11 @@ input[type="image"]{
                 <!--start a new help segment in Quick FAQs-->
 			  <div class="accordion-group">
                 <div class="accordion-heading">
-			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapseSixFAQ">
+			      <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapseSix2FAQ">
 			        Do I need to be on campus to access the database?
 			      </a>
                 </div><!--end accordion-heading-->
-			    <div id="collapseSixFAQ" class="accordion-body collapse">
+			    <div id="collapseSix2FAQ" class="accordion-body collapse">
                   <div class="accordion-inner">
 			        <p>No. You can access your story anywhere Internet is available.</p>
 
