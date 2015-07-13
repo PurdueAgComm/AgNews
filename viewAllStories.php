@@ -34,10 +34,10 @@ $num_results = mysql_num_rows($redResult);
       <table class="table table-striped table-hover table-bordered">
       <tr>
         <td align="center" width="3%"></td>
-        <td width="55%"><span rel='tooltip' style='cursor: pointer;' title='If headline is unavailable, it will show the filename.'>Headline</span></td>
+        <td width="45%"><span rel='tooltip' style='cursor: pointer;' title='If headline is unavailable, it will show the filename.'>Headline</span></td>
         <td width="20%">Date Released</td>
         <td width="20%">Status</td>
-        <td width="5%">Admin</td>
+        <td width="15%">Admin</td>
       </tr>
 
       <?php
@@ -49,24 +49,24 @@ $num_results = mysql_num_rows($redResult);
 
 
 	        echo "<tr class='danger'>";
-	        echo "<td align='center' width='3%''><i rel='tooltip' title='This story is waiting on the writer(s).' class='fa fa-times'></i></td>";
+	        echo "<td align='center'><i rel='tooltip' title='This story is waiting on the writer(s).' class='fa fa-times-circle'></i></td>";
 
 	        if(!empty($redRow["strHeadline"])) {
-	        	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
+	        	echo "<td><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
 	        }
 	        else {
-	        	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
+	        	echo "<td><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
 	        }
 
 
 	         if($redRow["datePublished"] != "0000-00-00") {
-	          echo "<td width='15%'>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
+	          echo "<td>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
 	        }
 	        else {
-	          echo "<td width='15%'>TBD</td>";
+	          echo "<td>TBD</td>";
 	        }
 
-	        echo "<td width='20%'>";
+	        echo "<td>";
 	        $sql2 = "SELECT strStatus FROM tblStatus WHERE statusID=" . $redRow['statusID'];
 	        $result2 = mysql_query($sql2);
 	        $row2 = mysql_fetch_array($result2);
@@ -76,7 +76,8 @@ $num_results = mysql_num_rows($redResult);
 	          echo "No status provided";
 	        }
 	        echo "</td>";
-	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
+	        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> ";
+            echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
 	        echo "</tr>";
 	      }
 
@@ -86,23 +87,23 @@ $num_results = mysql_num_rows($redResult);
 
 
 	        echo "<tr class='warning'>";
-	        echo "<td align='center' width='3%''><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='fa fa-minus-circle'></i></td>";
+	        echo "<td align='center'><i rel='tooltip' title='Story is waiting on approval from the coordinator, a source, or M&M.' class='fa fa-minus-circle'></i></td>";
 
 		   if(!empty($redRow["strHeadline"])) {
-			 	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
+			 	echo "<td><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
 	        }
 	        else {
-	        	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
+	        	echo "<td><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
 	        }
 
 	        if($redRow["datePublished"] != "0000-00-00") {
-	          echo "<td width='15%'>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
+	          echo "<td>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
 	        }
 	        else {
-	          echo "<td width='15%'>TBD</td>";
+	          echo "<td>TBD</td>";
 	        }
 
-	        echo "<td width='20%'>";
+	        echo "<td>";
 	        $sql2 = "SELECT strStatus FROM tblStatus WHERE statusID=" . $redRow['statusID'];
 	        $result2 = mysql_query($sql2);
 	        $row2 = mysql_fetch_array($result2);
@@ -112,30 +113,31 @@ $num_results = mysql_num_rows($redResult);
 	          echo "No status provided";
 	        }
 	        echo "</td>";
-	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
+	        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> ";
+            echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
 	        echo "</tr>";
 	  }
 
 	 	if($redRow["statusID"] == 3) {
 
 	        echo "<tr>";
-	        echo "<td align='center' width='3%''><i rel='tooltip' title='This story has been published succesfully.' class='fa fa-check-circle-o'></i></td>";
+	        echo "<td align='center'><i rel='tooltip' title='This story has been published succesfully.' class='fa fa-check-circle-o'></i></td>";
 
 		    if(!empty($redRow["strHeadline"])) {
-			 	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
+			 	echo "<td><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strHeadline']), ENT_QUOTES) . "</a></td>";
 	        }
 	        else {
-	        	echo "<td width='55%'><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
+	        	echo "<td><a href='beholdStory.php?newsID=" . $redRow['newsID'] . "'>" . htmlspecialchars(stripslashes($redRow['strFilename']), ENT_QUOTES) . "</a></td>";
 	        }
 
 			if($redRow["datePublished"] != "0000-00-00") {
-	          echo "<td width='15%'>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
+	          echo "<td>" .  date("F d, Y", strtotime($redRow["datePublished"])) . "</td>";
 	        }
 	        else {
-	          echo "<td width='15%'>TBD</td>";
+	          echo "<td>TBD</td>";
 	        }
 
-        	echo "<td width='20%'>";
+        	echo "<td>";
 	        $sql2 = "SELECT strStatus FROM tblStatus WHERE statusID=" . $redRow['statusID'];
 	        $result2 = mysql_query($sql2);
 	        $row2 = mysql_fetch_array($result2);
@@ -145,7 +147,8 @@ $num_results = mysql_num_rows($redResult);
 	          echo "No status provided";
 	        }
 	        echo "</td>";
-	        echo "<td align='center' width='5%''><a href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> <a href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
+	        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $redRow["newsID"] . "'' rel='tooltip' title='Edit " . $redRow['strHeadline'] . "'><i class='fa fa-edit'></i></a> ";
+            echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strHeadline'] . "'><i class='fa fa-remove'></i></a></td>";
 	        echo "</tr>";
   		}
   	}
