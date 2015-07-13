@@ -93,7 +93,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
            <h3>News Story</h3>
              <?php
              if($_SESSION['storyError'] == 1) {
-               echo "<div class='alert alert-error'><i class='icon-exclamation-sign'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
+               echo "<div class='alert alert-error'><i class='fa fa-exclamation'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
              } ?>
 
              <textarea style="width: 98%; height: 200px;" id="tinymce" name="story"><?= htmlspecialchars_decode($_SESSION['story']);?></textarea>
@@ -162,13 +162,13 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         <div class="control-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
           <label class="control-label" for="headline">Headline</label>
           <div class="controls">
-            <input type="text" class="span3" id="headline" placeholder="Create a headline" name="headline" value="<?= $_SESSION['headline'];?>" > <?php if($_SESSION['headlineError'] == 1) echo "<i class='icon-exclamation-sign' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
+            <input type="text" class="span3" id="headline" placeholder="Create a headline" name="headline" value="<?= $_SESSION['headline'];?>" > <?php if($_SESSION['headlineError'] == 1) echo "<i class='fa fa-exclamation' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
           </div>
         </div>
         <div class="control-group  <?php if($_SESSION['sourceError'] == 1) echo 'error'; ?>">
           <label class="control-label" for="source">Sources(s)</label>
           <div class="controls">
-            <input type="text" class="span3" id="source1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source1"  value="<?= $_SESSION['sourceID1'];?>"  /> <span id="sourceControls"><a onClick="addSources();" rel="tooltip" title="Show more Source fields" class="btn btn-small"><i class="fa fa-list"></i></a></span> <a rel="tooltip" tabindex="-1" title="Create a new Source profile" data-toggle="modal" href="#myModal" role="button" class="btn btn-small"><i class="icon-plus-sign"></i></a> <br />
+            <input type="text" class="span3" id="source1" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source1"  value="<?= $_SESSION['sourceID1'];?>"  /> <span id="sourceControls"><a onClick="addSources();" rel="tooltip" title="Show more Source fields" class="btn btn-small"><i class="fa fa-list"></i></a></span> <a rel="tooltip" tabindex="-1" title="Create a new Source profile" data-toggle="modal" href="#myModal" role="button" class="btn btn-small"><i class="fa fa-plus"></i></a> <br />
             <div id="shameHideSources">
               <input type="text" class="span3" id="source2" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source2"  value="<?= $_SESSION['sourceID2'];?>"/><br />
               <input type="text" class="span3" id="source3" class="typeahead" data-provide="typeahead" data-items="4" placeholder="Specify a source" name="source3"  value="<?= $_SESSION['sourceID3'];?>"/><br />
