@@ -371,7 +371,10 @@ if(!empty($row["newsID"]))
 
 
 		<!-- Modal -->
-		<div id="sourceModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div id="sourceModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog modal-lg">
+		  <div class="modal-content">
+
 		  <div class="modal-header">
 		    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 		    <h3 id="myModalLabel">Do you want to send a note to your source?</h3>
@@ -381,16 +384,18 @@ if(!empty($row["newsID"]))
 		  	<p class="span5"><span class="label label-info"><i class="fa fa-remove icon-white"></i></span> If you wish to just send your story, leave the field below blank.</p>
 		    <div class="control-group" style="margin-left: 25px;">
 
-	            <textarea placeholder="Type your note here" class="span5" name="note" rows="5"></textarea>
+	            <textarea placeholder="Type your note here" class="form-control" name="note" rows="5"></textarea>
 
 	        </div>
 
 		  </div>
 		  <div class="modal-footer">
-		    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
 		    <button class="btn btn-primary" onClick="submitStage()">Send Source Check</button>
 		  </div>
-		</div>
+		  </div> <!-- end of modal content -->
+		</div> <!-- end of modal-dialog modal-lg -->
+	</div>
 
 
 

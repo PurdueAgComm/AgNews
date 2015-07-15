@@ -91,7 +91,7 @@ $newsID = (int) $_GET["newsID"];
 
     ?>
 
-      <h3>Update Story: <span class="muted"> <?php echo htmlspecialchars(stripslashes($storyTitle), ENT_QUOTES); ?></span></h3>
+      <h2>Update Story: <span class="muted"> <?php echo htmlspecialchars(stripslashes($storyTitle), ENT_QUOTES); ?></span></h2>
 
 
 
@@ -101,7 +101,7 @@ $newsID = (int) $_GET["newsID"];
 
        //display general error with information
         if ($_GET["isComplete"] == "false") {
-          echo "<div class='alert alert-error alert-block'><h4>We need your attention! <span class='badge badge-important' style='position: relative; top: -2px;'>" . $_GET['count'] . " items</span></h4><p>" . $_SESSION['error'] . "</p></div>";
+          echo "<div class='alert alert-danger alert-block'><h4>We need your attention! <span class='badge badge-important' style='position: relative; top: -2px;'>" . $_GET['count'] . " items</span></h4><p>" . $_SESSION['error'] . "</p></div>";
           $_SESSION["error"] = "";
         }
         if ($_SESSION["success"] != "") {
@@ -111,34 +111,44 @@ $newsID = (int) $_GET["newsID"];
 
       ?>
 
-      <form class="form-horizontal" name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doEditStory.php?newsID=<?php echo $newsID; ?>">
+      <form class="form-group" name="addForm" id="addForm" method="post" enctype="multipart/form-data" action="functions/doEditStory.php?newsID=<?php echo $newsID; ?>">
 
-          <div class="well" style="clear: both;">
-           <h3>News Story</h3>
+          <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">News Story</h3>
+                  </div>
+                  <div class="panel-body form-horizontal">
              <?php
              if($_SESSION['storyError'] == 1) {
-               echo "<div class='alert alert-error'><i class='icon-exclamation-sign'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
+               echo "<div class='alert alert-danger'><i class='fa fa-exclamation'></i> Looks like you forgot to enter a story. Please enter one before continuing.</div>";
              } ?>
 
              <textarea style="width: 98%; height: 200px;" id="tinymce" name="story"><?= htmlspecialchars_decode($story["txtBody"]);?></textarea>
           </div>
+        </div> <!-- /.panel -->
 
-          <div style="margin-bottom: 20px;">
-          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-block" />
-          </div>
+          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-primary btn-lg btn-block" />
 
-          <div class="well">
-            <h3>Internal Information</h3>
-            <div class="control-group <?php if($_SESSION['filenameError'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="filename">Filename</label>
-              <div class="controls">
-                <input type="text" class="span3" id="filename" placeholder="Create a filename" name="filename" value="<?= htmlspecialchars(stripslashes($story["strFilename"]), ENT_QUOTES);?>" > <span class="inline-help text-error">Required</span>
-              </div>
+        <br />
+
+          <div class="panel panel-default">
+                 <div class="panel-heading">
+                  <h3 class="panel-title">Internal Information</h3>
+                </div>
+          <div class="panel-body form-horizontal">
+
+            <div class="form-group <?php if($_SESSION['filenameError'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="filename">Filename</label>
+              <div class="col-sm-4">
+                <input type="text" class="form-control" id="filename" placeholder="Create a filename" name="filename" value="<?= htmlspecialchars(stripslashes($story["strFilename"]), ENT_QUOTES);?>" >
+                </div>
+                 <span class="inline-help text-danger">Required</span>
+
             </div>
 
-            <div class="control-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="writer">Writer(s)*<br /></label>
-            <div class="controls" id="writers">
+            <div class="form-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="writer">Writer(s)*<br /></label>
+            <div class="col-sm-4" id="writers">
 
                 <?php
                 $numWriters = 1;
@@ -146,7 +156,7 @@ $newsID = (int) $_GET["newsID"];
                 while($writers = mysql_fetch_array($resultWriters)) {
 
                   if($numWriters===2) {
-                    echo "<div id='shameHideWriters'>";
+                    echo "<div id='shameHideWriters' style='margin-top: 20px;'>";
                   }
 
                   if(!empty($writers["strFirstName"])) {
@@ -154,16 +164,16 @@ $newsID = (int) $_GET["newsID"];
                     if($numWriters === 1) {
                       // display control since it's the first box
       			      // **07-27: USE htmlspecialchars on the $writers. SERIOUSLY Don't forget the ENT_QUOTES to hit the apostrophes. We see this info coming into the editStory.php page.
-                          echo "<input type='text' class='span3' id='writer" . $numWriters . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $numWriters . "'  value='" . htmlspecialchars(stripslashes($writers["strFirstName"]), ENT_QUOTES) . " " . htmlspecialchars(stripslashes($writers["strLastName"]), ENT_QUOTES) . "'/><span id='writerControls'> <a onClick='addWriter();' rel='tooltip' title='Show more Writer fields' class='btn btn-small'><i class='icon-list'></i></a></span><br />";
+                      echo "<input type='text' class='form-control' id='writer" . $numWriters . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $numWriters . "'  value='" . htmlspecialchars(stripslashes($writers["strFirstName"]), ENT_QUOTES) . " " . htmlspecialchars(stripslashes($writers["strLastName"]), ENT_QUOTES) . "'/></div><span id='writerControls'> <a onClick='addWriter();' rel='tooltip' title='Show more Writer fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br /> <div class='col-sm-4'>";
                     }
                     else {
                       // don't display control
-                      echo "<input type='text' class='span3' id='writer" . $numWriters . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $numWriters . "'  value='" . htmlspecialchars(stripslashes($writers["strFirstName"]), ENT_QUOTES) . " " . htmlspecialchars(stripslashes($writers["strLastName"]), ENT_QUOTES) . "'/><br />";
+                      echo "<input type='text' class='form-control' id='writer" . $numWriters . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $numWriters . "'  value='" . htmlspecialchars(stripslashes($writers["strFirstName"]), ENT_QUOTES) . " " . htmlspecialchars(stripslashes($writers["strLastName"]), ENT_QUOTES) . "'/><br />";
                     }
                   }
 
                   else {
-                    echo "<input type='text' class='span3' id='writer" . $numWriters . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $numWriters . "'><br />";
+                    echo "<input type='text' class='form-control' id='writer" . $numWriters . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $numWriters . "'><br />";
                   }
 
 
@@ -173,14 +183,14 @@ $newsID = (int) $_GET["newsID"];
               for($i=$numWriters; $i<6; $i++) {
 
                 if($i===2) {
-                  echo "<div id='shameHideWriters'>";
+                  echo "<div id='shameHideWriters' style='margin-top: 20px;'>";
                 }
 
                 if($i==1) {
-                  echo "<input type='text' class='span3' id='writer" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $i . "'><br />";
+                  echo "<input type='text' class='form-control' id='writer" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $i . "'><br />";
                 }
                 else {
-                  echo "<input type='text' class='span3' id='writer" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $i . "'><br />";
+                  echo "<input type='text' class='form-control' id='writer" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a writer' name='writer" . $i . "'><br />";
                 }
 
 
@@ -191,19 +201,20 @@ $newsID = (int) $_GET["newsID"];
           </div>
         </div>
 
+
             <a name="intent"></a>
-            <div class="control-group <?php if($_SESSION['intentError'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="intent">Intent</label>
-              <div class="controls">
-                <textarea class="span3" name="intent"><?= $story["txtIntent"];?></textarea>
+            <div class="form-group <?php if($_SESSION['intentError'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="intent">Intent</label>
+              <div class="col-sm-4">
+                <textarea class="form-control" name="intent"><?= $story["txtIntent"];?></textarea>
               </div>
             </div>
 
             <a name="reach"></a>
-            <div class="control-group <?php if($_SESSION['reachError'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="reach">Reach</label>
-              <div class="controls">
-               <select name="reach" class="span3">
+            <div class="form-group <?php if($_SESSION['reachError'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="reach">Reach</label>
+              <div class="col-sm-4">
+               <select name="reach" class="form-control">
               <?php
                 $reach = array("Select Reach", "Global", "National", "Midwest", "State");
                 foreach($reach as $value) {
@@ -218,37 +229,43 @@ $newsID = (int) $_GET["newsID"];
 
               </div>
             </div>
-          </div>
 
-          <div style="margin-bottom: 20px;">
-          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-block" />
-          </div>
-
-
-
-
-
-        <div class="well">
-          <h3>General Information</h3>
-        <div class="control-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="headline">Headline*</label>
-          <div class="controls">
-            <input type="text" class="span3" id="headline" placeholder="Create a headline" name="headline" value="<?= htmlspecialchars(stripslashes($story["strHeadline"]), ENT_QUOTES);?>"> <?php if($_SESSION['headlineError'] == 1) echo "<i class='icon-exclamation-sign' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
           </div>
         </div>
 
-        <div class="control-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="tweet">Tweet*</label>
-          <div class="controls">
-            <input type="text" class="span3" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= htmlspecialchars(stripslashes($story["strTweet"]), ENT_QUOTES);?>"> <span id="count" class="muted"></span>
+
+
+          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-primary btn-lg btn-block" />
+          <br />
+
+
+
+
+
+        <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">General Information</h3>
+                  </div>
+        <div class="panel-body form-horizontal">
+        <div class="form-group <?php if($_SESSION['headlineError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="headline">Headline*</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="headline" placeholder="Create a headline" name="headline" value="<?= htmlspecialchars(stripslashes($story["strHeadline"]), ENT_QUOTES);?>"> <?php if($_SESSION['headlineError'] == 1) echo "<i class='fa fa-exclamation' rel='tooltip' title='You either left the headline blank or are using a headline that already exists.'></i>"; ?>
+          </div>
+        </div>
+
+        <div class="form-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="tweet">Tweet*</label>
+          <div class="col-sm-4">
+            <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= htmlspecialchars(stripslashes($story["strTweet"]), ENT_QUOTES);?>"> <span id="count" class="muted"></span>
           </div>
         </div>
 
 
         <a name="sources"></a>
-        <div class="control-group  <?php if($_SESSION['sourceError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="source">Source(s)*</label>
-          <div class="controls">
+        <div class="form-group <?php if($_SESSION['sourceError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="source">Source(s)*</label>
+          <div class="col-sm-4">
 
             <?php
               $numSources = 1;
@@ -256,24 +273,24 @@ $newsID = (int) $_GET["newsID"];
               while($sources = mysql_fetch_array($resultSources)) {
 
                 if($numSources===2) {
-                  echo "<div id='shameHideSources'>";
+                  echo "<div id='shameHideSources' style='margin-top: 20px;'>";
                 }
                 if(!empty($sources["strFirstName"])) {
 
 				  if($numSources === 1) {
                     // display control since it's the first box
-                    echo "<input type='text' class='span3' id='source" . $numSources . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $numSources . "'  value='" . htmlspecialchars($sources["strFirstName"], ENT_QUOTES) . " " . htmlspecialchars($sources["strLastName"], ENT_QUOTES) . "'/><span id='sourceControls'> <a onClick='addSources();' rel='tooltip' title='Show more Source fields' class='btn btn-small'><i class='icon-list'></i></a></span> <a rel='tooltip' tabindex='-1' title='Create a new Source profile' data-toggle='modal' href='#myModal' role='button' class='btn btn-small'><i class='icon-plus-sign'></i></a><br />";
+            echo "<input type='text' class='form-control' id='source" . $numSources . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $numSources . "'  value='" . htmlspecialchars($sources["strFirstName"], ENT_QUOTES) . " " . htmlspecialchars($sources["strLastName"], ENT_QUOTES) . "'/> </div><span id='sourceControls'> <a onClick='addSources();' rel='tooltip' title='Show more Source fields' class='btn btn-default'><i class='fa fa-list'></i></a></span> <a rel='tooltip' tabindex='-1' title='Create a new Source profile' data-toggle='modal' href='#myModal' role='button' class='btn btn-default'><i class='fa fa-plus'></i></a><br /> <div class='col-sm-4'>";
       			    // **07-27: USE htmlspecialchars on the $sources. SERIOUSLY Don't forget the ENT_QUOTES to hit the apostrophes. We see this info coming into the editStory.php page.
 
                   }
                   else {
                     // don't display control
-                    echo "<input type='text' class='span3' id='source" . $numSources . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $numSources . "'  value='" . htmlspecialchars($sources["strFirstName"], ENT_QUOTES) . " " . htmlspecialchars($sources["strLastName"], ENT_QUOTES) . "'/><br />";
+                    echo "<input type='text' class='form-control' id='source" . $numSources . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $numSources . "'  value='" . htmlspecialchars($sources["strFirstName"], ENT_QUOTES) . " " . htmlspecialchars($sources["strLastName"], ENT_QUOTES) . "'/><br />";
                   }
                 }
 
                 else {
-                  echo "<input type='text' class='span3' id='source" . $numSources . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $numSources . "'><br />";
+                  echo "<input type='text' class='form-control' id='source" . $numSources . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $numSources . "'><br />";
                 }
 
 
@@ -283,15 +300,15 @@ $newsID = (int) $_GET["newsID"];
             for($i=$numSources; $i<6; $i++) {
 
               if($i===2) {
-                echo "<div id='shameHideSources'>";
+                echo "<div id='shameHideSources' style='margin-top: 20px;'>";
               }
 
               if($i==1) {
-                echo "<input type='text' class='span3' id='source" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $i . "'><span id='sourceControls'> <a onClick='addSources();' rel='tooltip' title='Show more Source fields' class='btn btn-small'><i class='icon-list'></i></a></span> <a rel='tooltip' tabindex='-1' title='Create a new Source profile' data-toggle='modal' href='#myModal' role='button' class='btn btn-small'><i class='icon-plus-sign'></i></a><br />";
+                echo "<input type='text' class='form-control' id='source" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $i . "'></div><span id='sourceControls'> <a onClick='addSources();' rel='tooltip' title='Show more Source fields' class='btn btn-default'><i class='fa fa-list'></i></a></span> <a rel='tooltip' tabindex='-1' title='Create a new Source profile' data-toggle='modal' href='#myModal' role='button' class='btn btn-default'><i class='fa fa-plus'></i></a><br /> <div class='col-sm-4'>";
 
               }
               else {
-                echo "<input type='text' class='span3' id='source" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $i . "'><br />";
+                echo "<input type='text' class='form-control' id='source" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a source' name='source" . $i . "'><br />";
               }
             }
             ?>
@@ -301,32 +318,32 @@ $newsID = (int) $_GET["newsID"];
 
 
         <a name="depts"></a>
-        <div class="control-group  <?php if($_SESSION['departmentError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="department">Department(s)*</label>
-          <div class="controls">
+        <div class="form-group  <?php if($_SESSION['departmentError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="department">Department(s)*</label>
+          <div class="col-sm-4">
              <?php
               $numDepts = 1;
 
               while($depts = mysql_fetch_array($resultDepts)) {
 
                 if($numDepts===2) {
-                  echo "<div id='shameHideDepartments'>";
+                  echo "<div id='shameHideDepartments' style='margin-top: 20px;'>";
                 }
 
                 if(!empty($depts["strDeptName"])) {
 
                   if($numDepts === 1) {
                     // display control since it's the first box
-                    echo "<input type='text' class='span3' id='department" . $numDepts . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $numDepts . "'  value='" . htmlspecialchars(stripslashes($depts["strDeptName"]), ENT_QUOTES) .  "'/><span id='departmentControls'> <a onClick='addDepartments();' rel='tooltip' title='Show more Department fields' class='btn btn-small'><i class='icon-list'></i></a></span><br />";
+                    echo "<input type='text' class='form-control' id='department" . $numDepts . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $numDepts . "'  value='" . htmlspecialchars(stripslashes($depts["strDeptName"]), ENT_QUOTES) .  "'/></div><span id='departmentControls'> <a onClick='addDepartments();' rel='tooltip' title='Show more Department fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br /><div class='col-sm-4'>";
                   }
                   else {
                     // don't display control
-                    echo "<input type='text' class='span3' id='department" . $numDepts . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $numDepts . "'  value='" . htmlspecialchars(stripslashes($depts["strDeptName"]), ENT_QUOTES) . "'/><br />";
+                    echo "<input type='text' class='form-control' id='department" . $numDepts . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $numDepts . "'  value='" . htmlspecialchars(stripslashes($depts["strDeptName"]), ENT_QUOTES) . "'/><br />";
                   }
                 }
 
                 else {
-                  echo "<input type='text' class='span3' id='department" . $numDepts . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $numDepts . "'><br />";
+                  echo "<input type='text' class='form-control' id='department" . $numDepts . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $numDepts . "'><br />";
                 }
 
 
@@ -336,14 +353,14 @@ $newsID = (int) $_GET["newsID"];
             for($i=$numDepts; $i<6; $i++) {
 
               if($i===2) {
-                echo "<div id='shameHideDepartments'>";
+                echo "<div id='shameHideDepartments' style='margin-top: 20px;' >";
               }
 
               if($i==1) {
-                echo "<input type='text' class='span3' id='department" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $i . "'><span id='departmentControls'> <a onClick='addDepartments();' rel='tooltip' title='Show more Department fields' class='btn btn-small'><i class='icon-list'></i></a></span><br />";
+                echo "<input type='text' class='form-control' id='department" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $i . "'></div><span id='departmentControls'> <a onClick='addDepartments();' rel='tooltip' title='Show more Department fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br /> <div class='col-sm-4'>";
               }
               else {
-                echo "<input type='text' class='span3' id='department" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $i . "'><br />";
+                echo "<input type='text' class='form-control' id='department" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a department' name='department" . $i . "'><br />";
               }
             }
             ?>
@@ -354,9 +371,9 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
          <a name="affiliations"></a>
-         <div class="control-group  <?php if($_SESSION['affiliationError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="affiliation">Affiliation(s)</label>
-          <div class="controls">
+         <div class="form-group  <?php if($_SESSION['affiliationError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" style="margin-bottom:10px;" for="affiliation">Affiliation(s)</label>
+          <div class="col-sm-4">
 
             <?php
               $numAffiliations = 1;
@@ -364,23 +381,23 @@ $newsID = (int) $_GET["newsID"];
               while($affiliations = mysql_fetch_array($resultAffiliations)) {
 
                 if($numAffiliations===2) {
-                  echo "<div id='shameHideAffiliations'>";
+                  echo "<div id='shameHideAffiliations'> style='margin-top: 20px;'";
                 }
 
                 if(!empty($affiliations["strAffiliation"])) {
 
                   if($numAffiliations === 1) {
                     // display control since it's the first box
-                    echo "<input type='text' class='span3' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'  value='" . htmlspecialchars(stripslashes($affiliations["strAffiliation"]), ENT_QUOTES) .  "'/> <span id='affiliationControls'> <a onClick='addAffiliations();' rel='tooltip' title='Show more Affiliation fields' class='btn btn-small'><i class='icon-list'></i></a></span><br />";
+                    echo "<input type='text' class='form-control' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'  value='" . htmlspecialchars(stripslashes($affiliations["strAffiliation"]), ENT_QUOTES) .  "'/></div> <span id='affiliationControls'> <a onClick='addAffiliations();' rel='tooltip' title='Show more Affiliation fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br />";
                   }
                   else {
                     // don't display control
-                    echo "<input type='text' class='span3' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'  value='" . htmlspecialchars(stripslashes($affiliations["strAffiliation"]), ENT_QUOTES) . "'/><br />";
+                    echo "<input type='text' class='form-control' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'  value='" . htmlspecialchars(stripslashes($affiliations["strAffiliation"]), ENT_QUOTES) . "'/><br /> <div class='col-sm-4'>";
                   }
                 }
 
                 else {
-                  echo "<input type='text' class='span3' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'><br />";
+                  echo "<input type='text' class='form-control' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'><br />";
                 }
                 $numAffiliations++;
               }
@@ -388,14 +405,14 @@ $newsID = (int) $_GET["newsID"];
             for($i=$numAffiliations; $i<6; $i++) {
 
               if($i===2) {
-                echo "<div id='shameHideAffiliations'>";
+                echo "<div id='shameHideAffiliations' style='margin-top: 20px;' >";
               }
 
               if($i==1) {
-                echo "<input type='text' class='span3' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'><span id='affiliationControls'> <a onClick='addAffiliations();' rel='tooltip' title='Show more Affiliation fields' class='btn btn-small'><i class='icon-list'></i></a></span><br />";
+                echo "<input type='text' class='form-control' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'></div><span id='affiliationControls'> <a onClick='addAffiliations();' rel='tooltip' title='Show more Affiliation fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br /><div class='col-sm-4'>";
               }
               else {
-                echo "<input type='text' class='span3' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'><br />";
+                echo "<input type='text' class='form-control' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'><br />";
               }
 
             }
@@ -406,10 +423,10 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
         <a name="pubDate"></a>
-        <div class="control-group <?php if($_SESSION['datePublishedError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="datePublished">Publish Date</label>
-          <div class="controls">
-            <div class="input-append date datePicker" id="dp3" data-date-format="yyyy-mm-dd">
+        <div class="form-group <?php if($_SESSION['datePublishedError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="datePublished">Publish Date</label>
+          <div class="col-sm-4">
+            <div class="input-group date datePicker" id="dp3" data-date-format="yyyy-mm-dd">
             <?php
               if($story["datePublished"] == "0000-00-00") {
                 $datePub = "";
@@ -419,17 +436,22 @@ $newsID = (int) $_GET["newsID"];
               }
              ?>
 
-              <input class="span2" name="datePublished" id="datePublished" size="16" type="text" value="<?= $datePub; ?>" readonly><span class="add-on"><i class="icon-th"></i></span>
+               <input class="form-control" name="datePublished" size="16" type="text" value="<?= $datePub;?>" readonly>
+              <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
             </div>
-            <a onClick="$('#datePublished').val('');" class="btn">Clear</a>
+
+              <div style="margin-top:10px;">
+               <a onClick="$('#datePublished').val('');" class="btn btn-default">Clear</a>
+               </div>
           </div>
+
         </div>
 
 
           <a name="areas"></a>
-         <div class="control-group <?php if($_SESSION['areaError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Area(s)*</label>
-          <div class="controls">
+         <div class="form-group <?php if($_SESSION['areaError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="college">Area(s)*</label>
+          <div class="col-sm-4">
          <?php
             $i = 1;
             $sql = "SELECT * FROM tblArea;";
@@ -459,46 +481,54 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
           <a name="storyURL"></a>
-         <div class="control-group <?php if($_SESSION['urlError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="url">Story URL</label>
-          <div class="controls">
-            <div class="input-append">
-              <span class="add-on"><i class="icon-tag"></i></span>
-              <input type="text" class="span3" id="url" placeholder="Enter the URL of the News Story" name="url" value="<?= $story["strURL"];?>"> <button rel="tooltip" title="Shortcut to save story." onClick="setConfirmUnload(false);"  type="submit" class="btn" /><i class="icon-refresh"></i></button>
+         <div class="form-group form-inline <?php if($_SESSION['urlError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="url">Story URL</label>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <span class="input-group-addon add-on"><i class="fa fa-tag"></i></span>
+              <input type="text" class="form-control" id="url" placeholder="Enter the URL of the News Story" name="url" value="<?= $story["strURL"];?>">
             </div>
+            <span>
+               <button rel="tooltip" title="Shortcut to save story." onClick="setConfirmUnload(false);"  type="submit" class="btn btn-default" /><i class="fa fa-refresh"></i></button>
+               </span>
+
           </div>
         </div>
 
         <a name="imageURL"></a>
-        <div class="control-group <?php if($_SESSION['imageError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="image">Story Image</label>
-          <div class="controls">
-            <div class="input-append">
-              <span class="add-on"><i class="icon-picture"></i></span>
-              <input type="text" class="span3" id="image" placeholder="Enter URL of Story Photo" name="image" value="<?= $story["strImage"];?>"> <button rel="tooltip" title="Shortcut to save story." onClick="setConfirmUnload(false);"  type="submit" class="btn" /><i class="icon-refresh"></i></button>
-            </div>
+        <div class="form-group form-inline <?php if($_SESSION['imageError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="image">Story Image</label>
+          <div class="col-sm-4">
+            <div class="input-group">
+              <span class="input-group-addon add-on"><i class="fa fa-picture-o"></i></span>
+              <input type="text" class="form-control" id="image" placeholder="Enter URL of Story Photo" name="image" value="<?= $story["strImage"];?>">
+                </div>
+                <span>
+               <button rel="tooltip" title="Shortcut to save story." onClick="setConfirmUnload(false);"  type="submit" class="btn btn-default" /><i class="fa fa-refresh"></i></button>
+               </span>
+
 
           </div>
         </div>
 
-        <div class="control-group">
-          <div class="controls">
 
+     </div>
+  </div> <!-- end well -->
+
+
+          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);"  class="btn btn-primary btn-lg btn-block" />
+        <br />
+
+
+      <div class="panel panel-default">
+          <div class="panel-heading">
+          <h3 class="panel-title">Define Metadata</h3>
           </div>
-       </div>
+      <div class="panel-body form-horizontal">
 
-      </div> <!-- end well -->
-
-      <div style="margin-bottom: 20px;">
-          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);"  class="btn btn-block" />
-      </div>
-
-      <div class="well">
-      <h3>Define Metadata</h3>
-
-      <div class="control-group">
-          <label class="control-label" for="isTopStory">This is an <strong>Agriculture Top Story</strong></label>
-          <div class="controls">
+      <div class="form-group">
+          <label class="col-sm-2 control-label" for="isTopStory">This is an <strong>Agriculture Top Story</strong></label>
+          <div class="col-sm-4">
             <label class="checkbox">
               <?php if($story["isTopStory"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isTopStory"> Yes
@@ -509,9 +539,9 @@ $newsID = (int) $_GET["newsID"];
         </div>
       </div>
 
-      <div class="control-group">
-          <label class="control-label" for="isTopStory">This is an  <strong>Extension Top Story</strong></label>
-          <div class="controls">
+      <div class="form-group">
+          <label class="col-sm-2 control-label" for="isTopStory">This is an  <strong>Extension Top Story</strong></label>
+          <div class="col-sm-4">
             <label class="checkbox">
              <?php if($_SESSION["isExtTopStory"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isExtTopStory"> Yes
@@ -523,9 +553,9 @@ $newsID = (int) $_GET["newsID"];
       </div>
 
 
-      <div class="control-group">
-          <label class="control-label" for="isScience">This story is <strong>science news</strong> </label>
-          <div class="controls">
+      <div class="form-group">
+          <label class="col-sm-2 control-label" for="isScience">This story is <strong>science news</strong> </label>
+          <div class="col-sm-4">
             <label class="checkbox">
               <?php if($story["isScience"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isScience"> Yes
@@ -539,9 +569,9 @@ $newsID = (int) $_GET["newsID"];
 
 
       <a name="topics"></a>
-       <div class="control-group <?php if($_SESSION['topicError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Background Topic(s)</label>
-          <div class="controls">
+       <div class="form-group <?php if($_SESSION['topicError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="college">Background Topic(s)</label>
+          <div class="col-sm-4">
 
           <?php
             $i = 1;
@@ -576,9 +606,9 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
        <a name="issues"></a>
-       <div class="control-group <?php if($_SESSION['issueError'] == 1) echo 'error'; ?>">
-          <label class="control-label" for="college">Critical Issue(s)</label>
-          <div class="controls">
+       <div class="form-group <?php if($_SESSION['issueError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label" for="college">Critical Issue(s)</label>
+          <div class="col-sm-4">
             <?php
               $i = 1;
               $sql = "SELECT * FROM tblIssues WHERE isHidden=0 ORDER BY strIssues;";
@@ -608,9 +638,9 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
 
-        <div class="control-group">
-          <label class="control-label" for="isConnections">Featured in:</label>
-          <div class="controls">
+        <div class="form-group">
+          <label class="col-sm-2 control-label" for="isConnections">Featured in:</label>
+          <div class="col-sm-4">
             <label class="checkbox">
             <?php if($story["isConnections"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isConnections"> Connections
@@ -647,107 +677,110 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
 
-
+      </div>
       </div> <!-- end well -->
 
-      <div class="well">
-      <h3>Multimedia</h3>
+      <div class="panel panel-default">
+                <div class="panel-heading">
+                <h3 class="panel-title">Multimedia</h3>
+                </div>
 
+      <div class="panel-body form-horizontal">
 
-        <div class="control-group">
-          <label class="control-label" for="youtube">Youtube Video URL</label>
-          <div class="controls">
-            <input type="text" class="span3" id="youtube" name="youtube" placeholder="http://www.youtube.com"  value="<?= $story["strVideo"] ?>"/>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="youtube">Youtube Video URL</label>
+          <div class="col-sm-10">
+            <input type="text" class="form-control" id="youtube" name="youtube" placeholder="http://www.youtube.com"  value="<?= $story["strVideo"] ?>"/>
           </div>
         </div>
 
 
         <a name="websites"></a>
-        <div class="control-group">
-          <label class="control-label" for="website1">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite1" name="nameWebsite1" placeholder="Website Title"  value="<?= $story['strWebsiteTitle1'];?>"/> Link: <input type="text" class="span3" id="website1" name="website1" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite1'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website1">Related Website</label>
+          <div class="col-sm-10">
+            Title: <input type="text" class="form-control" id="nameWebsite1" name="nameWebsite1" placeholder="Website Title"  value="<?= $story['strWebsiteTitle1'];?>"/> Link: <input type="text" class="form-control" id="website1" name="website1" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite1'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
           </div>
         </div>
 
         <div id="shameHideWebsites">
 
-        <div class="control-group">
-          <label class="control-label" for="website2">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite2" name="nameWebsite2" placeholder="Website Title"  value="<?= $story['strWebsiteTitle2'];?>"/> Link: <input type="text" class="span3" id="website2" name="website2" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite2'];?>"/>  <span class="muted inline-help">Start with <strong>http://</strong></span>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website2">Related Website</label>
+          <div class="col-sm-10">
+            Title: <input type="text" class="form-control" id="nameWebsite2" name="nameWebsite2" placeholder="Website Title"  value="<?= $story['strWebsiteTitle2'];?>"/> Link: <input type="text" class="form-control" id="website2" name="website2" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite2'];?>"/>  <span class="muted inline-help">Start with <strong>http://</strong></span>
           </div>
         </div>
 
-        <div class="control-group">
-          <label class="control-label" for="website3">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite3" name="nameWebsite3" placeholder="Website Title"  value="<?= $story['strWebsiteTitle3'];?>"/> Link: <input type="text" class="span3" id="website3" name="website3" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite3'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
-          </div>
-        </div>
-
-
-        <div class="control-group">
-          <label class="control-label" for="website4">Related Website</label>
-          <div class="controls">
-             Title: <input type="text" class="span3" id="nameWebsite4" name="nameWebsite4" placeholder="Website Title"  value="<?= $story['strWebsiteTitle4'];?>"/> Link: <input type="text" class="span3" id="website4" name="website4" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite4'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website3">Related Website</label>
+          <div class="col-sm-10">
+            Title: <input type="text" class="form-control" id="nameWebsite3" name="nameWebsite3" placeholder="Website Title"  value="<?= $story['strWebsiteTitle3'];?>"/> Link: <input type="text" class="form-control" id="website3" name="website3" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite3'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
           </div>
         </div>
 
 
-        <div class="control-group">
-          <label class="control-label" for="website5">Related Website</label>
-          <div class="controls">
-            Title: <input type="text" class="span3" id="nameWebsite5" name="nameWebsite5" placeholder="Website Title"  value="<?= $story['strWebsiteTitle5'];?>"/> Link: <input type="text" class="span3" id="website5" name="website5" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite5'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website4">Related Website</label>
+          <div class="col-sm-10">
+             Title: <input type="text" class="form-control" id="nameWebsite4" name="nameWebsite4" placeholder="Website Title"  value="<?= $story['strWebsiteTitle4'];?>"/> Link: <input type="text" class="form-control" id="website4" name="website4" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite4'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
+          </div>
+        </div>
+
+
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="website5">Related Website</label>
+          <div class="col-sm-10">
+            Title: <input type="text" class="form-control" id="nameWebsite5" name="nameWebsite5" placeholder="Website Title"  value="<?= $story['strWebsiteTitle5'];?>"/> Link: <input type="text" class="form-control" id="website5" name="website5" placeholder="http://www.thewebsite.com"  value="<?= $story['strWebsite5'];?>"/> <span class="muted inline-help">Start with <strong>http://</strong></span>
           </div>
         </div>
         </div>
 
-        <div class="control-group">
-          <label class="control-label" for="college">Included Media</label>
-          <div class="controls">
+        <div class="form-group form-inline">
+          <label class="col-sm-2 control-label" for="college">Included Media</label>
+          <div class="col-sm-7">
               <?php
 
               if($story["isPhoto"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isPhoto' checked='checked'> Photo";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isPhoto'> Photo";
                   echo "</label>";
               }
 
               if($story["isVideo"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isVideo' checked='checked'> Video";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isVideo'> Video";
                   echo "</label>";
               }
 
               if($story["isGraphic"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isGraphic' checked='checked'> Graphic";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isGraphic'> Graphic";
                   echo "</label>";
               }
 
               if($story["isAudio"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isAudio' checked='checked'> Audio";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isAudio'> Audio";
                   echo "</label>";
               }
@@ -757,10 +790,10 @@ $newsID = (int) $_GET["newsID"];
         </div>
 
       </div>
+    </div>
 
-      <div class="well">
+
         <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-large btn-block btn-primary" value="Create Story" />
-      </div>
 
 
 <!-- ************************************************************************-->
@@ -770,67 +803,73 @@ $newsID = (int) $_GET["newsID"];
 <!-- BEGIN MODAL WINDOW -->
 <!-- ************************************************************************-->
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-    <h3 id="myModalLabel">Add a Source</h3>
-  </div>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-  <div class="modal-body">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h3 id="myModalLabel">Add a Source</h3>
+      </div>
+      <div class="modal-body form-horizontal">
 
-      <div class="control-group <?php if($_SESSION['fname01Error'] == 1) echo 'error'; ?>">
-               <label class="control-label" for="fName01">First Name</label>
-         <div class="controls">
-               <input type="text" class="span3" id="fName01" placeholder="John" name="fname01"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION["fname01"]), ENT_QUOTES);?>" />
+       <div class="form-group <?php if($_SESSION['fname01Error'] == 1) echo 'error'; ?>">
+               <label class="col-sm-2 control-label" for="fName01">First Name</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="fName01" placeholder="John" name="fname01"  value="<?= htmlspecialchars_decode(stripslashes($_SESSION["fname01"]), ENT_QUOTES);?>" />
                <!-- **07-27: htmlspecialchars_decode is used to take care of the single quote possible within the name. This interprets the code stored in the database to display the actual character -->
 
          </div>
       </div>
 
-      <div class="control-group <?php if($_SESSION['lname01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="lName01">Last Name</label>
-         <div class="controls">
-               <input type="text" class="span3" id="lName01" placeholder="Doe" name="lname01" value="<?= htmlspecialchars_decode(stripslashes($_SESSION["lname01"]), ENT_QUOTES);?>" />
+      <div class="form-group <?php if($_SESSION['lname01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="lName01">Last Name</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="lName01" placeholder="Doe" name="lname01" value="<?= htmlspecialchars_decode(stripslashes($_SESSION["lname01"]), ENT_QUOTES);?>" />
                <!-- **07-27: htmlspecialchars_decode is used to take care of the single quote possible within the name. This interprets the code stored in the database to display the actual character -->
          </div>
       </div>
 
-      <div class="control-group <?php if($_SESSION['dept01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="dept01">Department</label>
-         <div class="controls">
-        <input type="text" class="span3" id="dept01" placeholder="Food Sciences" class="typeahead" data-provide="typeahead" data-items="4" name="dept01" value="<?= htmlspecialchars_decode(stripslashes($_SESSION['dept01']), ENT_QUOTES);?>" />
+
+      <div class="form-group <?php if($_SESSION['dept01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="dept01">Department</label>
+         <div class="col-sm-4">
+        <input type="text" class="form-control" id="dept01" placeholder="Food Sciences" class="typeahead" data-provide="typeahead" data-items="4" name="dept01" value="<?= htmlspecialchars_decode(stripslashes($_SESSION['dept01']), ENT_QUOTES);?>" />
 
          </div>
        </div>
 
-      <div class="control-group <?php if($_SESSION['email01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="email01">Email</label>
-         <div class="controls">
-               <input type="text" class="span3" id="email01" placeholder="john@purdue.edu" name="email01" value="<?= $_SESSION['email01'];?>" />
+      <div class="form-group <?php if($_SESSION['email01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="email01">Email</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="email01" placeholder="john@purdue.edu" name="email01" value="<?= $_SESSION['email01'];?>" />
 
          </div>
        </div>
 
-      <div class="control-group <?php if($_SESSION['phone01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="phone01">Phone Number</label>
-         <div class="controls">
-               <input type="text" class="span3" id="phone01" placeholder="XXX-XXX-XXXX" name="phone01" title="Phone Format" data-toggle="tooltip" data-placement ="right" value="<?= $_SESSION['phone01'];?>" />
+      <div class="form-group <?php if($_SESSION['phone01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="phone01">Phone Number</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="phone01" placeholder="XXX-XXX-XXXX" name="phone01" title="Phone Format" data-toggle="tooltip" data-placement ="right" value="<?= $_SESSION['phone01'];?>" />
+             </div>
                <span class="help-block muted">Telephone Number Format: XXX-XXX-XXXX</span>
-         </div>
+
       </div>
 
-  </div>
+
+
+    </div>
 
 
 
-  <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+      <div class="modal-footer">
+    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
     <input type="submit" onClick="setConfirmUnload(false);" name="source" class="btn btn-primary" id="save" value="Add Source" />
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
-
-  </div>
-
-</div>
  </form>
 
 
@@ -878,42 +917,42 @@ include_once('includes/footer.php'); // authenticate users, includes db connecti
 
 function addWriter() {
   $("#shameHideWriters").show();
-  $("#writerControls").html("<a onClick='hideWriters()' class='btn btn-small'><i class='icon-eye-close'></i></a>");
+  $("#writerControls").html("<a onClick='hideWriters()' class='btn btn-default'><i class='fa fa-eye-slash'></i></a>");
 }
 
 function hideWriters() {
   $("#shameHideWriters").hide();
-  $("#writerControls").html("<a onClick='addWriter();'' class='btn btn-small'><i class='icon-list'></i></a>");
+  $("#writerControls").html("<a onClick='addWriter();'' class='btn btn-default'><i class='fa fa-list'></i></a>");
 }
 
 function addSources() {
   $("#shameHideSources").show();
-  $("#sourceControls").html("<a onClick='hideSources()' class='btn btn-small'><i class='icon-eye-close'></i></a>");
+  $("#sourceControls").html("<a onClick='hideSources()' class='btn btn-default'><i class='fa fa-eye-slash'></i></a>");
 }
 
 function hideSources() {
   $("#shameHideSources").hide();
-  $("#sourceControls").html("<a onClick='addSources();'' class='btn btn-small'><i class='icon-list'></i></a>");
+  $("#sourceControls").html("<a onClick='addSources();'' class='btn btn-default'><i class='fa fa-list'></i></a>");
 }
 
 function addDepartments() {
   $("#shameHideDepartments").show();
-  $("#departmentControls").html("<a onClick='hideDepartments()' class='btn btn-small'><i class='icon-eye-close'></i></a>");
+  $("#departmentControls").html("<a onClick='hideDepartments()' class='btn btn-default'><i class='fa fa-eye-slash'></i></a>");
 }
 
 function hideDepartments() {
   $("#shameHideDepartments").hide();
-  $("#departmentControls").html("<a onClick='addDepartments();'' class='btn btn-small'><i class='icon-list'></i></a>");
+  $("#departmentControls").html("<a onClick='addDepartments();'' class='btn btn-default'><i class='fa fa-list'></i></a>");
 }
 
 function addAffiliations() {
   $("#shameHideAffiliations").show();
-  $("#affiliationControls").html("<a onClick='hideAffiliations()' class='btn btn-small'><i class='icon-eye-close'></i></a>");
+  $("#affiliationControls").html("<a onClick='hideAffiliations()' class='btn btn-default'><i class='fa fa-eye-slash'></i></a>");
 }
 
 function hideAffiliations() {
   $("#shameHideAffiliations").hide();
-  $("#affiliationControls").html("<a onClick='addAffiliations();'' class='btn btn-small'><i class='icon-list'></i></a>");
+  $("#affiliationControls").html("<a onClick='addAffiliations();'' class='btn btn-default'><i class='fa fa-list'></i></a>");
 }
 
 </script>

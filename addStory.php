@@ -104,7 +104,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
                          <div class="col-sm-4">
                              <input type="text" class="form-control" id="filename" placeholder="Create a filename" name="filename" value="<?= $_SESSION['filename'];?>" >
                          </div>
-                             <span class="text-danger help-block">Required</span>
+                             <span class="inline-help text-danger ">Required</span>
 
                      </div>
 
@@ -512,51 +512,51 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
         </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group form-inline">
           <label class="col-sm-2 control-label" for="college">Included Media</label>
-          <div class="col-sm-10">
+          <div class="col-sm-7">
               <?php
 
               if($_SESSION["isPhoto"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isPhoto' checked='checked'> Photo";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isPhoto'> Photo";
                   echo "</label>";
               }
 
               if($_SESSION["isVideo"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isVideo' checked='checked'> Video";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isVideo'> Video";
                   echo "</label>";
               }
 
               if($_SESSION["isGraphic"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isGraphic' checked='checked'> Graphic";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isGraphic'> Graphic";
                   echo "</label>";
               }
 
               if($_SESSION["isAudio"] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox col-sm-2'>";
                 echo "<input type='checkbox' value='1' name='isAudio' checked='checked'> Audio";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox col-sm-2'>";
                   echo "<input type='checkbox' value='1' name='isAudio'> Audio";
                   echo "</label>";
               }
@@ -564,6 +564,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             ?>
           </div>
         </div>
+
           </div>
       </div>
 
@@ -578,65 +579,71 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 <!-- BEGIN MODAL WINDOW -->
 <!-- ************************************************************************-->
 
-<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-lg">
+<div class="modal-content">
   <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
     <h3 id="myModalLabel">Add a Source</h3>
   </div>
 
-  <div class="modal-body">
+  <div class="modal-body form-horizontal">
 
-      <div class="form-group <?php if($_SESSION['fname01Error'] == 1) echo 'error'; ?>">
-               <label class="control-label" for="fName01">First Name</label>
-         <div class="controls">
-               <!-- **07-27: make sure to remove the \s here for any refresh or error situation so the names will appear as intended on the screen -->
-               <input type="text" class="span3" id="fName01" placeholder="John" name="fname01"  value="<?= htmlspecialchars(stripslashes($_SESSION["fname01"]), ENT_QUOTES);?>" />
+      <div class="form-group<?php if($_SESSION['fname01Error'] == 1) echo 'error'; ?>">
+               <label class="col-sm-2 control-label" for="fName01">First Name</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="fName01" placeholder="John" name="fname01"  value="<?= $_SESSION['fname01'];?>" />
+
          </div>
       </div>
 
-      <div class="form-group <?php if($_SESSION['lname01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="lName01">Last Name</label>
-         <div class="controls">
-               <!-- **07-27: make sure to remove the \s here for any refresh or error situation so the names will appear as intended on the screen -->
-               <input type="text" class="span3" id="lName01" placeholder="Doe" name="lname01" value="<?= htmlspecialchars(stripslashes($_SESSION["lname01"]), ENT_QUOTES);?>" />
+      <div class="form-group<?php if($_SESSION['lname01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="lName01">Last Name</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="lName01" placeholder="Doe" name="lname01" value="<?= $_SESSION['lname01'];?>" />
+
          </div>
       </div>
 
-      <div class="form-group <?php if($_SESSION['dept01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="dept01">Department</label>
-         <div class="controls">
-               <input type="text" class="span3" id="dept01" placeholder="Food Sciences" class="typeahead" data-provide="typeahead" data-items="4" name="dept01" value="<?= $_SESSION['dept01'];?>" />
+      <div class="form-group<?php if($_SESSION['dept01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="dept01">Department</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="dept01" placeholder="Food Sciences" class="typeahead" data-provide="typeahead" data-items="4" name="dept01" value="<?= $_SESSION['dept01'];?>" />
 
          </div>
        </div>
 
-      <div class="form-group <?php if($_SESSION['email01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="email01">Email</label>
-         <div class="controls">
-               <input type="text" class="span3" id="email01" placeholder="john@purdue.edu" name="email01" value="<?= $_SESSION['email01'];?>" />
+      <div class="form-group<?php if($_SESSION['email01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="email01">Email</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="email01" placeholder="john@purdue.edu" name="email01" value="<?= $_SESSION['email01'];?>" />
 
          </div>
        </div>
 
-      <div class="form-group <?php if($_SESSION['phone01Error'] == 1) echo 'error'; ?>">
-              <label class="control-label" for="phone01">Phone Number</label>
-         <div class="controls">
-               <input type="text" class="span3" id="phone01" placeholder="XXX-XXX-XXXX" name="phone01" title="Phone Format" data-toggle="tooltip" data-placement ="right" value="<?= $_SESSION['phone01'];?>" />
+      <div class="form-group<?php if($_SESSION['phone01Error'] == 1) echo 'error'; ?>">
+              <label class="col-sm-2 control-label" for="phone01">Phone Number</label>
+         <div class="col-sm-4">
+               <input type="text" class="form-control" id="phone01" placeholder="XXX-XXX-XXXX" name="phone01" title="Phone Format" data-toggle="tooltip" data-placement ="right" value="<?= $_SESSION['phone01'];?>" />
+                </div>
                <span class="help-block muted">Telephone Number Format: XXX-XXX-XXXX</span>
-         </div>
+
       </div>
 
   </div>
 
 
+
   <div class="modal-footer">
-    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
     <input type="submit" onClick="setConfirmUnload(false);" name="source" class="btn btn-primary" id="save" value="Add Source" />
 
 
   </div>
 
-</div>
+  </div>
+  </div>
+  </div>
 </form>
 
 <!-- ************************************************************************-->
@@ -721,7 +728,7 @@ function addAffiliations() {
 
 function hideAffiliations() {
   $("#shameHideAffiliations").hide();
-  $("#affiliationControls").html("<a onClick='addAffiliations();'' class='btn btn-default'><i class='icon-list'></i></a>");
+  $("#affiliationControls").html("<a onClick='addAffiliations();'' class='btn btn-default'><i class='fa fa-list'></i></a>");
 }
 
 function addWebsites() {
