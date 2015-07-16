@@ -56,6 +56,10 @@
 
 
     </script>
+    <!--Type Ahead-->
+
+<script type="text/javascript" src="js/bootstrap3-typeahead.js"></script>
+<script type="text/javascript" src="js/bootstrap3-typeahead.min.js"></script>
 
 
 

@@ -333,14 +333,14 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               while($row = mysql_fetch_array($result)) {
 
               if($_SESSION["area"][$i] != 0) {
-                echo "<label class='checkbox inline'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' id='" . $row["areaID"] . "' value='" . $row["areaID"] . "' name='area[" . $i . "]' checked='checked'> " . $row["strArea"];
-                echo "</label>";
+                echo "</label><br/>";
               }
                 else {
-                  echo "<label class='checkbox inline'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' id='" . $row["areaID"] . "' value='" . $row["areaID"] . "' name='area[" . $i . "]'> " . $row["strArea"];
-                  echo "</label>";
+                  echo "</label><br/>";
 
                 }
 
@@ -364,14 +364,14 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               while($row = mysql_fetch_array($result)) {
 
               if($_SESSION["topic"][$i] != 0) {
-                echo "<label class='checkbox'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' id='" . $row["topicID"] . "' value='" . $row["topicID"] . "' name='topic[" . $i . "]' checked='checked'> " . $row["strTopic"];
-                echo "</label>";
+                echo "</label><br/>";
               }
                 else {
-                  echo "<label class='checkbox'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' id='" . $row["topicID"] . "' value='" . $row["topicID"] . "' name='topic[" . $i . "]'> " . $row["strTopic"];
-                  echo "</label>";
+                  echo "</label><br/>";
 
                 }
 
@@ -398,14 +398,14 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               while($row = mysql_fetch_array($result)) {
 
               if($_SESSION["issues"][$i] != 0) {
-                echo "<label class='checkbox'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' id='" . $row["issuesID"] . "' value='" . $row["issuesID"] . "' name='issues[" . $i . "]' checked='checked'> " . $row["strIssues"];
-                echo "</label>";
+                echo "</label><br/>";
               }
                 else {
-                  echo "<label class='checkbox'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' id='" . $row["issuesID"] . "' value='" . $row["issuesID"] . "' name='issues[" . $i . "]'> " . $row["strIssues"];
-                  echo "</label>";
+                  echo "</label><br/>";
                 }
 
                 $i++;
@@ -417,8 +417,8 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
 
         <div class="form-group">
           <label class="col-sm-2 control-label metadata" for="isConnections">Featured in:</label>
-          <div class="col-sm-4">
-            <label class="checkbox">
+          <div class="col-sm-8">
+            <label class="checkbox-inline">
             <?php if($_SESSION["isConnections"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isConnections"> Connections
             <?php } else { ?>
@@ -426,7 +426,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             <?php } ?>
             </label>
 
-            <label class="checkbox">
+            <label class="checkbox-inline">
             <?php if($_SESSION["isAgricultures"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isAgricultures"> Agricultures
             <?php } else { ?>
@@ -434,7 +434,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             <?php } ?>
             </label>
 
-            <label class="checkbox">
+            <label class="checkbox-inline">
             <?php if($_SESSION["isColumn"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isColumn"> Columns
             <?php } else { ?>
@@ -442,7 +442,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
             <?php } ?>
             </label>
 
-            <label class="checkbox">
+            <label class="checkbox-inline">
             <?php if($_SESSION["isAnswers"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isAnswers"> Ag Answers
             <?php } else { ?>
@@ -518,45 +518,45 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
               <?php
 
               if($_SESSION["isPhoto"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isPhoto' checked='checked'> Photo";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isPhoto'> Photo";
                   echo "</label>";
               }
 
               if($_SESSION["isVideo"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isVideo' checked='checked'> Video";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isVideo'> Video";
                   echo "</label>";
               }
 
               if($_SESSION["isGraphic"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isGraphic' checked='checked'> Graphic";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isGraphic'> Graphic";
                   echo "</label>";
               }
 
               if($_SESSION["isAudio"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isAudio' checked='checked'> Audio";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isAudio'> Audio";
                   echo "</label>";
               }
@@ -816,6 +816,8 @@ function hideWebsites() {
 
 
 </script>
+
+
 
 
 

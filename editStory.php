@@ -381,7 +381,7 @@ $newsID = (int) $_GET["newsID"];
               while($affiliations = mysql_fetch_array($resultAffiliations)) {
 
                 if($numAffiliations===2) {
-                  echo "<div id='shameHideAffiliations'> style='margin-top: 20px;'";
+                  echo "<div class='col-sm-4'> <div id='shameHideAffiliations' style='margin-top: 20px;'>";
                 }
 
                 if(!empty($affiliations["strAffiliation"])) {
@@ -392,7 +392,7 @@ $newsID = (int) $_GET["newsID"];
                   }
                   else {
                     // don't display control
-                    echo "<input type='text' class='form-control' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'  value='" . htmlspecialchars(stripslashes($affiliations["strAffiliation"]), ENT_QUOTES) . "'/><br /> <div class='col-sm-4'>";
+                    echo "<input type='text' class='form-control' id='affiliation" . $numAffiliations . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $numAffiliations . "'  value='" . htmlspecialchars(stripslashes($affiliations["strAffiliation"]), ENT_QUOTES) . "'/><br />";
                   }
                 }
 
@@ -405,11 +405,11 @@ $newsID = (int) $_GET["newsID"];
             for($i=$numAffiliations; $i<6; $i++) {
 
               if($i===2) {
-                echo "<div id='shameHideAffiliations' style='margin-top: 20px;' >";
+                echo "<div class='col-sm-4'> <div id='shameHideAffiliations' style='margin-top: 20px;' >";
               }
 
               if($i==1) {
-                echo "<input type='text' class='form-control' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'></div><span id='affiliationControls'> <a onClick='addAffiliations();' rel='tooltip' title='Show more Affiliation fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br /><div class='col-sm-4'>";
+                echo "<input type='text' class='form-control' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'></div><span id='affiliationControls'> <a onClick='addAffiliations();' rel='tooltip' title='Show more Affiliation fields' class='btn btn-default'><i class='fa fa-list'></i></a></span><br />";
               }
               else {
                 echo "<input type='text' class='form-control' id='affiliation" . $i . "' class='typeahead' data-provide='typeahead' data-items='4' placeholder='Specify a affiliation' name='affiliation" . $i . "'><br />";
@@ -418,10 +418,11 @@ $newsID = (int) $_GET["newsID"];
             }
             ?>
 
-            </div>
-          </div>
-        </div>
 
+
+        </div>
+      </div>
+    </div>
         <a name="pubDate"></a>
         <div class="form-group <?php if($_SESSION['datePublishedError'] == 1) echo 'error'; ?>">
           <label class="col-sm-2 control-label" for="datePublished">Publish Date</label>
@@ -436,7 +437,7 @@ $newsID = (int) $_GET["newsID"];
               }
              ?>
 
-               <input class="form-control" name="datePublished" size="16" type="text" value="<?= $datePub;?>" readonly>
+               <input class="form-control" id="datePublished" name="datePublished" size="16" type="text" value="<?= $datePub;?>" readonly>
               <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
             </div>
 
@@ -445,13 +446,12 @@ $newsID = (int) $_GET["newsID"];
                </div>
           </div>
 
-        </div>
 
-
+      </div>
           <a name="areas"></a>
          <div class="form-group <?php if($_SESSION['areaError'] == 1) echo 'error'; ?>">
           <label class="col-sm-2 control-label" for="college">Area(s)*</label>
-          <div class="col-sm-4">
+          <div class="col-sm-6">
          <?php
             $i = 1;
             $sql = "SELECT * FROM tblArea;";
@@ -462,12 +462,12 @@ $newsID = (int) $_GET["newsID"];
                 $row2 = mysql_fetch_array($result2);
 
                 if($row2["newsAreaID"] != "") {
-                    echo "<label class='checkbox inline'>";
+                    echo "<label class='checkbox-inline'>";
                     echo "<input type='checkbox' id='" . $row["areaID"] . "' value='" . $row["areaID"] . "' name='area[" . $i . "]' checked='checked'> " . $row["strArea"];
                     echo "</label>";
                 }
                 else {
-                    echo "<label class='checkbox inline'>";
+                    echo "<label class='checkbox-inline'>";
                     echo "<input type='checkbox' id='" . $row["areaID"] . "' value='" . $row["areaID"] . "' name='area[" . $i . "]'> " . $row["strArea"];
                     echo "</label>";
                 }
@@ -529,7 +529,7 @@ $newsID = (int) $_GET["newsID"];
       <div class="form-group">
           <label class="col-sm-2 control-label" for="isTopStory">This is an <strong>Agriculture Top Story</strong></label>
           <div class="col-sm-4">
-            <label class="checkbox">
+            <label class="checkbox-inline">
               <?php if($story["isTopStory"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isTopStory"> Yes
               <?php } else { ?>
@@ -542,7 +542,7 @@ $newsID = (int) $_GET["newsID"];
       <div class="form-group">
           <label class="col-sm-2 control-label" for="isTopStory">This is an  <strong>Extension Top Story</strong></label>
           <div class="col-sm-4">
-            <label class="checkbox">
+            <label class="checkbox-inline">
              <?php if($_SESSION["isExtTopStory"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isExtTopStory"> Yes
               <?php } else { ?>
@@ -556,7 +556,7 @@ $newsID = (int) $_GET["newsID"];
       <div class="form-group">
           <label class="col-sm-2 control-label" for="isScience">This story is <strong>science news</strong> </label>
           <div class="col-sm-4">
-            <label class="checkbox">
+            <label class="checkbox-inline">
               <?php if($story["isScience"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isScience"> Yes
               <?php } else { ?>
@@ -583,14 +583,14 @@ $newsID = (int) $_GET["newsID"];
                 $row2 = mysql_fetch_array($result2);
 
                 if($row2["newsTopicID"] != "") {
-                    echo "<label class='checkbox'>";
+                    echo "<label class='checkbox-inline'>";
                     echo "<input type='checkbox' id='" . $row["topicID"] . "' value='" . $row["topicID"] . "' name='topic[" . $i . "]' checked='checked'> " . $row["strTopic"];
-                    echo "</label>";
+                    echo "</label> <br/>";
                 }
                 else {
-                    echo "<label class='checkbox'>";
+                    echo "<label class='checkbox-inline'>";
                     echo "<input type='checkbox' id='" . $row["topicID"] . "' value='" . $row["topicID"] . "' name='topic[" . $i . "]'> " . $row["strTopic"];
-                    echo "</label>";
+                    echo "</label> <br/>";
                 }
 
                 $i++;
@@ -619,14 +619,14 @@ $newsID = (int) $_GET["newsID"];
                   $row2 = mysql_fetch_array($result2);
 
                   if($row2["newsIssuesID"] != "") {
-                      echo "<label class='checkbox'>";
+                      echo "<label class='checkbox-inline'>";
                       echo "<input type='checkbox' id='" . $row["issuesID"] . "' value='" . $row["issuesID"] . "' name='issues[" . $i . "]' checked='checked'> " . $row["strIssues"];
-                      echo "</label>";
+                      echo "</label> <br/>";
                   }
                   else {
-                      echo "<label class='checkbox'>";
+                      echo "<label class='checkbox-inline'>";
                       echo "<input type='checkbox' id='" . $row["issuesID"] . "' value='" . $row["issuesID"] . "' name='issues[" . $i . "]'> " . $row["strIssues"];
-                      echo "</label>";
+                      echo "</label><br/>";
                   }
 
                 $i++;
@@ -640,8 +640,8 @@ $newsID = (int) $_GET["newsID"];
 
         <div class="form-group">
           <label class="col-sm-2 control-label" for="isConnections">Featured in:</label>
-          <div class="col-sm-4">
-            <label class="checkbox">
+          <div class="col-sm-8">
+            <label class="checkbox-inline">
             <?php if($story["isConnections"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isConnections"> Connections
             <?php } else { ?>
@@ -649,7 +649,7 @@ $newsID = (int) $_GET["newsID"];
             <?php } ?>
             </label>
 
-            <label class="checkbox">
+            <label class="checkbox-inline">
             <?php if($story["isAgricultures"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isAgricultures"> Agricultures
             <?php } else { ?>
@@ -657,7 +657,7 @@ $newsID = (int) $_GET["newsID"];
             <?php } ?>
             </label>
 
-            <label class="checkbox">
+            <label class="checkbox-inline">
             <?php if($story["isColumn"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isColumn"> Columns
             <?php } else { ?>
@@ -665,7 +665,7 @@ $newsID = (int) $_GET["newsID"];
             <?php } ?>
             </label>
 
-            <label class="checkbox">
+            <label class="checkbox-inline">
             <?php if($story["isAnswers"] == 1) { ?>
               <input type="checkbox" id="inlineCheckbox1" value="1" checked="checked" name="isAnswers"> Ag Answers
             <?php } else { ?>
@@ -742,45 +742,45 @@ $newsID = (int) $_GET["newsID"];
               <?php
 
               if($story["isPhoto"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isPhoto' checked='checked'> Photo";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isPhoto'> Photo";
                   echo "</label>";
               }
 
               if($story["isVideo"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isVideo' checked='checked'> Video";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isVideo'> Video";
                   echo "</label>";
               }
 
               if($story["isGraphic"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isGraphic' checked='checked'> Graphic";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isGraphic'> Graphic";
                   echo "</label>";
               }
 
               if($story["isAudio"] != 0) {
-                echo "<label class='checkbox col-sm-2'>";
+                echo "<label class='checkbox-inline'>";
                 echo "<input type='checkbox' value='1' name='isAudio' checked='checked'> Audio";
                 echo "</label>";
               }
                 else {
-                  echo "<label class='checkbox col-sm-2'>";
+                  echo "<label class='checkbox-inline'>";
                   echo "<input type='checkbox' value='1' name='isAudio'> Audio";
                   echo "</label>";
               }
@@ -1032,6 +1032,7 @@ function hideAffiliations() {
 </script>
 
 <!-- ICE CODE-->
+
 <script type="text/javascript" src="includes/ICE/ice-master.min.js"></script>
 <script type="text/javascript" src="includes/ICE/lib/tinymce/jscripts/tiny_mce/tiny_mce.js"></script>
 <script type="text/javascript">
