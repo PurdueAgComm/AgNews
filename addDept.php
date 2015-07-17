@@ -17,8 +17,10 @@ if($_SESSION["isAdmin"] != 1) {
 
 ?>
 
+<div class="row">
+<div class="col-sm-8">
 <form class="form-horizontal" method="post" action="functions/doAddDept.php">
-  <h3>Add a New Department</h3>
+  <h1>Add a New Department</h1>
     <div class="form-group <?php if($_SESSION['deptNameError'] == 1) echo 'error'; ?>">
       <label class="col-sm-2 control-label" for="department">Department</label>
       <div class="col-sm-4">
@@ -36,13 +38,19 @@ if($_SESSION["isAdmin"] != 1) {
         <input type="text" class="form-control" id="college" placeholder="College of Agriculture" name="college" value="<?= htmlspecialchars(stripslashes($_SESSION['collegeAdd']), ENT_QUOTES);?>" >
       </div>
       <span class="inline-help text-danger">Required</span>
-
+    </div>
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+        <button type="submit" class="btn btn-success btn-block btn-large" onClick="setConfirmUnload(false);"><i class="fa fa-plus-circle"></i> Add Department</button>
+      </div>
     </div>
 
-      <button type="submit" class="btn btn-block btn-primary btn-large" onClick="setConfirmUnload(false);">Add Department</button>
+
 
 
 </form>
+</div>
+</div>
 
 <?php
 // 07-27: clear these out when leaving the page so the user comes back to a clean form.

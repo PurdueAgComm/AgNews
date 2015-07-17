@@ -38,9 +38,11 @@ if(!$result){
 <div class="panel panel-default" >
  <div class="panel-body form-horizontal">
 
-<h3>Background Topics</h3>
+<h1>Background Topics</h1>
 
-<p>Please note: if you edit a topic, that topic will be edited throughout all recorded stories.</p><?php
+<p>If you edit a topic, that topic will be edited throughout all recorded stories.</p>
+<br />
+<?php
              if($_SESSION['topicAddError'] == 1) {
                echo "<div class='alert alert-error'><i class='fa fa-exclamation'></i> Looks like you forgot to enter an topic. Please enter an topic before continuing.</div>";
              }
@@ -59,7 +61,7 @@ if(!$result){
                  <!-- **07-27: USE the htmlspecialchars(stripslashes ...) to show the content without the escape backslash (\). This would show if there were an error on the page -->
                  <input type="text" class="form-control" id="topicAdd" name="topicAdd" class="textfield" placeholder="Issue" required ="required" value="<?= htmlspecialchars(stripslashes($_SESSION['topicAdd']), ENT_QUOTES);?>" />
             </div>  <!-- input-append -->
-              <span><button action="submit" onClick="setConfirmUnload(false);" class="btn btn-primary" name ="submit" id="submit">Add</button> </span>
+              <button action="submit" onClick="setConfirmUnload(false);" class="btn btn-success" name ="submit" id="submit"><i class="fa fa-plus-circle"></i> Add Topic</button>
 
 
           </div> <!-- controls -->
@@ -101,10 +103,10 @@ $i++;
             <span id="topicControls">
 
               <!-- edit button -->
-             <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Edit the topic" type="submit "id="edit" class="btn btn-default" name="edit" value="edit" onclick="Clicked(this)">Edit <i class="fa fa-edit"></i></button>
+             <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Edit the topic" type="submit "id="edit" class="btn btn-default" name="edit" value="edit" onclick="Clicked(this)"><i class="fa fa-edit"></i> Edit</button>
 
               <!-- delete button -->
-              <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Delete the topic" type="submit" id="delete" class="btn btn-danger" name="delete" value="delete" ><i class="icon-white fa fa-remove"></i></button>
+              <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Archive the topic" type="submit" id="delete" class="btn btn-default" name="delete" value="delete" ><i class="icon-white fa fa-archive"></i> Archive</button>
 
 
            </span> <!-- topicControls: addForm02 -->
@@ -131,9 +133,9 @@ $i++;
 <div class="panel panel-default" >
  <div class="panel-body form-horizontal">
 
-          <h3>Archived Topics</h3>
-
-          The following <i>topics</i> may be activated by clicking the checkmark.<br /><br />
+          <h1>Archived Topics</h1>
+          <p>The following topics may be activated by clicking the checkmark.</p>
+          <br />
 
 
 <!-- run through the list of topics and display assign the information from $result to $activity -->
@@ -162,7 +164,7 @@ $i++;
          <input type="hidden" class="form-control" id="isHidden" name="isHidden" class="textfield"  value="<?= $activityDelete['isHidden'];?>" />
          </div> <!-- iinput-append: addForm03 -->
                <!-- activate button -->
-              <span><button rel ="tooltip" onClick="setConfirmUnload(false);" title="Activate Issue" id="reSubmit" type="submit" class="btn btn-success" name="reSubmit" ><i class="icon-white fa fa-check"></i></button> </span>
+              <span><button rel ="tooltip" onClick="setConfirmUnload(false);" title="Recover Topic" id="reSubmit" type="submit" class="btn btn-default" name="reSubmit" ><i class="icon-white fa fa-undo"></i> Recover</button> </span>
 
 
         </div> <!-- controls: addForm03 -->

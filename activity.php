@@ -1,4 +1,4 @@
-<?php
+  <?php
 include_once('includes/header.php'); // authenticate users, includes db connection
 if($_SESSION["isAdmin"] != 1) {
 	$_SESSION["error"] = "You do not have the creditentials to access this page. (Admin)";
@@ -14,9 +14,9 @@ $result3 = mysql_query($sql) OR die(mysql_error());
 $num_results2 = mysql_num_rows($result3);
 ?>
 
-<h3>News Activity Log</h3>
-<p class="text-right"><a href="#other" class="btn btn-mini">Jump to other activity</a></p>
-      
+<h1>News Activity Log</h1>
+<p class="text-right"><a href="#other" class="btn btn-default btn-mini"><i class="fa fa-arrow-down"></i> Jump to other activity</a></p>
+
 
       <?php
 
@@ -31,14 +31,14 @@ $num_results2 = mysql_num_rows($result3);
          <td width="30%">Story</td>
          <td width="20%">Time</td>
          </tr>
-      
+
        <?php
  	     // display stories that require their attention first
-	      while($activity = mysql_fetch_array($result)) { 
+	      while($activity = mysql_fetch_array($result)) {
 
 
-	      
-	        
+
+
 		        echo "<tr><td>" . $activity["strFirstName"] . " " . $activity["strLastName"] . "</td>";
 		        echo "<td>" . $activity["strActivity"] . "</td>";
 
@@ -46,12 +46,12 @@ $num_results2 = mysql_num_rows($result3);
 		          echo "<td><a href='beholdStory.php?newsID=" . $activity["newsID"] . "''>" . $activity["strHeadline"] . "</a></td>";
             }
             else {
-              echo "<td><a href='beholdStory.php?newsID=" . $activity["newsID"] . "''>" . htmlspecialchars(stripslashes($activity["strFilename"]), ENT_QUOTES) . "</a></td>"; 
+              echo "<td><a href='beholdStory.php?newsID=" . $activity["newsID"] . "''>" . htmlspecialchars(stripslashes($activity["strFilename"]), ENT_QUOTES) . "</a></td>";
             }
 
 		        echo "<td>" . date("m.d.Y", strtotime($activity["dateTimeStamp"])) . " at " . date("h:i a", strtotime($activity["dateTimeStamp"])) .  "</td></tr>";
 
-	        
+
 	      }
 	      echo "</table>";
       } // end if (regarding if there are news stories)
@@ -74,18 +74,18 @@ $num_results2 = mysql_num_rows($result3);
          <td width="30%">Activity</td>
          <td width="20%">Time</td>
          </tr>
-        
+
        <?php
 
        // display stories that require their attention first
-        while($activity = mysql_fetch_array($result3)) { 
-        
-          
+        while($activity = mysql_fetch_array($result3)) {
+
+
             echo "<tr><td>" . $activity["strFirstName"] . " " . $activity["strLastName"] . "</td>";
             echo "<td>" . $activity["strActivity"] . "</td>";
             echo "<td>" . date("m.d.Y", strtotime($activity["dateTimeStamp"])) . " at " . date("h:i a", strtotime($activity["dateTimeStamp"])) .  "</td></tr>";
 
-          
+
         }
         echo "</table>";
       } // end if (regarding if there are news stories)

@@ -29,13 +29,9 @@ $deptArray = mysql_fetch_array($resultDept);
   // if we don't have a specific department ID, show me the list of departments in the database.
   if(empty($deptID)) { ?>
 
-    <h3>Manage Departments</h3>
-    <p>You can edit a department at any time, simply click the department below.
-     To add a department, click on the "Add Department" button.</p>
-    <p>Archive any department by clicking the red button in the "Archive" column. </p>
+    <h1>Manage Departments</h1>
     <div class="clearfix" style="margin-bottom: 5px;">
-      <a href="addDept.php" style="margin-left: 5px"; class="pull-right btn btn-default">Add Department <i class="fa fa-plus-circle"></i></a>
-     <p><?php echo "<i rel='tooltip' title='College of Agriculture' class='fa fa-flag'></i>";?><font size=1> College of Agriculture department</font></p>
+      <a href="addDept.php" style="margin-left: 5px"; class="pull-right btn btn-success"><i class="fa fa-plus-circle"></i> Add Department</a>
     </div>
 
     <table class="table table-striped table-hover table-bordered">
@@ -79,7 +75,7 @@ $deptArray = mysql_fetch_array($resultDept);
          <input type="hidden" class="span3" id="deptName" name="deptName" class="textfield"  value="<?= $dept["strDeptName"];?>" />
 
          <!-- delete button -->
-         <button rel="tooltip" onClick="setConfirmUnload(false);" title="Delete the department" type="submit" id="delete" class="btn btn-danger" name="delete" value="delete" ><i class="icon-white fa fa-remove"></i></button>
+         <button rel="tooltip" onClick="setConfirmUnload(false);" title="Archive the department" type="submit" id="delete" class="btn btn-default" name="delete" value="delete" ><i class="fa fa-archive"></i> Archive</button>
 
     </form> <!-- end form: delete -->
 
@@ -94,9 +90,7 @@ $deptArray = mysql_fetch_array($resultDept);
       if(!empty($resultArch))
       {
     ?>
-      <h3 id='archDept'>Archived Departments</h3>
-      <p>You may activate a department at any time. Click on the green box in the "Active" column to add the department to the active department list.</p>
-
+      <h1 id='archDept'>Archived Departments</h1>
       <table class="table table-striped table-hover table-bordered">
          <tr>
             <td align="center" width="3%"></td>
@@ -136,7 +130,7 @@ $deptArray = mysql_fetch_array($resultDept);
            <input type="hidden" class="span3" id="deptName" name="deptName" class="textfield"  value="<?= $deptArch["strDeptName"];?>" />
 
             <!-- activate button -->
-           <button rel="tooltip" onClick="setConfirmUnload(false);" title="Activate the department" type="submit" id="activate" class="btn btn-success" name="activate" value="activate" ><i class="icon-white fa fa-check"></i></button>
+           <button rel="tooltip" onClick="setConfirmUnload(false);" title="Recover the department" type="submit" id="activate" class="btn btn-default" name="activate" value="activate" ><i class="fa fa-undo"></i> Recover</button>
 
           </form> <!-- end form: activate -->
 

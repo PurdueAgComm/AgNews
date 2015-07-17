@@ -36,30 +36,29 @@ if(!$result){
 <div class="panel panel-default" >
  <div class="panel-body form-horizontal">
 
-<h3>Critical Issues</h3>
+<h1>Critical Issues</h1>
 
-<p>Please note: if you edit an issue, that issue will be edited throughout all recorded stories.</p><?php
-             if($_SESSION['issueAddError'] == 1) {
-               echo "<div class='alert alert-error'><i class='icon-exclamation-sign'></i> Looks like you forgot to enter an issue. Please enter an issue before continuing.</div>";
-             }
+<p>If you edit an issue, that issue will be edited throughout all recorded stories.</p>
+<br />
+
+<?php
+   if($_SESSION['issueAddError'] == 1) {
+     echo "<div class='alert alert-error'><i class='icon-exclamation-sign'></i> Looks like you forgot to enter an issue. Please enter an issue before continuing.</div>";
+   }
 ?>
-
 
      <!-- New form: addForm01 -->
    <form class="form-group" name="addForm01" method="post" enctype="multipart/form-data" action="functions/doIssue.php">
 
          <!-- New Issue: client side error if field is blank upon "Submit" need to be required-->
       <div class="<?php if($_SESSION['issueAddError'] == 1) echo 'error'; ?>">
-
-         	  <label class="col-sm-2 control-label" for="issueAdd">Add a new Issue</label>
-
+         	  <label class="col-sm-2 control-label" for="issueAdd">Add A New Issue</label>
           <div class="controls">
             <div class="input-append col-sm-4">
                   <!-- **07-27: htmlspecialchars(stripslashes) is good here to allow the browser to see the apostrophes AND escape the slashes. This is important for refresh or if there is an error on the page  -->
     		      <input type="text" class="form-control" id="issueAdd" name="issueAdd" class="textfield" placeholder="Issue" required ="required" value="<?= htmlspecialchars(stripslashes($_SESSION['issueAdd']), ENT_QUOTES);?>" />
               </div> <!-- input-append -->
-              <span><button action="submit" onClick="setConfirmUnload(false);" class="btn btn-primary" name ="submit" id="submit">Add</button> </span>
-
+              <span><button action="submit" onClick="setConfirmUnload(false);" class="btn btn-success" name ="submit" id="submit"><i class="fa fa-plus-circle"></i> Add Issue</button> </span>
           </div> <!-- controls -->
        </div> <!-- control group -->
    </form> <!-- addForm01 -->
@@ -72,13 +71,11 @@ if(!$result){
 $i=0;
  while($activity = mysql_fetch_array($result)) {
 $i++;
-
 ?>
 
 
     <!-- Edit or Delete form: addForm02 -->
  <form class="form-group" name="addForm02" id="addForm02" method="post" enctype="multipart/form-data" action="functions/doIssue.php">
-
     <!-- Edit or Delete: client side error if field is blank upon "Submit"-->
    <div class="<?php if($activity['strIssues'] == 1) echo 'error'; ?>" >
      <label class="col-sm-2 control-label"></label>
@@ -95,12 +92,10 @@ $i++;
             <span id="issueControls">
 
               <!-- edit button -->
-             <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Edit the issue" type="submit "id="edit" class="btn btn-default" name="edit" value="edit" onclick="Clicked(this)">Edit <i class="fa fa-edit"></i></button>
+             <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Edit the issue" type="submit "id="edit" class="btn btn-default" name="edit" value="edit" onclick="Clicked(this)"><i class="fa fa-edit"></i> Edit</button>
 
               <!-- delete button -->
-              <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Delete the issue" type="submit" id="delete" class="btn btn-danger" name="delete" value="delete" ><i class="icon-white fa fa-times"></i></button>
-
-
+              <button rel="tooltip" data-container="body" onClick="setConfirmUnload(false);" title="Archive this issue" type="submit" id="delete" class="btn btn-default" name="delete" value="delete" ><i class="fa fa-archive"></i> Archive</button>
            </span> <!-- issueControls: addForm02 -->
 
 
@@ -126,9 +121,10 @@ $i++;
  <div class="panel panel-default">
 <div class="panel-body form-horizontal">
 
-          <h3>Archived Issues</h3>
+          <h1>Archived Issues</h1>
 
-          The following <i>issues</i> may be activated by clicking the checkmark.<br /><br />
+          <p>The following issues may be recovered.</p>
+          <br />
 
 
 <!-- run through the list of issues and display assign the information from $result to $activity -->
@@ -161,7 +157,7 @@ $i++;
 
                <!-- activate button -->
                <span>
-              <button rel ="tooltip" onClick="setConfirmUnload(false);" title="Activate Issue" id="reSubmit" type="submit" class="btn btn-success" name="reSubmit" ><i class="icon-white fa fa-check"></i></button> </span>
+              <button rel ="tooltip" onClick="setConfirmUnload(false);" title="Recover Issue" id="reSubmit" type="submit" class="btn btn-default" name="reSubmit" ><i class="icon-white fa fa-undo"></i> Recover</button> </span>
 
 
         </div> <!-- controls: addForm03 -->

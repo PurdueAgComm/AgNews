@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once("includes/header.php");
 if($_SESSION["isAdmin"] != 1) {
   $_SESSION["error"] = "You do not have the creditentials to access this page. (Admin)";
@@ -17,31 +17,38 @@ if($_SESSION["isAdmin"] != 1) {
 
 ?>
 
+<div class="row">
+<div class="col-sm-8">
 <form class="form-horizontal" method="post" action="functions/doAddAffiliation.php">
-  <h3>Add a New Affiliation</h3>
-    <div class="control-group <?php if($_SESSION['affiliationError'] == 1) echo 'error'; ?>">
-      <label class="control-label" for="affiliation">Affiliation</label>
-      <div class="controls">
-      <!-- **07-27: we need the stripslashes to return without any \'s. -->
-        <input type="text" class="span3" id="affiliation" placeholder="Affiliation" name="affiliation" value="<?= htmlspecialchars(stripslashes($_SESSION['affiliationAdd']), ENT_QUOTES);?>" > <span class="inline-help text-error">Required</span>
-      </div>
+  <h1>Add a New Affiliation</h1>
+  <div class="form-group <?php if($_SESSION['affiliationError'] == 1) echo 'error'; ?>">
+    <div class="col-sm-2">
+      <label class="control-label" for="affiliation">Affiliation *</label>
     </div>
-       
-    <div class="well">
-      <button type="submit" class="btn btn-block btn-primary btn-large" onClick="setConfirmUnload(false);">Add Affiliation</button>
+    <div class="col-sm-4">
+      <input type="text" class="form-control" id="affiliation" placeholder="Affiliation" name="affiliation" value="<?= htmlspecialchars(stripslashes($_SESSION['affiliationAdd']), ENT_QUOTES);?>">
     </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-4 col-sm-offset-2">
+      <button type="submit" class="btn btn-block btn-success btn-large" onClick="setConfirmUnload(false);"><i class="fa fa-plus-circle"></i> Add Affiliation</button>
+    </div>
+  </div>
+
 
 </form>
+</div>
+</div>
 
 <?php
 // 07-27: clear these out when leaving the page so the user comes back to a clean form.
 $_SESSION["affiliationError"] = 0;
-
 $_SESSION["affiliationAdd"] ="";
 $_SESSION["isHiddenAdd"] = "";
 
 ?>
 
-<?php 
+<?php
 include_once("includes/footer.php");
 ?>

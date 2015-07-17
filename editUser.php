@@ -134,11 +134,11 @@ else {
   $sql = "SELECT * FROM tblPeople WHERE strRole <> 'MM' ORDER BY strLastName;";
   $result = mysql_query($sql);
 ?>
-<h3>Manage Users</h3>
+<h1>Manage Users</h1>
 <p>You can edit a user at any time, simply click their name below. To add a user, click on the "Add User" button.</p>
 
  <div class="clearfix" style="margin-bottom: 5px;">
-        <a href="addUser.php" style="margin-left: 5px;" class="pull-right btn btn-default">Add User <i class="fa fa-plus-circle"></i></a>
+        <a href="addUser.php" style="margin-left: 5px;" class="pull-right btn btn-success"><i class="fa fa-plus-circle"></i> Add User</a>
 
 
         </div>

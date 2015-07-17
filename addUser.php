@@ -18,7 +18,7 @@ if($_SESSION["isAdmin"] != 1) {
 ?>
 
 <form class="form-horizontal" method="post" action="functions/doAddUser.php">
-  <h3>Add a New User</h3>
+  <h1>Add a New User</h1>
     <div class="form-group <?php if($_SESSION['firstNameError'] == 1) echo 'error'; ?>">
       <label class="col-sm-2 control-label" for="filename">First Name</label>
       <div class="col-sm-4">
@@ -76,9 +76,6 @@ if($_SESSION["isAdmin"] != 1) {
                 <input type="checkbox" id="inlineCheckbox1" value="1" name="isWriter"> Writer
               <?php } ?>
             </label>
-
-
-
             <label class="checkbox">
              <?php if($_SESSION["isSupportAdd"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isSupport"> Support
@@ -86,10 +83,6 @@ if($_SESSION["isAdmin"] != 1) {
                 <input type="checkbox" id="inlineCheckbox1" value="1" name="isSupport"> Support
               <?php } ?>
             </label>
-
-
-
-
             <label class="checkbox">
              <?php if($_SESSION["isAdminAdd"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isAdmin"> Administrator
@@ -97,9 +90,6 @@ if($_SESSION["isAdmin"] != 1) {
                 <input type="checkbox" id="inlineCheckbox1" value="1" name="isAdmin"> Administrator
               <?php } ?>
             </label>
-
-
-
             <label class="checkbox">
              <?php if($_SESSION["isSourceAdd"] == 1) { ?>
                 <input type="checkbox" id="inlineCheckbox1" checked="checked" value="1" name="isSource"> Source
@@ -107,11 +97,15 @@ if($_SESSION["isAdmin"] != 1) {
                 <input type="checkbox" id="inlineCheckbox1" value="1" name="isSource"> Source
               <?php } ?>
             </label>
-
     </div>
 
+    <div class="form-group">
+      <div class="col-sm-4 col-sm-offset-2">
+        <br />
+        <button type="submit" class="btn btn-block btn-success btn-large" onClick="setConfirmUnload(false);"><i class="fa fa-plus-circle"></i> Add User</button>
+      </div>
+    </div>
 
-      <button type="submit" class="btn btn-block btn-primary btn-large" onClick="setConfirmUnload(false);">Add User</button>
 
 
 
