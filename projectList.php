@@ -44,9 +44,9 @@ if(!empty($_SESSION["error"])) {
 
 
     <div class="clearfix">
-    <a style="margin-bottom: 5px;" class="btn btn-primary pull-right" href="functions/doSendProjectList.php"><i class="fa fa-envelope icon-white"></i> Send to M&M</a>
+    <a style="margin-bottom: 5px;" class="btn btn-success pull-right" href="functions/doSendProjectList.php"><i class="fa fa-envelope icon-white"></i> Send to M&M</a>
 
-    <a rel="tooltip" style='margin-right: 5px;' tabindex="-1" title="Update M&M Contact" data-toggle="modal" href="#myModal" role="button" class="btn btn-default pull-right"><i class="fa fa-edit"></i></a>
+    <a rel="tooltip" style='margin-right: 5px;' tabindex="-1" title="Update M&M Contact" data-toggle="modal" href="#myModal" role="button" class="btn btn-default pull-right"><i class="fa fa-edit"></i> Update M&M Contact</a>
 
     </div>
     <table class="clearfix table table-striped table-hover table-bordered">
