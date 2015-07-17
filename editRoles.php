@@ -47,7 +47,7 @@ if($_SESSION["isAdmin"] != 1) {
                  <input type="hidden" name="roleAction" value="coordinator" />
                </div>
 
-               <button class="btn btn-success" action="submit" onClick="setConfirmUnload(false);"><i class="fa fa-check icon-white" ></i></button>
+               <button class="btn btn-success" action="submit" onClick="setConfirmUnload(false);"><i class="fa fa-save" ></i> Save</button>
                <span rel='tooltip' title='The Coordinator of the News Unit will receive updates when stories are progressed to the "Coordinator Review" status.'><i class='fa fa-question-circle'></i>
          </div>
       </div>
@@ -78,7 +78,7 @@ if($_SESSION["isAdmin"] != 1) {
                </select>
                <input type="hidden" name="roleAction" value="assistant" />
            </div>
-               <button class="btn btn-success" onClick="setConfirmUnload(false);" action="submit"><i class="fa fa-check icon-white"></i></button>
+               <button class="btn btn-success" onClick="setConfirmUnload(false);" action="submit"><i class="fa fa-save" ></i> Save</button>
                <span rel='tooltip' title='The News Assistant Role receives an email update when stories are progressed to the "M&M Review" status prompting them to log in, update the story URL, and publish the story.'><i class='fa fa-question-circle'></i>
          </div>
       </div>
@@ -109,7 +109,7 @@ if($_SESSION["isAdmin"] != 1) {
                </select>
                <input type="hidden" name="roleAction" value="administrator" />
            </div>
-               <button onClick="setConfirmUnload(false);" class="btn btn-success" action="submit"><i class="fa fa-check icon-white"></i></button>
+               <button onClick="setConfirmUnload(false);" class="btn btn-success" action="submit"><i class="fa fa-save" ></i> Save</button>
               <span rel='tooltip' title='The MMU Administrator is the MMU contact for this website. All help emails will be sent to this person.'><i class='fa fa-question-circle'></i>
          </div>
       </div>
