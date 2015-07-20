@@ -184,10 +184,10 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           <div class="form-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
             <label class="col-sm-2 control-label" for="tweet">Tweet</label>
             <div class="col-sm-4">
-              <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= $_SESSION['tweet'];?>
-              ">
-              <span id="count" class="muted"></span>
+              <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= $_SESSION['tweet'];?>">
             </div>
+              <span id="count" class="muted"></span>
+
           </div>
 
         <div class="form-group  <?php if($_SESSION['sourceError'] == 1) echo 'error'; ?>">

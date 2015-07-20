@@ -255,8 +255,10 @@ $newsID = (int) $_GET["newsID"];
         <div class="form-group <?php if($_SESSION['tweetError'] == 1) echo 'error'; ?>">
           <label class="col-sm-2 control-label" for="tweet">Tweet*</label>
           <div class="col-sm-4">
-            <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= htmlspecialchars(stripslashes($story["strTweet"]), ENT_QUOTES);?>"> <span id="count" class="muted"></span>
+            <input type="text" class="form-control" id="tweet" placeholder="Specify a custom tweet" name="tweet" value="<?= htmlspecialchars(stripslashes($story["strTweet"]), ENT_QUOTES);?>">
           </div>
+             <span id="count" class="muted"></span>
+
         </div>
 
 
