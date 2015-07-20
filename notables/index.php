@@ -12,7 +12,7 @@
       <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
           <img alt="Page Banner" class="banner" height="235" src="images/page-banner.jpg" width="840"/>
           <h1>Notables</h1>
-          <p>Appointments, Honors, and Notables from the College of Agriculture. Nunc laoreet mi vel augue malesuada, nec pulvinar mi viverra. Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
+          <p>Appointments, honors, and other accomplishments in the College of Agriculture.</p>
           <?php
           $sql = "SELECT * FROM tblNews LEFT JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.stageID=6 AND tblNewsArea.areaID=5 AND tblNews.isHidden=0 ORDER BY tblNews.datePublished DESC LIMIT 5";
           $result = mysql_query($sql);

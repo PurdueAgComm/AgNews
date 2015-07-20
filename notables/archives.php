@@ -14,7 +14,6 @@
     <div class="row">
       <div class="maincontent col-lg-9 col-md-9 col-sm-9 left">
         <h1>Archives</h1>
-        <p> Cras sed orci pellentesque, porttitor odio nec, convallis odio. Maecenas id tellus enim. Interdum et malesuada fames ac ante ipsum primis in faucibus.</p>
         <?php
           $year = date("Y");
           // no stories beyond 2010

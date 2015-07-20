@@ -82,9 +82,9 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <p>Purdue University, 610 Purdue Mall, West Lafayette, IN 47907, (765) 494-4600</p>
-            <p><a href="http://www.purdue.edu/purdue/disclaimer.html"> &#169; 2015 Purdue University</a> | <a href="http://www.purdue.edu/purdue/ea_eou_statement.html">An equal access/equal opportunity university</a> | <a href="http://www.purdue.edu/securepurdue/DMCAAgent.cfm">Copyright Complaints</a> | <a href="#">Maintained by Office of XYZ</a></p>
-            <p>Trouble with this page? Disability-related <a href="http://www.purdue.edu/disabilityresources/">accessibility</a> issue? Please contact&#160;Office of XYZ at <a href="mailto:XYZ@purdue.edu">XYZ@purdue.edu</a>.</p>
+            <p>Purdue Agriculture, 615 W. State Street, West Lafayette, IN 47907, (765) 494-8391</p>
+            <p><a href="http://www.purdue.edu/purdue/disclaimer.html"> &#169; 2015 Purdue University</a> | <a href="http://www.purdue.edu/purdue/ea_eou_statement.html">An equal access/equal opportunity university</a> | <a href="http://www.purdue.edu/securepurdue/DMCAAgent.cfm">Copyright Complaints</a> | <a href="#">Maintained by Agricultural Communication</a></p>
+            <p>Trouble with this page? Disability-related <a href="http://www.purdue.edu/disabilityresources/">accessibility</a> issue? Please contact Agricultural Communication at <a href="mailto:agweb@purdue.edu">agweb@purdue.edu</a>.</p>
           </div>
         </div>
       </div>
