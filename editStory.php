@@ -127,7 +127,7 @@ $newsID = (int) $_GET["newsID"];
           </div>
         </div> <!-- /.panel -->
 
-          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-primary btn-lg btn-block" />
+          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-success btn-lg btn-block" />
 
         <br />
 
@@ -138,12 +138,10 @@ $newsID = (int) $_GET["newsID"];
           <div class="panel-body form-horizontal">
 
             <div class="form-group <?php if($_SESSION['filenameError'] == 1) echo 'error'; ?>">
-              <label class="col-sm-2 control-label" for="filename">Filename</label>
+              <label class="col-sm-2 control-label" for="filename">Filename*</label>
               <div class="col-sm-4">
                 <input type="text" class="form-control" id="filename" placeholder="Create a filename" name="filename" value="<?= htmlspecialchars(stripslashes($story["strFilename"]), ENT_QUOTES);?>" >
                 </div>
-                 <span class="inline-help text-danger">Required</span>
-
             </div>
 
             <div class="form-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
@@ -235,7 +233,7 @@ $newsID = (int) $_GET["newsID"];
 
 
 
-          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-primary btn-lg btn-block" />
+          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);" class="btn btn-success btn-lg btn-block" />
           <br />
 
 
@@ -441,13 +439,10 @@ $newsID = (int) $_GET["newsID"];
               <span class="input-group-addon add-on"><i class="fa fa-calendar"></i></span>
             </div>
 
-              <div style="margin-top:10px;">
-               <a onClick="$('#datePublished').val('');" class="btn btn-default">Clear</a>
-               </div>
+
           </div>
-
-
-      </div>
+          <a onClick="$('#datePublished').val('');" class="btn btn-default">Clear Date</a>
+        </div>
           <a name="areas"></a>
          <div class="form-group <?php if($_SESSION['areaError'] == 1) echo 'error'; ?>">
           <label class="col-sm-2 control-label" for="college">Area(s)*</label>
@@ -516,7 +511,7 @@ $newsID = (int) $_GET["newsID"];
   </div> <!-- end well -->
 
 
-          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);"  class="btn btn-primary btn-lg btn-block" />
+          <input type="submit" value="Update Story" onClick="setConfirmUnload(false);"  class="btn btn-success btn-lg btn-block" />
         <br />
 
 
@@ -793,7 +788,7 @@ $newsID = (int) $_GET["newsID"];
     </div>
 
 
-        <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-large btn-block btn-primary" value="Create Story" />
+        <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-lg btn-block btn-success" value="Update Story" />
 
 
 <!-- ************************************************************************-->
@@ -864,7 +859,7 @@ $newsID = (int) $_GET["newsID"];
 
       <div class="modal-footer">
     <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
-    <input type="submit" onClick="setConfirmUnload(false);" name="source" class="btn btn-primary" id="save" value="Add Source" />
+    <input type="submit" onClick="setConfirmUnload(false);" name="source" class="btn btn-success" id="save" value="Add Source" />
       </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->

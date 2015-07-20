@@ -266,8 +266,6 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
        </div>
 
 
-
-
           </div>
         </div>
 
@@ -568,7 +566,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           </div>
       </div>
 
-        <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-default btn-lg btn-block btn-primary" value="Create Story" />
+        <input type="submit" onClick="setConfirmUnload(false);"  name="story2" class="btn btn-default btn-lg btn-block btn-success" value="Create Story" />
 
 
 

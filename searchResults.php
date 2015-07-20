@@ -108,14 +108,17 @@ if(!empty($_GET["q"])) {
 
  	<?php
  	if($numResult > 0) { ?>
-
 		<h3>Search Results (<?php echo $numResult ?>)</h3>
-		<div class="input-append pull-right">
-          <form action="searchResults.php" method="get" style="margin-bottom: -5px;">
-            <input id="appendedInputButtons" type="text" name="q" placeholder="Search Stories">
-            <button class="btn" type="submit" onClick="setConfirmUnload(false);" type="submit"><i class='icon-search'></i></button>
-          </form>
-        </div>
+        <form class="form-inline pull-right" action="searchResults.php" method="get" style="margin-bottom: 10px;">
+        <div class="form-group">
+		    <label for="search" class="sr-only">Password</label>
+		    <input class="form-control" id="search" type="text" name="q" placeholder="Search Stories">
+		</div>
+		<button class="btn btn-default" type="submit" onClick="setConfirmUnload(false);" type="submit"><i class='fa fa-search'></i></button>
+        </form>
+
+
+
 		  <table class="table table-striped table-hover table-bordered">
 	      <tr>
 	        <td width="55%">Headline</td>
@@ -147,12 +150,13 @@ if(!empty($_GET["q"])) {
 		<h3>No Results Found</h3>
 		<p>Unfortunately, there were no results found for <span class='text text-error'><?php echo $term_list ?></span>. Please try again using the form below.</p>
 
-		<div class="span12 input-append">
-		  <form action="searchResults.php" method="get" style="margin-bottom: -5px;">
-            <input class="span4" id="appendedInputButtons" type="text" name="q" placeholder="Type and click enter">
-            <button class="btn" type="submit" type="submit"><i class='icon-search'></i></button>
-          </form>
-        </div>
+		<form class="form-inline" action="searchResults.php" method="get" style="margin-bottom: 10px;">
+        <div class="form-group">
+		    <label for="search" class="sr-only">Password</label>
+		    <input class="form-control" id="search" type="text" name="q" placeholder="Search Stories">
+		</div>
+		<button class="btn btn-default" type="submit" onClick="setConfirmUnload(false);" type="submit"><i class='fa fa-search'></i></button>
+        </form>
 
 
 		<p class="span5 muted"><span class="label label-info">Frustrated?</span> This only searches <strong>Filenames</strong>. If you have ways you would like to search that are not provided here, please contact the developer in charge of this database and let him or her know.</p>

@@ -103,7 +103,7 @@ if(!empty($row["newsID"]))
 								}
 							}
 							else {
-								echo "Expected Release: <a href='editStory.php?newsID=" . $_GET["newsID"] . "#pubDate' class='btn btn-mini'><i class='fa fa-plus'></i> Add Publish Date</a>";
+								echo "Expected Release: <a href='editStory.php?newsID=" . $_GET["newsID"] . "#pubDate' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Publish Date</a>";
 							}
 						?>
 
@@ -121,7 +121,7 @@ if(!empty($row["newsID"]))
 								echo $row["strReach"];
 							}
 							else {
-								echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#reach' class='btn btn-mini'><i class='fa fa-plus'></i> Add Reach</a>";
+								echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#reach' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Reach</a>";
 							}
 						?>
 					</td>
@@ -134,7 +134,7 @@ if(!empty($row["newsID"]))
 								echo $row["txtIntent"];
 							}
 							else {
-								echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#intent' class='btn btn-mini'><i class='fa fa-plus'></i> Add Intent</a>";
+								echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#intent' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Intent</a>";
 							}
 						?>
 					</td>
@@ -178,7 +178,7 @@ if(!empty($row["newsID"]))
 							}
 					}
 					else {
-						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#sources' class='btn btn-mini'><i class='fa fa-plus'></i> Add Sources</a>";
+						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#sources' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Sources</a>";
 					}
 
 				?></td>
@@ -195,7 +195,7 @@ if(!empty($row["newsID"]))
 						}
 					}
 					else {
-						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#topics' class='btn btn-mini'><i class='fa fa-plus'></i> Add Topics</a>";
+						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#topics' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Topics</a>";
 					}
 
 				?></td>
@@ -213,7 +213,7 @@ if(!empty($row["newsID"]))
 						}
 					}
 					else {
-						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#issues' class='btn btn-mini'><i class='fa fa-plus'></i> Add Issues</a>";
+						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#issues' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Issues</a>";
 					}
 
 				 ?></td>
@@ -232,7 +232,7 @@ if(!empty($row["newsID"]))
 
 						}
 						if(!$website) {
-								echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#websites' class='btn btn-mini'><i class='fa fa-plus'></i> Add Websites</a>";
+								echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#websites' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Websites</a>";
 						}
 					?>
 				</td>
@@ -256,7 +256,7 @@ if(!empty($row["newsID"]))
 						}
 					}
 					else {
-						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#depts' class='btn btn-mini'><i class='fa fa-plus'></i> Add Departments</a>";
+						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#depts' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Departments</a>";
 					}
 
 					?></td>
@@ -274,7 +274,7 @@ if(!empty($row["newsID"]))
 						}
 					}
 					else {
-						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#affiliations' class='btn btn-mini'><i class='fa fa-plus'></i> Add Affiliations</a>";
+						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#affiliations' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Affiliations</a>";
 					}
 					?></td>
 			</tr>
@@ -290,7 +290,7 @@ if(!empty($row["newsID"]))
 						}
 					}
 					else {
-						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#areas' class='btn btn-mini'><i class='fa fa-plus'></i> Add Areas</a>";
+						echo "<a href='editStory.php?newsID=" . $_GET["newsID"] . "#areas' class='btn btn-default btn-xs'><i class='fa fa-plus'></i> Add Areas</a>";
 					}
 					?></td>
 			</tr>
@@ -322,8 +322,8 @@ if(!empty($row["newsID"]))
 	<strong>Created</strong>: <?php echo  date("m.d.Y", strtotime($row["dateCreated"])) . " at " . date("h:i a", strtotime($row["dateCreated"]))  ?> <br/>
 	<strong>Last Modified</strong>: <?php if(!empty($row["dateModified"])) {  echo  date("m.d.Y", strtotime($row["dateModified"])) . " at " . date("h:i a", strtotime($row["dateModified"]));} else { echo "No edits have been made.";} ?> <br/>
 	<br />
-	<a href='editStory.php?newsID=<?php echo $_GET["newsID"] ?>' class='btn btn-block btn-warning'><i class='icon-white fa fa-edit'></i> Edit Story</a>
-	<a href='functions/doSaveStory.php?newsID=<?php echo $_GET["newsID"] ?>' class='btn btn-block btn-success'><i class='fa fa-download icon-white'></i> Download Story</a>
+	<a href='editStory.php?newsID=<?php echo $_GET["newsID"] ?>' class='btn btn-block btn-success'><i class='icon-white fa fa-edit'></i> Edit Story</a>
+	<a href='functions/doSaveStory.php?newsID=<?php echo $_GET["newsID"] ?>' class='btn btn-block btn-default'><i class='fa fa-download icon-white'></i> Download Story</a>
 	<br />
 	</div><!--end of panel body-->
 	<div class="panel-footer">
@@ -341,36 +341,33 @@ if(!empty($row["newsID"]))
 
 	      ?>
 
-		<form class="form-horizontal" id="stageForm" style="margin: 0px;" action="functions/doUpdateStage.php" method="post">
+		<form class="form-horizontal" id="stageForm" action="functions/doUpdateStage.php" method="post">
 			<div class="control-group">
+				 <select class="form-control" name="stage" id="stage">
+					<?php
+					  $sql = "SELECT * FROM tblStage;";
+			          $result = mysql_query($sql);
 
 
-					 <select name="stage" id="stage" style="width: 85%;">
-						<?php
-						  $sql = "SELECT * FROM tblStage;";
-				          $result = mysql_query($sql);
+			            while($stage = mysql_fetch_array($result)) {
 
-
-				            while($stage = mysql_fetch_array($result)) {
-
-				              if($stage["stageID"] == $row["stageID"]) {
-				                echo "<option value='" . $stage["stageID"] . "' selected='selected'>" . $stage["strStage"] . "</option>";
-				              }
-				                else {
-				                  echo "<option value='" .  $stage["stageID"] . "'>" . $stage["strStage"] . "</option>";
-				                }
-				            }
-				      ?>
-					</select>
-					<input type="hidden" name="newsID" value="<?php echo $_GET["newsID"]; ?>">
-					<a onClick="doSourceCheck()" rel="tooltip" title="Update this story's progress." class="btn btn-small btn-success"><i class='fa fa-check icon-white' ></i></a>
-
-				</div>
+			              if($stage["stageID"] == $row["stageID"]) {
+			                echo "<option value='" . $stage["stageID"] . "' selected='selected'>" . $stage["strStage"] . "</option>";
+			              }
+			                else {
+			                  echo "<option value='" .  $stage["stageID"] . "'>" . $stage["strStage"] . "</option>";
+			                }
+			            }
+			      ?>
+				</select>
+				<input type="hidden" name="newsID" value="<?php echo $_GET["newsID"]; ?>">
+				<a style="margin-top: 5px;" onClick="doSourceCheck()" rel="tooltip" class="btn btn-block btn-small btn-success"><i class='fa fa-check icon-white' ></i> Update Status</a>
+			</div>
 
 
 
 
-		<!-- Modal -->
+			<!-- Modal -->
 		<div id="sourceModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog modal-lg">
 		  <div class="modal-content">
@@ -395,11 +392,7 @@ if(!empty($row["newsID"]))
 		  </div>
 		  </div> <!-- end of modal content -->
 		</div> <!-- end of modal-dialog modal-lg -->
-	</div>
-
-
-
-
+		</div>
 
 		</form>
 
@@ -413,9 +406,9 @@ if(!empty($row["newsID"]))
 		?>
 
 
-		<div class="progress" role="progressbar" style="margin-top:5px;">
+		<!-- <div class="progress" role="progressbar" style="margin-top:5px;">
 		  <div class="progress-bar progress-bar-success progress-bar-striped active" style="width: <?php echo ($row["stageID"]/$stageC["stageCount"])*100 ?>%"> <?php echo number_format(($row["stageID"]/$stageC["stageCount"])*100, 0, '.', ' ') ?>%</div>
-		</div>
+		</div> -->
 	</div>
 
 </div>
