@@ -69,12 +69,10 @@ if(!empty($row["newsID"]))
 ?>
 
 
-	<h2><?php if($row["isTopStory"] == 1 || $row["isExtTopStory"] == 1) echo "<span class='label label-inverse' style='position: relative; top: -5px;'><i class='fa fa-star icon-white' rel='tooltip' title='This was featured as a Top Story. '></i></span>"?> <?php if(!empty($row["strHeadline"])) { echo htmlspecialchars(stripslashes($row["strHeadline"]), ENT_QUOTES); } else { echo htmlspecialchars(stripslashes($row["strFilename"]), ENT_QUOTES); } ?></h2>
+	<h2><?php if($row["isTopStory"] == 1 || $row["isExtTopStory"] == 1) echo "<i class='fa fa-star' rel='tooltip' title='This was featured as a Top Story. '></i>"?> <?php if(!empty($row["strHeadline"])) { echo htmlspecialchars(stripslashes($row["strHeadline"]), ENT_QUOTES); } else { echo htmlspecialchars(stripslashes($row["strFilename"]), ENT_QUOTES); } ?></h2>
 
 	<div class="panel panel-default">
 	<div class="panel-body">
-
-
 		<div style="width:45%; float: left; margin-right: 20px;">
 			<table class="table table-hover">
 				<tr >
@@ -87,8 +85,6 @@ if(!empty($row["newsID"]))
 									}
 								}
 						?>
-
-
 					</td>
 				</tr>
 				<tr>
@@ -304,7 +300,7 @@ if(!empty($row["newsID"]))
 
 <div class="panel panel-default" style="width: 30%; min-height: 300px; margin-left:15px; float: left;">
 	<div class="panel-heading">
-	<h3 style='text-align: center;'>Manage Story</h3>
+	<h3 class="panel-title">Manage Story</h3>
 	</div>
 
 	<div class="panel-body">
