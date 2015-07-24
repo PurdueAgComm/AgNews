@@ -73,7 +73,7 @@
             </div>
           </div>
           <div class="motto col-lg-4 col-md-4 col-sm-4"><img alt="Moves the World Forward" src="//www.purdue.edu/purdue/images/wearepurdue.png"/>
-            <a alt="Facebook" href="http://www.facebook.com/PurdueUniversity" target="_blank"><i class="fa fa-facebook"></i></a> <a alt="Twitter" href="http://twitter.com/LifeAtPurdue" target="_blank"><i class="fa fa-twitter"></i></a> <a alt="YouTube" href="http://www.youtube.com/purdue" target="_blank"><i class="fa fa-youtube"></i></a> <a alt="Instagram" href="http://www.instagram.com/lifeatpurdue" target="_blank"><i class="fa fa-instagram"></i></a> <a alt="Pinterest" href="http://www.pinterest.com/lifeatpurdue/" target="_blank"><i class="fa fa-pinterest"></i></a> <a alt="Google Plus" href="http://plus.google.com/+PurdueUniversity" target="_blank"><i class="fa fa-google-plus"></i></a> <a alt="LinkedIn" href="https://www.linkedin.com/edu/purdue-university-18357" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a alt="Facebook" href="https://www.facebook.com/PurdueAg" target="_blank"><i class="fa fa-facebook"></i></a> <a alt="Twitter" href="https://twitter.com/#!/PurdueAg" target="_blank"><i class="fa fa-twitter"></i></a> <a alt="YouTube" href="http://www.youtube.com/user/Purdueagriculture" target="_blank"><i class="fa fa-youtube"></i></a> <a alt="Instagram" href="https://instagram.com/purdue_ag" target="_blank"><i class="fa fa-instagram"></i></a><a alt="LinkedIn" href="https://www.linkedin.com/company/purdue-agriculture" target="_blank"><i class="fa fa-linkedin"></i></a>
           </div>
         </div>
       </div>
