@@ -123,9 +123,6 @@ $i++;
 
           <h1>Archived Issues</h1>
 
-          <p>The following issues may be recovered.</p>
-          <br />
-
 
 <!-- run through the list of issues and display assign the information from $result to $activity -->
 <?php

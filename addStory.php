@@ -129,8 +129,7 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
                         <div class="form-group <?php if($_SESSION['intentError'] == 1) echo 'error'; ?> ">
                           <label class="col-sm-2 control-label" for="intent">Intent</label>
                           <div class="col-sm-4">
-                            <textarea class="form-control" name="intent">
-                              <?= $_SESSION['intent'];?> </textarea>
+                            <textarea class="form-control" name="intent"><?= $_SESSION['intent'];?></textarea>
                           </div>
                         </div>
 

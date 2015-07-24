@@ -134,9 +134,6 @@ $i++;
  <div class="panel-body form-horizontal">
 
           <h1>Archived Topics</h1>
-          <p>The following topics may be activated by clicking the checkmark.</p>
-          <br />
-
 
 <!-- run through the list of topics and display assign the information from $result to $activity -->
 <?php

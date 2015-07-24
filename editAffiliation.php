@@ -76,8 +76,6 @@ $affiliationArray = mysql_fetch_array($resultAffiliation);
       {
     ?>
       <h1 id='archAffiliation'>Archived Affiliations</h1>
-      <p>You may activate an affiliation at any time. Click on the green box in the "Active" column to add the affiliation to the active affiliation list.</p>
-
       <table class="table table-striped table-hover table-bordered">
          <tr>
             <td width="30%">Affiliation</td>
@@ -101,7 +99,7 @@ $affiliationArray = mysql_fetch_array($resultAffiliation);
           <input type="hidden" class="span3" id="affilation" name="affiliation" class="textfield"  value="<?= $affiliationArch["strAffiliation"];?>" />
 
           <!-- activate button -->
-          <button rel="tooltip" onClick="setConfirmUnload(false);" title="Activate the affiliation" type="submit" id="activate" class="btn btn-default" name="activate" value="activate" ><i class="fa fa-undo"></i> Recover</button>
+          <button rel="tooltip" onClick="setConfirmUnload(false);" title="Recover the affiliation" type="submit" id="activate" class="btn btn-default" name="activate" value="activate" ><i class="fa fa-undo"></i> Recover</button>
 
           </form> <!-- end form: activate -->
 

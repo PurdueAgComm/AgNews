@@ -1062,7 +1062,7 @@ function hideAffiliations() {
 
 
 window.scrollTo(0, 0);
-$('#headline').focus().blur()
+
 </script>
 
 <script>
