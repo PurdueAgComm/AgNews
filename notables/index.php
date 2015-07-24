@@ -1,4 +1,17 @@
-<?php include_once("includes/header.php"); ?>
+<?php include_once("includes/header.php");
+ini_set('display_errors',1);
+error_reporting(E_ALL);
+function shortenString($maxlen, $string)
+{
+    if (strlen($string) > $maxlen){
+        $shortString = substr($string,0,strrpos($string,". ",$maxlen-strlen($string))+1);
+    } else {
+        $shortString = $string;
+    }
+
+    return $shortString;
+}
+ ?>
   <div class="breadcrumb">
   <div class="container">
     <div class="row">
@@ -20,10 +33,13 @@
           <h2><a href="notable.php?n=<?php echo $notable["newsID"]?>"><?php echo $notable["strHeadline"]; ?></a></h2>
           <p class="noteDate"><i class="fa fa-calendar"></i> <?php echo date("F d, Y", strtotime($notable["datePublished"])); ?></p>
           <p>
-            <?php if(!empty($notable["strImage"])) {
-              echo "<img style='border: 1px solid #dadada; padding: 5px; margin: 10px 0 5px 5px; float: right;' src='" . $notable["strImage"] . "' alt='" . $notable["strHeadline"] . "' />";
-            }
-            echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
+          <?php
+            $body = html_entity_decode(htmlspecialchars_decode($notable["txtBody"]));
+            $body = preg_replace("/&#?[a-z0-9]+;/i"," ", $body);
+            echo shortenString(500, $body);
+            echo " <a href='notable.php?n=" . $notable["newsID"] . "'>Read More &#187;</a>";
+          ?>
+          </p>
           <?php endwhile; ?>
         </div>
         <div class="sidenav col-lg-3 col-md-3 col-sm-3">
