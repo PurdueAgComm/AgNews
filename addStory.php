@@ -104,8 +104,6 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
                          <div class="col-sm-4">
                              <input type="text" class="form-control" id="filename" placeholder="Create a filename" name="filename" value="<?= $_SESSION['filename'];?>" >
                          </div>
-                             <span class="inline-help text-danger ">Required</span>
-
                      </div>
 
                       <div class="form-group  <?php if($_SESSION['writerError'] == 1) echo 'error'; ?>">
