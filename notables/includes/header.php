@@ -7,6 +7,7 @@ $result = mysql_query($sql);
 $notableTitle = mysql_fetch_array($result);
 $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 (!empty($notableTitle["strHeadline"])) ? $title = $notableTitle["strHeadline"] . " - Purdue Agriculture Notables" : $title = "Purdue Agriculture Notables";
+(!empty($notableTitle["strImage"])) ? $photo = $notableTitle["strImage"] : $photo = "https://ag.purdue.edu/PublishingImages/PurdueAgFB.png";
 (!empty($notableTitle["txtBody"])) ? $body = strip_tags(html_entity_decode(htmlspecialchars_decode($notableTitle["txtBody"]))) : $body = "Appointments, Honors, and Notables from the College of Agriculture.";
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -21,9 +22,9 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <meta property="og:url" content="<?php echo $actual_link; ?>" />
     <meta property="og:title" content="<?= $title ?>" />
     <meta property="og:description" content="<?php echo $body; ?>" />
-    <meta property="og:image" content="https://ag.purdue.edu/PublishingImages/PurdueAgFB.png" />
+    <meta property="og:image" content="<?php echo $photo; ?>" />
     <meta content="width=device-width, user-scalable=no" name="viewport"/>
-    <title><?php echo $title ?>- Purdue University</title>
+    <title><?php echo $title ?> - Purdue University</title>
     <link href="images/favicon.ico" rel="shortcut icon"/>
     <script async="true" src="js/modernizr-1.5.min.js" type="text/javascript">
     </script>
@@ -36,6 +37,15 @@ $actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
   </head>
   <body style="">
+  <!-- Google Tag Manager -->
+  <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-TQG2WJ"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TQG2WJ');</script>
+  <!-- End Google Tag Manager -->
     <div class="navbar navbar-inverse goldbar" role="navigation">
       <div class="container">
         <div class="navbar-header">

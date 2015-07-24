@@ -20,7 +20,11 @@
             <div class="noteDate pull-left"><i class="fa fa-calendar"></i> <?php echo date("F d, Y", strtotime($notable["datePublished"])); ?></div>
             <div class="addthis_sharing_toolbox noteDate pull-right"></div>
             <br class="clearfix" />
-            <p><?php echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
+            <p>
+            <?php if(!empty($notable["strImage"])) {
+              echo "<img style='border: 1px solid #dadada; padding: 5px; margin: 10px 0 5px 5px; float: right;' src='" . $notable["strImage"] . "' alt='" . $notable["strHeadline"] . "' />";
+            }
+            echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
         <?php endwhile; ?>
         </div>
 

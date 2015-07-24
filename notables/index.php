@@ -19,7 +19,11 @@
           while($notable = mysql_fetch_array($result)) : ?>
           <h2><a href="notable.php?n=<?php echo $notable["newsID"]?>"><?php echo $notable["strHeadline"]; ?></a></h2>
           <p class="noteDate"><i class="fa fa-calendar"></i> <?php echo date("F d, Y", strtotime($notable["datePublished"])); ?></p>
-          <p><?php echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
+          <p>
+            <?php if(!empty($notable["strImage"])) {
+              echo "<img style='border: 1px solid #dadada; padding: 5px; margin: 10px 0 5px 5px; float: right;' src='" . $notable["strImage"] . "' alt='" . $notable["strHeadline"] . "' />";
+            }
+            echo html_entity_decode(htmlspecialchars_decode($notable["txtBody"])); ?></p>
           <?php endwhile; ?>
         </div>
         <div class="sidenav col-lg-3 col-md-3 col-sm-3">
