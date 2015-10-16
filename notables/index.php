@@ -1,16 +1,15 @@
 <?php include_once("includes/header.php");
 ini_set('display_errors',1);
 error_reporting(E_ALL);
-function shortenString($maxlen, $string)
-{
-    if (strlen($string) > $maxlen){
-        $shortString = substr($string,0,strrpos($string,". ",$maxlen-strlen($string))+1);
-    } else {
-        $shortString = $string;
-    }
 
-    return $shortString;
+
+
+function getFirstPara($string){
+    $string = substr($string,0, strpos($string, "</p>")+4);
+        $string = str_replace("<p>", "", str_replace("</p>", "", $string));
+        return $string;
 }
+
  ?>
   <div class="breadcrumb">
   <div class="container">
@@ -35,9 +34,11 @@ function shortenString($maxlen, $string)
           <p>
           <?php
             $body = html_entity_decode(htmlspecialchars_decode($notable["txtBody"]));
-            $body = preg_replace("/&#?[a-z0-9]+;/i"," ", $body);
-            echo shortenString(500, $body);
-            echo " <a href='notable.php?n=" . $notable["newsID"] . "'>Read More &#187;</a>";
+            $body = preg_replace("/&#?[a-z0-9]+;/i"," ",$body);
+            echo getFirstPara($body);
+            echo " ";
+            echo "<a href='notable.php?n=" . $notable["newsID"] . "'>Read More &#187;</a>";
+
           ?>
           </p>
           <?php endwhile; ?>
@@ -57,3 +58,8 @@ function shortenString($maxlen, $string)
         <div class="sidecontent col-lg-3 col-md-3 col-sm-3">
         </div>
         <?php include_once("includes/footer.php"); ?>
+
+
+
+
+
