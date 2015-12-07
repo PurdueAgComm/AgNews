@@ -7,15 +7,12 @@
         <span class="muted pull-right"  data-container="body" rel="tooltip" title="Updated 2015"><small>version 2.0</small></p>
 
 
-      <div class="alert alert-info"><strong>2.0.0 Changelog</strong><br />
+      <!-- <div class="alert alert-info"><strong>2.0.0 Changelog</strong><br />
         <ul>
           <li>Changes to doUpdateStage.php</li>
           <li>Notables release</li>
           <li>UI Updates</li>
-          <li>Columns New!</li>
-          <li>AgAnswers New!</li>
-          <li>Connections New!</li>
-      </div>
+      </div> -->
 
     </div> <!-- /container -->
 
