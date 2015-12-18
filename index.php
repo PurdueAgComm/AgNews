@@ -46,10 +46,9 @@ if(!isset($_COOKIE['201'])) { ?>
         <h3 class="panel-title">Changelog - v2.0.1</h3>
       </div>
       <div class="panel-body">
-        <ul>
-          <li><strong>Changelog Message</strong>: You'll receive a message outlining the latest changes to the AgNews Database the first time you login once an update has been released.</li>
-          <li><strong>Seach</strong>: You can now search <code>Headlines</code> in addition to <code>Filenames</code>.
-        </ul>
+          <p><label class="label label-success">Feature</label> <strong>Changelog Message</strong>: You'll receive a message outlining the latest changes to the AgNews Database the first time you login once an update has been released.</li></p>
+          <p><label class="label label-success">Feature</label> <strong>Search</strong>: You can now search <code>Headlines</code> in addition to <code>Filenames</code>.</p>
+          <p><label class="label label-warning">Bug Fix</label> <strong>Your News Stories</strong>: Fixed an issue where users couldn't edit or delete stories from their dashboard.</p>
       </div>
     </div>
 <?
@@ -117,8 +116,8 @@ if(!isset($_COOKIE['201'])) { ?>
           echo "No status provided";
         }
         echo "</td>";
-        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Edit " . $normalRow['strFilename'] . "'><i class='fa fa-edit'></i></a> ";
-        echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Remove " . $normalRow['strFilename'] . "'><i class='fa fa-times'></i></a></td>";
+        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Edit " . $redRow['strFilename'] . "'><i class='fa fa-edit'></i></a> ";
+        echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $redRow["newsID"] . "' rel='tooltip' title='Remove " . $redRow['strFilename'] . "'><i class='fa fa-times'></i></a></td>";
         echo "</tr>";
       }
 
@@ -154,8 +153,8 @@ if(!isset($_COOKIE['201'])) { ?>
           echo "No status provided";
         }
         echo "</td>";
-        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Edit " . $normalRow['strFilename'] . "'><i class='fa fa-edit'></i></a> ";
-        echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $normalRow["newsID"] . "' rel='tooltip' title='Remove " . $normalRow['strFilename'] . "'><i class='fa fa-times'></i></a></td>";
+        echo "<td align='center'><a class='btn btn-default btn-sm' href='editStory.php?newsID=" . $yellowRow["newsID"] . "' rel='tooltip' title='Edit " . $yellowRow['strFilename'] . "'><i class='fa fa-edit'></i></a> ";
+        echo "<a class='btn btn-default btn-sm' href='functions/doDeleteStory.php?newsID=" . $yellowRow["newsID"] . "' rel='tooltip' title='Remove " . $yellowRow['strFilename'] . "'><i class='fa fa-times'></i></a></td>";
         echo "</tr>";
       }
 
