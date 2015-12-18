@@ -33,6 +33,32 @@ if ($_SESSION["success"] != "") {
 
 ?>
 
+<?php
+// hack to display new features message for users who haven't logged in since last version
+// ************************************************************************************************************************************
+// ************************************************************************************************************************************
+//    // CHANGE COOKIE NAME TO THE NAME OF THE CURRENT VERSION FOR IT TO SHOW UP AGAIN
+// ************************************************************************************************************************************
+// ************************************************************************************************************************************
+if(!isset($_COOKIE['201'])) { ?>
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Changelog - v2.0.1</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+          <li><strong>Changelog Message</strong>: You'll receive a message outlining the latest changes to the AgNews Database the first time you login once an update has been released.</li>
+          <li><strong>Seach</strong>: You can now search <code>Headlines</code> in addition to <code>Filenames</code>.
+        </ul>
+      </div>
+    </div>
+<?
+  // set a cookie to expire in a year
+  setcookie("201", "true", time()+60*60*24*365);
+}
+//END DISPLAY OF CHANGELOG
+?>
+
       <h3>Your News Stories</h3>
       <?php
       // if there are news stories, post them in table format
