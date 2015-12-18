@@ -53,7 +53,7 @@ if(!empty($_GET["q"])) {
 	$parts = array();
 	foreach($terms as $term){
 		if($term != "and") {
-			$parts[] = "strFilename RLIKE '$term'";
+			$parts[] = "strFilename RLIKE '$term' OR strHeadline RLIKE '$term'";
 		}
 	}
 
@@ -61,6 +61,7 @@ if(!empty($_GET["q"])) {
 	$sql = "SELECT * FROM tblNews WHERE isHidden=0 AND $parts";
 	$result = mysql_query($sql);
 	$numResult = mysql_num_rows($result);
+
 
 	if(empty($numResult))
 	{
