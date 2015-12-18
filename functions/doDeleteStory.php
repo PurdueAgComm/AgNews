@@ -18,8 +18,6 @@ if($action == "recover") {
 	$_SESSION["success"] = "You've successfully recovered the story.";
 	header("Location: ../index.php");
 
-
-
 }
 else{
 	$sql = "UPDATE tblNews SET isHidden=1 WHERE newsID=" . $newsID . " LIMIT 1";
