@@ -62,7 +62,6 @@ if(!empty($_GET["q"])) {
 	$result = mysql_query($sql);
 	$numResult = mysql_num_rows($result);
 
-
 	if(empty($numResult))
 	{
 		$numResult = "no";
@@ -160,7 +159,7 @@ if(!empty($_GET["q"])) {
         </form>
 
 
-		<p class="span5 muted"><span class="label label-info">Frustrated?</span> This only searches <strong>Filenames</strong>. If you have ways you would like to search that are not provided here, please contact the developer in charge of this database and let him or her know.</p>
+		<p class="span5 muted"><span class="label label-info">Frustrated?</span> This only searches <strong>Filename & Headlines</strong>. If you have ways you would like to search that are not provided here, please contact the developer in charge of this database and let him or her know.</p>
 
 	<?php } ?>
 
