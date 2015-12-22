@@ -1,0 +1,74 @@
+[
+  {
+    "index": 0,
+    "name": "Headline"
+  },
+  {
+    "index": 1,
+    "name": "Story URL"
+  },
+  {
+    "index": 2,
+    "name": "Area"
+  },
+  {
+    "index": 3,
+    "name": "Topic"
+  },
+    {
+    "index": 4,
+    "name": "Issue"
+  },
+    {
+    "index": 5,
+    "name": "Date Published"
+  },
+    {
+    "index": 6,
+    "name": "Status"
+  },
+    {
+    "index": 7,
+    "name": "Writer"
+  },
+    {
+    "index": 8,
+    "name": "Source"
+  },
+    {
+    "index": 9,
+    "name": "Department"
+  },
+    {
+    "index": 10,
+    "name": "Top Story"
+  },
+      {
+    "index": 11,
+    "name": "Reach"
+  },
+  {
+    "index": 12,
+    "name": "YouTube URL"
+  },
+      {
+    "index": 13,
+    "name": "Related Website(s)"
+  },
+  {
+    "index": 14,
+    "name": "Includes Photos"
+  },
+    {
+    "index": 15,
+    "name": "Includes Video"
+  },
+    {
+    "index": 16,
+    "name": "Includes Graphics"
+  },
+    {
+    "index": 17,
+    "name": "Includes Audio"
+  }
+]
