@@ -58,6 +58,15 @@ if(!isset($_COOKIE['201'])) { ?>
 //END DISPLAY OF CHANGELOG
 ?>
 
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <h3 class="panel-title">Changelog - v2.1.0</h3>
+      </div>
+      <div class="panel-body">
+          <p><label class="label label-success">Feature</label> <strong>Custom Reports</strong>: If you're an administrator, you're now able to create reports that fit your needs. Visit the control panel to make your custom report.</p>
+      </div>
+    </div>
+
       <h3>Your News Stories</h3>
       <?php
       // if there are news stories, post them in table format
