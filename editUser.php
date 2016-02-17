@@ -72,6 +72,19 @@ $user = mysql_fetch_array($result);
     </div>
 
     <div class="form-group">
+      <label class="col-sm-2 control-label sr-only">Extension Depot Emails</label>
+          <div class="col-sm-5" style="margin-left:20px">
+            <label class="checkbox">
+             <?php if($user["isDepotNews"] == 1) { ?>
+                <input type="checkbox" id="isDepotNews" checked="checked" value="1" name="isDepotNews"> Yes, I want to receive Extension Depot News in my email
+              <?php } else { ?>
+                <input type="checkbox" id="isDepotNews" value="1" name="isDepotNews"> Yes, I want to receive Extension Depot News in my email
+              <?php } ?>
+            </label>
+         </div>
+    </div>
+
+    <div class="form-group">
     	<label class="col-sm-2 control-label">Staff Role</label>
           <div class="col-sm-4" style="margin-left:20px">
             <label class="checkbox">
@@ -115,6 +128,8 @@ $user = mysql_fetch_array($result);
 
          </div>
     </div>
+
+
 
 
       <button type="submit" onClick="setConfirmUnload(false);" class="btn btn-block btn-primary btn-large">Update User</button>
