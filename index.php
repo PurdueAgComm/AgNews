@@ -58,12 +58,16 @@ if(!isset($_COOKIE['201'])) { ?>
 //END DISPLAY OF CHANGELOG
 ?>
 
+<!-- What's currently in development and hasn't launched -->
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Changelog - v2.1.0</h3>
       </div>
       <div class="panel-body">
+          <p><label class="label label-success">Feature</label> <strong>Select to receive Extension Depot news in your email</strong>: For the administrators that need to receive the Extension Depot stories in their email (in order to add it manually to the Depot), they can now select to receive these updates in their user profile rather than coded in manually by MMU Web.</p>
+          <p><label class="label label-success">Feature</label> <strong>Extension Depot Manager Role</strong>: A user can now be assigned to the role of Extension Depot Manager. This user will receive updates when any user creates a new writer in order to manage the available writers in the Extension Depot</p>
           <p><label class="label label-success">Feature</label> <strong>Custom Reports</strong>: If you're an administrator, you're now able to create reports that fit your needs. Visit the control panel to make your custom report.</p>
+          <p><label class="label label-danger">Removed</label> <strong>Change Confirmation</strong>: Removed the change confirmation when navigating away from a page when a form input has been changed.</p>
       </div>
     </div>
 
