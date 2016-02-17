@@ -40,6 +40,17 @@ else if($roleAction == "coordinator") {
 	$sql = "INSERT INTO tblActivity (newsID, peopleID, strFirstName, strLastName, strActivity) VALUES (NULL, " . $_SESSION["userID"] . ", '" . $_SESSION["firstName"] .  "', '" . $_SESSION["lastName"] . "', '<strong>Changed the News Coordinator.</strong>');";
 	mysql_query($sql);
 }
+else if($roleAction == "Extension Depot Manager") {
+	// update coordinator for news unit
+	$sqlCurrent = "UPDATE tblPeople SET strRole='' WHERE strRole='Extension Depot Manager' LIMIT 1";
+	mysql_query($sqlCurrent);
+
+	$sqlNew = "UPDATE tblPeople SET strRole='Extension Depot Manager' WHERE peopleID=" . (int) $_POST["depotManager"];
+	mysql_query($sqlNew);
+
+	$sql = "INSERT INTO tblActivity (newsID, peopleID, strFirstName, strLastName, strActivity) VALUES (NULL, " . $_SESSION["userID"] . ", '" . $_SESSION["firstName"] .  "', '" . $_SESSION["lastName"] . "', '<strong>Changed the Extension Depot Manager.</strong>');";
+	mysql_query($sql);
+}
 
 $_SESSION["success"] = "You have updated the contact person for the " . $roleAction . " role.";
 header("Location: ../editRoles.php");

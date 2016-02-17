@@ -115,6 +115,37 @@ if($_SESSION["isAdmin"] != 1) {
       </div>
 </form>
 
+<form class="form-group form-horizontal" action="functions/doEditRole.php" method="post">
+ <div class="<?php if($_SESSION['depotError'] == 1) echo 'error'; ?>">
+         <label class="col-sm-2 control-label" for="depotManager">Extension Depot Manager</label>
+         <div class="controls">
+         <div class="col-sm-4">
+               <select class="form-control" name="depotManager">
+        <?php
+          $sql = "SELECT * FROM tblPeople WHERE (strRole <> 'MM' AND strRole <> 'IT') AND isAdmin=1  ORDER BY strLastName";
+          $result = mysql_query($sql);
+          while($people = mysql_fetch_array($result)) {
+
+            if($people["strRole"] == "Extension Depot Manager")
+            {
+              echo "<option value='" . $people["peopleID"] . "' selected='selected'>" . $people["strFirstName"] . " " . $people["strLastName"] . "</option>";
+            }
+            else {
+              echo "<option value='" . $people["peopleID"] . "'>" . $people["strFirstName"] . " " . $people["strLastName"] . "</option>";
+            }
+
+          }
+        ?>
+
+               </select>
+               <input type="hidden" name="roleAction" value="Extension Depot Manager" />
+           </div>
+               <button onClick="setConfirmUnload(false);" class="btn btn-success" action="submit"><i class="fa fa-save" ></i> Save</button>
+              <span rel='tooltip' title='The Extension Depot Manager will be notified every time there is a new writer created by any user in the AgNews DB.'><i class='fa fa-question-circle'></i>
+         </div>
+      </div>
+</form>
+
 
 
 
