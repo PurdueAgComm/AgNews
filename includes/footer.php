@@ -26,32 +26,27 @@
         $("[rel='tooltip']").tooltip();
     });
 
-    function setConfirmUnload(on) {
-     window.onbeforeunload = (on) ? unloadMessage : null;
-    }
+    // disabled
+    // function setConfirmUnload(on) {
+    //  window.onbeforeunload = (on) ? unloadMessage : null;
+    // }
 
-    function unloadMessage() {
-         return 'You have entered new data on this page.' +
-            ' If you navigate away from this page without' +
-            ' first saving your data, the changes will be' +
-            ' lost.';
-    }
+    // function unloadMessage() {
+    //      return 'You have entered new data on this page.' +
+    //         ' If you navigate away from this page without' +
+    //         ' first saving your data, the changes will be' +
+    //         ' lost.';
+    // }
 
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
-     $(':input',document.addForm).bind(
-         "change", function() {
-              setConfirmUnload(true);
-         }
-     ); // Prevent accidental navigation away
+    //  $(':input',document.addForm).bind(
+    //      "change", function() {
+    //           setConfirmUnload(true);
+    //      }
+    //  ); // Prevent accidental navigation away
 
-    });
-
-
-
-
-
-
+    // });
     </script>
     <!--Type Ahead-->
 
