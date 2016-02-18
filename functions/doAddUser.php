@@ -110,8 +110,7 @@ if($_SESSION["errorCounter"] == 0)
 
 	else if($_SESSION["isWriterAdd"]==1)  {
 		$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Writer" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
-		//TODO: REMOVE COMMENT BELOW
-		//mysql_query($sql);
+		mysql_query($sql);
 		// email Extension Depot Manager about addition of new WRITERS
 		$sql = "SELECT strEmail FROM tblPeople WHERE strRole='Extension Depot Manager' LIMIT 1";
 		$result = mysql_query($sql);
