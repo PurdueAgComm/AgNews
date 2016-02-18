@@ -82,72 +82,67 @@ if(empty($_SESSION["firstNameAdd"])) {
 	$_SESSION["error"] = "Everyone has a name. Can you complete the first name field?";
 }
 
-
 // check for duplicate users
 $query = mysql_query("SELECT * FROM tblPeople WHERE strEmail = ('" . $_SESSION["emailAdd"] . "') ");
 $row = mysql_fetch_array($query);
 
-	if(mysql_num_rows($query) != 0) {
-		$_SESSION["emailError"] = 1;
-  	    $_SESSION["errorCounter"]++;
+if(mysql_num_rows($query) != 0) {
+	$_SESSION["emailError"] = 1;
+	$_SESSION["errorCounter"]++;
 
-		$_SESSION["error"] = "Our database shows <strong>". $row[strFirstName]. " ". $row[strLastName]. "</strong> is assigned the entered email address and is in our database.<br> <a rel='tooltip' title='Create a new Source profile' href='/agnewsdb/editUser.php' role='button' class='btn btn-small btn-danger'><strong> " . $row[strEmail]. " </strong> is assigned to a source in our database. Please go to Edit User if you want to add a staff role to ". $row[strFirstName]. " ". $row[strLastName]. "</a>";
+	$_SESSION["error"] = "Our database shows <strong>". $row[strFirstName]. " ". $row[strLastName]. "</strong> is assigned the email address entered below and is in our database.<br> <a rel='tooltip' title='Create a new Source profile' href='/agnewsdb/editUser.php' role='button' class='btn btn-small btn-danger'><strong> " . $row[strEmail]. " </strong> is assigned to a source in our database. Please go to Edit User if you want to add a staff role to ". $row[strFirstName]. " ". $row[strLastName]. "</a>";
 
-	}
+}
 
 // if there are no errors
 if($_SESSION["errorCounter"] == 0)
 {
-         // Set user strRole field
-	     if($_SESSION["isAdminAdd"]==1)  {
+	// Set user strRole field
+	if($_SESSION["isAdminAdd"]==1)  {
+		$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Administrator" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
+		mysql_query($sql);
+  }
 
-	       $sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Administrator" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
-		   mysql_query($sql);
-         }
+  else if($_SESSION["isSupportAdd"]==1)  {
+		$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Support" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
+		mysql_query($sql);
+	}
 
-            else if($_SESSION["isSupportAdd"]==1)  {
-
-				$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Support" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
-				mysql_query($sql);
-            }
-
-              else if($_SESSION["isWriterAdd"]==1)  {
-
-					$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Writer" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
-					mysql_query($sql);
-
-					// email Extension Depot Manager about addition of new WRITERS
-					$message = "<html><body style='background-color: #fafafa;'>";
-					$message .= "<table align='center' width='650' cellpadding='5' cellspacing='5' style='font-family: arial; border: 1px solid #a4a4a4; background-color: #FFF;'>";
-					$message .= "<tr><td colspan='4' style='height: 80px; width: 610px; background-color:#FFF;'><img src='http://dev.www.purdue.edu/agnewsdb/img/emailupdate.jpg' alt='You have a new update from AgNews DB' /></td></tr>";
-					$message .= "<tr><td colspan='3' width='75%'>&nbsp;</td> <td colspan='1' width='25%' align='right'>" . date("M d, Y") . "</td></tr>";
-					$message .= "<tr><td colspan='4' width='100%'>Hey,<br/><br/>";
-					$message .= "<p>A new writer...";
-					$message .= "</td></tr>";
-					$message .= "</table>";
-					$message .= "</body></html>";
-					$message = chunk_split(base64_encode($message));
-					$headers = "From:noreplyagnews@purdue.edu\r\n";
-					$headers .= "MIME-Version: 1.0\r\n";
-					$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
-					$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
-					//mail($to,$subject,$message,$headers);
-
-
-					}
-
-                 else if($_SESSION["isSourceAdd"]==1)  {
-
-						$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Source" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
-						mysql_query($sql);;
-                 }
-
+	else if($_SESSION["isWriterAdd"]==1)  {
+		$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Writer" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
+		//TODO: REMOVE COMMENT BELOW
+		//mysql_query($sql);
+		// email Extension Depot Manager about addition of new WRITERS
+		$sql = "SELECT strEmail FROM tblPeople WHERE strRole='Extension Depot Manager' LIMIT 1";
+		$result = mysql_query($sql);
+		$depotManger = mysql_fetch_array($result);
+		$to = $depotManger["strEmail"];
+		$subject = "[AgNews] A writer needs to be added to the Extension Depot";
+		$message = "<html><body style='background-color: #fafafa;'>";
+		$message .= "<table align='center' width='650' cellpadding='5' cellspacing='5' style='font-family: arial; border: 1px solid #a4a4a4; background-color: #FFF;'>";
+		$message .= "<tr><td colspan='4' style='height: 80px; width: 610px; background-color:#FFF;'><img src='http://dev.www.purdue.edu/agnewsdb/img/emailupdate.jpg' alt='You have a new update from AgNews DB' /></td></tr>";
+		$message .= "<tr><td colspan='3' width='75%'>&nbsp;</td> <td colspan='1' width='25%' align='right'>" . date("M d, Y") . "</td></tr>";
+		$message .= "<tr><td colspan='4' width='100%'>Hey,<br/><br/>";
+		$message .= "<p>A new writer <strong>" . $_SESSION["firstNameAdd"] . " " . $_SESSION["lastNameAdd"] . "</strong>, their alias is <strong>" . $_SESSION["aliasAdd"] . "</strong>. If you have questions, the writer was added by " . $_SESSION["firstName"] . " " . $_SESSION["lastName"] . " (" . $_SESSION["userEmail"] . ").</p>";
+		$message .= "<p>Here's a <a href='https://extension.purdue.edu/depot/AuthorControl.aspx'>handy link to the author control page in the Extension Depot</a>.</p>";
+		$message .= "<p>Thanks,<br />Mankind</p>";
+		$message .= "</td></tr>";
+		$message .= "</table>";
+		$message .= "</body></html>";
+		$message = chunk_split(base64_encode($message));
+		$headers = "From:noreplyagnews@purdue.edu\r\n";
+		$headers .= "MIME-Version: 1.0\r\n";
+		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+		$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
+		mail($to,$subject,$message,$headers);
+	}
+  else if($_SESSION["isSourceAdd"]==1)  {
+		$sql = "INSERT INTO tblPeople (alias, strFirstName, strLastName, strRole, strEmail, strPhone, isAdmin, isSupport, isWriter, isSource) VALUES ('" . $_SESSION["aliasAdd"] . "', '" . $_SESSION["firstNameAdd"] . "', '" . $_SESSION["lastNameAdd"] . "', '" . "Source" . "' ,'" . $_SESSION["emailAdd"] . "', '" . $_SESSION["phoneAdd"] . "', " . $_SESSION["isAdminAdd"]  . ", " . $_SESSION["isSupportAdd"]  . ", " . $_SESSION["isWriterAdd"]  . ", " . $_SESSION["isSourceAdd"]  . ");";
+		mysql_query($sql);;
+  }
 	// add an activity
 	$sql = "INSERT INTO tblActivity (newsID, peopleID, strFirstName, strLastName, strActivity) VALUES (NULL, " . $_SESSION["userID"] . ", '" . $_SESSION["firstName"] .  "', '" . $_SESSION["lastName"] . "', '<strong>Added " . $_SESSION["firstNameAdd"] . " " . $_SESSION["lastNameAdd"] . "</strong>');";
 	mysql_query($sql);
-
-
-
 
 	// redirect with success message
 	// **07-27: we need the stripslashes to return without any \'s.
@@ -162,9 +157,7 @@ if($_SESSION["errorCounter"] == 0)
 	$_SESSION["isSupportAdd"] = "";
 	$_SESSION["isAdminAdd"] = "";
 	$_SESSION["isSourceAdd"] = "";
-
 	header("Location: ../addUser.php");
-
 }
 else {
 	// return user to last page
