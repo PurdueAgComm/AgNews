@@ -350,7 +350,7 @@ if($stageID == 5) {
 	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 	$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
 
-	// mail($to,$subject,$message,$headers);
+	//mail($to,$subject,$message,$headers);
 	$_SESSION["success"] .= "<br /><strong>An e-mail has been sent to notify " . $support["strFirstName"] . " " . $support["strLastName"] . " that your story has been submitted to M&M.</strong>";
 	$sql = "UPDATE tblNews SET statusID=2 WHERE newsID=" . $newsID;
 	mysql_query($sql);
