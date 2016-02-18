@@ -424,7 +424,6 @@ else {
 
 <script>
 function doSourceCheck() {
-	setConfirmUnload(false)
 	var e = document.getElementById("stage");
 	var strStage = e.options[e.selectedIndex].value;
 
@@ -437,7 +436,6 @@ function doSourceCheck() {
 }
 
 function submitStage() {
-	setConfirmUnload(false);
 	document.getElementById("stageForm").submit();
 }
 </script>
