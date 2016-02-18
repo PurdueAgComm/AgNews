@@ -1,24 +1,10 @@
 <?php
 
-
-
-/*
-######################################
-
-EMAILS ARE DISABLED
-
-######################################
-*/
-
-
 session_start();
 include_once('../includes/db.php'); //includes db connection
 
 $stageID = $_POST["stage"];
 $newsID  = $_POST["newsID"];
-
-
-
 
 if(!empty($stageID) && !empty($newsID)) {
 	if($stageID == 6) {
@@ -107,12 +93,11 @@ if($stageID == 2) {
 	$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
 
 
-	// mail($to,$subject,$message,$headers);
+	//mail($to,$subject,$message,$headers);
 	$_SESSION["success"] .= "<br /><strong>An e-mail has been sent to notify " . $coord["strFirstName"] . " " . $coord["strLastName"] . " that your story is ready for editing.</strong>";
 
 	$sql = "UPDATE tblNews SET statusID=2 WHERE newsID=" . $newsID;
 	mysql_query($sql);
-
 
 	$sql2 = "SELECT strStage FROM tblStage WHERE stageID=2;";
 	$result2 = mysql_query($sql2);
@@ -121,13 +106,9 @@ if($stageID == 2) {
 	// update activity feed
 	$sql = "INSERT INTO tblActivity (newsID, peopleID, strFirstName, strLastName, strActivity) VALUES (" . $newsID . ", " . $_SESSION["userID"] . ", '" . $_SESSION["firstName"] .  "', '" . $_SESSION["lastName"] . "', 'Set status to " . $stage["strStage"] . ".');";
 	mysql_query($sql);
-
-
-
 }
 
 if($stageID == 3) {
-
 	// writer now needs to review edits
 	// get the author who is associated with this story from the DB
 	$sql = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsWriterPeople ON tblNewsWriterPeople.peopleID = tblPeople.peopleID WHERE tblNewsWriterPeople.newsID=" . $newsID;
@@ -139,22 +120,15 @@ if($stageID == 3) {
 	$result2 = mysql_query($sql2);
 	$news = mysql_fetch_array($result2);
 
-	// TODO: enable email
-
-// $to = $writer["strEmail"];
-	$to = "gprice@purdue.edu"; //was Kenny's email here 08-05-14
-
+	$to = $writer["strEmail"];
 	if(!empty($news["strHeadline"])) {
 		$subject = "[AgNews DB] '" . $news["strHeadline"] . "' is ready for review.";
 		$title = $news["strHeadline"];
-
 	}
 	else {
 		$subject = "[AgNews DB] '" . $news["strFilename"] . "' is ready for review.";
 		$title = $news["strFilename"];
 	}
-
-
 
 	$message = "<html><body style='background-color: #fafafa;'>";
 	$message .= "<table align='center' width='650' cellpadding='5' cellspacing='5' style='font-family: arial; border: 1px solid #a4a4a4; background-color: #FFF;'>";
@@ -222,16 +196,16 @@ if($stageID == 4) {
 
 	$headers = "From: " . $writer["strEmail"];
 
-    // Generate a boundary string
-    $semi_rand = md5(time());
-    $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
+  // Generate a boundary string
+  $semi_rand = md5(time());
+  $mime_boundary = "==Multipart_Boundary_x{$semi_rand}x";
 
-    // Add the headers for a file attachment
-    $headers .= "\nMIME-Version: 1.0\n" .
-    "Content-Type: multipart/mixed;\n" .
-    " boundary=\"{$mime_boundary}\"";
+  // Add the headers for a file attachment
+  $headers .= "\nMIME-Version: 1.0\n" .
+  "Content-Type: multipart/mixed;\n" .
+  " boundary=\"{$mime_boundary}\"";
 
-    $content = "<html><body style='background-color: #fafafa;'>";
+  $content = "<html><body style='background-color: #fafafa;'>";
 	$content .= "<table align='center' width='650' cellpadding='5' cellspacing='5' style='font-family: arial; border: 1px solid #a4a4a4; background-color: #FFF;'>";
 	$content .= "<tr><td colspan='4' style='height: 80px; width: 610px; background-color:#FFF;'><img src='http://dev.www.purdue.edu/agnewsdb/img/emailupdate.jpg' alt='You have a new update from AgNews DB' /></td></tr>";
 	$content .= "<tr><td colspan='3' width='65%'>&nbsp;</td> <td colspan='1' width='35%' align='right'>" . date("M d, Y") . "</td></tr>";
@@ -242,12 +216,12 @@ if($stageID == 4) {
 	$content .= "</body></html>";
 
 
-    // Add a multipart boundary above the plain message
-    $message = "This is a multi-part message in MIME format.\n\n" .
-    "--{$mime_boundary}\n" .
-    "Content-Type: text/html; charset=\"iso-8859-1\"\n" .
-    "Content-Transfer-Encoding: 7bit\n\n" .
-    $content . "\n\n";
+  // Add a multipart boundary above the plain message
+  $message = "This is a multi-part message in MIME format.\n\n" .
+  "--{$mime_boundary}\n" .
+  "Content-Type: text/html; charset=\"iso-8859-1\"\n" .
+  "Content-Transfer-Encoding: 7bit\n\n" .
+  $content . "\n\n";
 
 
 	$body .= "<html>";
@@ -263,21 +237,21 @@ if($stageID == 4) {
 	$body .= "Writer(s)</td>";
 	$body .= "<td>";
 
-		$sqlWriters = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsWriterPeople ON tblNewsWriterPeople.peopleID = tblPeople.peopleID WHERE tblNewsWriterPeople.newsID=" . $newsID;
-		$resultWriters = mysql_query($sqlWriters);
-		while($writer = mysql_fetch_array($resultWriters)) {
-			$body .= $writer["strFirstName"] . " " . $writer["strLastName"] . ", " . $writer["strPhone"] . ", " . $writer["strEmail"] . "<br />";
-		}
+	$sqlWriters = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsWriterPeople ON tblNewsWriterPeople.peopleID = tblPeople.peopleID WHERE tblNewsWriterPeople.newsID=" . $newsID;
+	$resultWriters = mysql_query($sqlWriters);
+	while($writer = mysql_fetch_array($resultWriters)) {
+		$body .= $writer["strFirstName"] . " " . $writer["strLastName"] . ", " . $writer["strPhone"] . ", " . $writer["strEmail"] . "<br />";
+	}
 
 	$body .= "</td></tr><tr><td>";
 	$body .= "Source(s)</td>";
 	$body .= "<td>";
 
-		$sqlSources = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsSourcePeople ON tblNewsSourcePeople.peopleID = tblPeople.peopleID WHERE tblNewsSourcePeople.newsID=" . $newsID;
-		$resultSources = mysql_query($sqlSources);
-		while($source = mysql_fetch_array($resultSources)) {
-			$body .= $source["strFirstName"] . " " . $source["strLastName"] . ", " . $source["strPhone"] . ", " . $source["strEmail"] . "<br />";
-		}
+	$sqlSources = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsSourcePeople ON tblNewsSourcePeople.peopleID = tblPeople.peopleID WHERE tblNewsSourcePeople.newsID=" . $newsID;
+	$resultSources = mysql_query($sqlSources);
+	while($source = mysql_fetch_array($resultSources)) {
+		$body .= $source["strFirstName"] . " " . $source["strLastName"] . ", " . $source["strPhone"] . ", " . $source["strEmail"] . "<br />";
+	}
 
 	$body .= "</td></tr><tr><td valign='top'><strong>Related Websites:</strong></td><td>";
 
@@ -304,27 +278,27 @@ if($stageID == 4) {
 	$body .= "</td></tr></table>";
 	$body .= "</html>";
 
-    // Base64 encode the file data
-    $data = chunk_split(base64_encode($body));
+  // Base64 encode the file data
+  $data = chunk_split(base64_encode($body));
 
-    // Add file attachment to the message
-    $message .= "--{$mime_boundary}\n" .
-    "Content-Type: application/ms-word;\n" .
-    " name=\"testfile.doc\"\n" .
-    "Content-Disposition: attachment;\n" .
-    " filename=\" " . date("ymd") . "_" . $news["strFilename"] . ".doc\"\n" .
-    "Content-Transfer-Encoding: base64\n\n" .
-    $data . "\n\n" .
-    "--{$mime_boundary}--\n";
+  // Add file attachment to the message
+  $message .= "--{$mime_boundary}\n" .
+  "Content-Type: application/ms-word;\n" .
+  " name=\"testfile.doc\"\n" .
+  "Content-Disposition: attachment;\n" .
+  " filename=\" " . date("ymd") . "_" . $news["strFilename"] . ".doc\"\n" .
+  "Content-Transfer-Encoding: base64\n\n" .
+  $data . "\n\n" .
+  "--{$mime_boundary}--\n";
 
 
-    // get source associated with this story from DB
+  // get source associated with this story from DB
 	$sql3 = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsSourcePeople ON tblNewsSourcePeople.peopleID = tblPeople.peopleID WHERE tblNewsSourcePeople.newsID=" . $newsID;
 	$result3 = mysql_query($sql3);
 	$source = mysql_fetch_array($result3);
 
-//TODO
- 	// mail($source["strEmail"], "[AgComm News] " . $title . " is ready for review.", $message, $headers);
+	//TODO
+ 	//mail($source["strEmail"], "[AgComm News] " . $title . " is ready for review.", $message, $headers);
  	//mail("knwilson@purdue.edu", "[AgComm News] " . $title . " is ready for review.", $message, $headers);
 
 	$_SESSION["success"] .= "<br /><strong>An e-mail has been sent to notify " . $source["strFirstName"] . " " . $source["strLastName"] . " that a source check is needed from them.</strong><br /><small>Follow up with your source to make sure that your email address is on their whitelist.</small>";
@@ -343,7 +317,6 @@ if($stageID == 4) {
 }
 
 if($stageID == 5) {
-
 
 	$sql = "SELECT * FROM tblPeople WHERE strRole='News Assistant'";
 	$result = mysql_query($sql);
@@ -364,7 +337,6 @@ if($stageID == 5) {
 		$title = $news["strFilename"];
 	}
 
-
 	$message =  "<html><body style='background-color: #fafafa;'>";
 	$message .= "<table align='center' width='650' cellpadding='5' cellspacing='5' style='font-family: arial; border: 1px solid #a4a4a4; background-color: #FFF;'>";
 	$message .= "<tr><td colspan='4' style='height: 80px; width: 610px; background-color:#FFF;'><img src='http://dev.www.purdue.edu/agnewsdb/img/emailupdate.jpg' alt='You have a new update from AgNews DB' /></td></tr>";
@@ -380,11 +352,8 @@ if($stageID == 5) {
 
 	// mail($to,$subject,$message,$headers);
 	$_SESSION["success"] .= "<br /><strong>An e-mail has been sent to notify " . $support["strFirstName"] . " " . $support["strLastName"] . " that your story has been submitted to M&M.</strong>";
-
-
 	$sql = "UPDATE tblNews SET statusID=2 WHERE newsID=" . $newsID;
 	mysql_query($sql);
-
 
 	$sql2 = "SELECT strStage FROM tblStage WHERE stageID=5;";
 	$result2 = mysql_query($sql2);
@@ -393,12 +362,10 @@ if($stageID == 5) {
 	// update activity feed
 	$sql = "INSERT INTO tblActivity (newsID, peopleID, strFirstName, strLastName, strActivity) VALUES (" . $newsID . ", " . $_SESSION["userID"] . ", '" . $_SESSION["firstName"] .  "', '" . $_SESSION["lastName"] . "', 'Set status to " . $stage["strStage"] . ".');";
 	mysql_query($sql);
-
 }
 
 if($stageID == 6) {
-
-	// source now gets to review the story
+	// SENDING OUT EMAIL TO PEOPLE ON NOTIFICATION LIST
 	// get the author  who is associated with this story from the DB
 	$sql = "SELECT tblPeople.strFirstName, tblPeople.strLastName, tblPeople.strPhone, tblPeople.strEmail FROM tblPeople INNER JOIN tblNewsWriterPeople ON tblNewsWriterPeople.peopleID = tblPeople.peopleID WHERE tblNewsWriterPeople.newsID=" . $newsID;
 	$result = mysql_query($sql);
@@ -441,10 +408,8 @@ if($stageID == 6) {
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
-		mail($to,$subject,$message,$headers);
+		//mail($to,$subject,$message,$headers);
 	}
-
-
 
 	// EMAIL AGCOMM WEB TEAM FOR EXTENSION DEPOT STORY POSTING
 	$sqlArea = "SELECT newsID FROM tblNewsArea WHERE newsID=" . $newsID . " AND areaID=4";
@@ -470,9 +435,13 @@ if($stageID == 6) {
 
 	// if the area is Extension Depot News...
 	if($areaNum > 0) {
+		$to = "";
+		$sqlDepotNewsReceivers = "SELECT strFirstName, strEmail FROM tblPeople WHERE isDepotNews=1";
+		$resultDepotNewsReceivers = mysql_query($sqlDepotNewsReceivers);
+		while($depotNewsReceivers = mysql_fetch_array($resultDepotNewsReceivers)) {
+			$to .= $depotNewsReceivers["strEmail"] . ", ";
+		}
 
-		$to = "knwilson@purdue.edu,abanta@purdue.edu,clgosnell@purdue.edu,olopez@purdue.edu,katz@purdue.edu,kgetzin@purdue.edu";
-		//$to = "knwilson@purdue.edu";
 		if(!empty($news["strHeadline"])) {
 			$subject = "[Depot] '" . $news["strHeadline"] . "' needs to be added to the Depot.";
 			$title = $news["strHeadline"];
@@ -486,10 +455,8 @@ if($stageID == 6) {
 		$message .= "<tr><td colspan='4' style='height: 80px; width: 610px; background-color:#FFF;'><img src='http://dev.www.purdue.edu/agnewsdb/img/emailupdate.jpg' alt='You have a new update from AgNews DB' /></td></tr>";
 		$message .= "<tr><td colspan='3' width='75%'>&nbsp;</td> <td colspan='1' width='25%' align='right'>" . date("F d, Y") . "</td></tr>";
 		$message .= "<tr><td colspan='4' width='100%'>Quick, there's work to be had! The News Unit has published a news article that needs to be added to <a href='http://extension.purdue.edu/depot'>The Extension Depot</a>.</td></tr>";
-
 		$message .= "<tr style='background-color: #dadada'><td colspan='4' style='text-align: center;'><strong>General Information</strong></td></tr>";
 		$message .= "<tr><td width='10%'><strong>Admin</strong></td><td width='*' colspan='3'><a href='https://www.purdue.edu/agnewsdb/beholdStory.php?newsID=" . $newsID . "'>View Article in News DB</a></td></tr>";
-
 		$message .= "<tr><td><strong>Topics</strong></td><td colspan='3'>";
 		$i = 0;
 		while($topics = mysql_fetch_array($resultTopics)) {
@@ -554,7 +521,6 @@ if($stageID == 6) {
 			$message .= "<tr><td valign='top'><strong>Article</strong></td><td colspan='3'>" . html_entity_decode(htmlspecialchars_decode($news["txtBody"])) . "</td></tr>";
 		}
 
-
 		$message .= "</table>";
 		$message .= "</body></html>";
 		$message = chunk_split(base64_encode($message));
@@ -562,7 +528,7 @@ if($stageID == 6) {
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
-		mail($to,$subject,$message,$headers);
+		//mail($to,$subject,$message,$headers);
 	}
 
 	$sql = "UPDATE tblNews SET statusID=3 WHERE newsID=" . $newsID;
