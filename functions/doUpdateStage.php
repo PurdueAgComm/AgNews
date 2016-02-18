@@ -528,7 +528,7 @@ if($stageID == 6) {
 		$headers .= "MIME-Version: 1.0\r\n";
 		$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 		$headers .= "Content-Transfer-Encoding: base64\r\n\r\n";
-		//mail($to,$subject,$message,$headers);
+		mail($to,$subject,$message,$headers);
 	}
 
 	$sql = "UPDATE tblNews SET statusID=3 WHERE newsID=" . $newsID;
