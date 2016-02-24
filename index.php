@@ -10,13 +10,13 @@ $sql = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID =
 $result = mysql_query($sql);
 $num_results = mysql_num_rows($result);
 
-$redSQL = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID = tblNewsWriterPeople.newsID WHERE tblNews.isHidden=0 AND tblNews.statusID=1 AND tblNewsWriterPeople.peopleID ='" . $_SESSION["userID"] . "';";
+$redSQL = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID = tblNewsWriterPeople.newsID WHERE tblNews.isHidden=0 AND tblNews.statusID=1 AND tblNewsWriterPeople.peopleID ='" . $_SESSION["userID"] . "' ORDER BY tblNews.datePublished DESC;";
 $redResult = mysql_query($redSQL);
 
-$yellowSQL = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID = tblNewsWriterPeople.newsID WHERE tblNews.isHidden=0 AND tblNews.statusID=2 AND tblNewsWriterPeople.peopleID ='" . $_SESSION["userID"] . "';";
+$yellowSQL = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID = tblNewsWriterPeople.newsID WHERE tblNews.isHidden=0 AND tblNews.statusID=2 AND tblNewsWriterPeople.peopleID ='" . $_SESSION["userID"] . "' ORDER BY tblNews.datePublished DESC;";
 $yellowResult = mysql_query($yellowSQL);
 
-$normalSQL = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID = tblNewsWriterPeople.newsID WHERE tblNews.isHidden=0 AND tblNews.statusID=3 AND tblNewsWriterPeople.peopleID ='" . $_SESSION["userID"] . "' LIMIT 10;";
+$normalSQL = "SELECT * FROM tblNews INNER JOIN tblNewsWriterPeople ON tblNews.newsID = tblNewsWriterPeople.newsID WHERE tblNews.isHidden=0 AND tblNews.statusID=3 AND tblNewsWriterPeople.peopleID ='" . $_SESSION["userID"] . "' ORDER BY tblNews.datePublished DESC LIMIT 10;";
 $normalResult = mysql_query($normalSQL);
 $numNormal = mysql_num_rows($normalResult);
 
@@ -40,21 +40,6 @@ if ($_SESSION["success"] != "") {
 //    // CHANGE COOKIE NAME TO THE NAME OF THE CURRENT VERSION FOR IT TO SHOW UP AGAIN
 // ************************************************************************************************************************************
 // ************************************************************************************************************************************
-if(!isset($_COOKIE['201'])) { ?>
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Changelog - v2.0.1</h3>
-      </div>
-      <div class="panel-body">
-          <p><label class="label label-success">Feature</label> <strong>Changelog Message</strong>: You'll receive a message outlining the latest changes to the AgNews Database the first time you login once an update has been released.</li></p>
-          <p><label class="label label-success">Feature</label> <strong>Search</strong>: You can now search <code>Headlines</code> in addition to <code>Filenames</code>.</p>
-          <p><label class="label label-warning">Bug Fix</label> <strong>Your News Stories</strong>: Fixed an issue where users couldn't edit or delete stories from their dashboard.</p>
-      </div>
-    </div>
-<?
-  // set a cookie to expire in a year
-  setcookie("201", "true", time()+60*60*24*365);
-}
 
 if(!isset($_COOKIE['210'])) { ?>
     <div class="panel panel-primary">
@@ -62,6 +47,7 @@ if(!isset($_COOKIE['210'])) { ?>
         <h3 class="panel-title">Changelog - v2.1.0</h3>
       </div>
       <div class="panel-body">
+          <p><label class="label label-success">Feature</label> <strong>My Stories Order</strong>: Order has been updated to show newest to oldest stories.</li></p>
           <p><label class="label label-success">Feature</label> <strong>Select to receive Extension Depot news in your email</strong>: For the administrators that need to receive the Extension Depot stories in their email (in order to add it manually to the Depot), they can now select to receive these updates in their user profile rather than coded in manually by MMU Web.</p>
           <p><label class="label label-success">Feature</label> <strong>Extension Depot Manager Role</strong>: A user can now be assigned to the role of Extension Depot Manager. This user will receive updates when any user creates a new writer in order to manage the available writers in the Extension Depot</p>
           <p><label class="label label-danger">Removed</label> <strong>Change Confirmation</strong>: Removed the change confirmation when navigating away from a page when a form input has been changed.</p>
@@ -75,7 +61,10 @@ if(!isset($_COOKIE['210'])) { ?>
 //END DISPLAY OF CHANGELOG
 ?>
 
+
+
 <!-- What's currently in development and hasn't launched -->
+
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Changelog - v2.2.0</h3>
@@ -84,6 +73,8 @@ if(!isset($_COOKIE['210'])) { ?>
           <p><label class="label label-success">Feature</label> <strong>Custom Reports</strong>: If you're an administrator, you're now able to create reports that fit your needs. Visit the control panel to make your custom report.</p>
       </div>
     </div>
+
+
 
       <h3>Your News Stories</h3>
       <?php
@@ -236,9 +227,7 @@ if(!isset($_COOKIE['210'])) { ?>
         echo "<div class='alert alert-info'>You have no news stories. <a href='addStory.php'>Create one</a>.</div>";
       }
         ?>
-
-
-    <?php
+<?php
 // global includes
 include_once('includes/footer.php'); // authenticate users, includes db connection
 ?>
