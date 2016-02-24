@@ -103,6 +103,7 @@ if($_SESSION["errorCounter"] == 0)
     if ($row["strRole"]!="Coordinator")  {
 	  if($row["strRole"]!="IT")  {
 	     if($row["strRole"]!="News Assistant")  {
+        if($row["strRole"]!="Extension Depot Manager")  {
 
 
 	     if($_SESSION["isAdminAdd"]==1)  {
@@ -128,6 +129,7 @@ if($_SESSION["errorCounter"] == 0)
 	                $sql = "UPDATE tblPeople SET strRole= '" . "Source" . "' WHERE peopleID=" . $userID;
                     mysql_query($sql);
                  }
+               }
 		 }
 	  }
 	}
