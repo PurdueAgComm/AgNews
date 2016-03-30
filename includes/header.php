@@ -55,3 +55,11 @@ $_SESSION["waitingOnWriter"] = mysql_num_rows($redResult);
         </div><!--/.nav-collapse -->
       </div><!--/.container-fluid -->
     </nav>
+
+    <?php if($_SESSION["server_warning"] == 1) : ?>
+      <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-warning"><i class="fa fa-warning"></i> <strong>Attention!</strong> You are not on production.</div>
+        </div>
+      </div>
+    <?php endif; ?>
