@@ -563,6 +563,36 @@ $newsID = (int) $_GET["newsID"];
         </div>
       </div>
 
+      <a name="fund"></a>
+      <div class="form-group <?php if($_SESSION['fundError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label metadata" for="college">Funding</label>
+          <div class="col-sm-4">
+            <?php
+            $i = 1;
+            $sql = "SELECT * FROM tblFund WHERE isHidden=0 ORDER BY strFund;";
+            $result = mysql_query($sql);
+            while($row = mysql_fetch_array($result)) {
+                $sql2 = "SELECT * FROM tblNewsFund WHERE isHidden=0 AND newsID=" . $newsID . " AND fundID=" . $row["fundID"];
+                $result2 = mysql_query($sql2);
+                $row2 = mysql_fetch_array($result2);
+
+                if($row2["newsFundID"] != "") {
+                    echo "<label class='checkbox-inline'>";
+                    echo "<input type='checkbox' id='" . $row["fundID"] . "' value='" . $row["fundID"] . "' name='fund[" . $i . "]' checked='checked'> " . $row["strFund"];
+                    echo "</label> <br/>";
+                }
+                else {
+                    echo "<label class='checkbox-inline'>";
+                    echo "<input type='checkbox' id='" . $row["fundID"] . "' value='" . $row["fundID"] . "' name='fund[" . $i . "]'> " . $row["strFund"];
+                    echo "</label> <br/>";
+                }
+                $i++;
+            }
+
+          ?>
+          </div>
+        </div>
+
 
 
       <a name="topics"></a>

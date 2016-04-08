@@ -59,6 +59,7 @@ for($i=1; $i<6; $i++) {
 }
 
 $_SESSION["area"] = $_POST["area"];
+$_SESSION["fund"] = $_POST["fund"];
 $_SESSION["topic"] = $_POST["topic"];
 $_SESSION["issues"] = $_POST["issues"];
 $_SESSION["college"] = $_POST["college"];
@@ -597,6 +598,30 @@ else {
 			header("Location: ../editStory.php?newsID=" . $newsID . "&isComplete=false&count=" . $j);
 			die();
 	        }
+
+
+	    // #############################################################
+			//	tblNewsFund -  This SQL statement is add funds,
+			//  referencing this story
+			// #############################################################
+			// Now, insert the required information into the database.
+
+			$sqlDelete = "DELETE FROM tblNewsFund WHERE newsID=" . $newsID;
+			mysql_query($sqlDelete);
+
+			$sql3 = "SELECT COUNT(fundID) AS numberOfFunds FROM tblFund;";
+			$result = mysql_query($sql3);
+			$row = mysql_fetch_array($result);
+
+			for($i=0; $i <= $row["numberOfFunds"]; $i++) {
+				if(!empty($_SESSION["fund"][$i])) {
+					$sql2 = "INSERT INTO tblNewsFund(newsID, fundID) VALUES (" . $newsID . ", " . $_SESSION["fund"][$i] . ");";
+					mysql_query($sql2);
+				}
+			}
+
+			$sqlDelete = "DELETE FROM tblNewsArea WHERE newsID=" . $newsID;
+			mysql_query($sqlDelete);
 
 			// #############################################################
 			//	tblNewsTopic -  This SQL statement is dd topics,

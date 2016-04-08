@@ -59,6 +59,7 @@ for($i=1; $i<6; $i++) {
 }
 
 $_SESSION["area"] = $_POST["area"];
+$_SESSION["fund"] = $_POST["fund"];
 $_SESSION["topic"] = $_POST["topic"];
 $_SESSION["issues"] = $_POST["issues"];
 $_SESSION["college"] = $_POST["college"];
@@ -79,6 +80,7 @@ $_SESSION["sourceError"] = 0;
 $_SESSION["departmentError"] = 0;
 $_SESSION["collegeError"] = 0;
 $_SESSION["areaError"] = 0;
+$_SESSION["fundError"] = 0;
 $_SESSION["topicError"] = 0;
 $_SESSION["issueError"] = 0;
 $_SESSION["storyError"] = 0;
@@ -557,6 +559,23 @@ else {
 	}
 
 				// #############################################################
+				//	tblNewsFund-  This SQL statement is to add funds,
+				//  referencing this story
+				// #############################################################
+				// Now, insert the required information into the database.
+
+				$sql3 = "SELECT COUNT(fundID) AS numberOfFunds FROM tblFund;";
+				$result = mysql_query($sql3);
+				$row = mysql_fetch_array($result);
+
+				for($i=0; $i <= $row["numberOfFunds"]; $i++) {
+					if(!empty($_SESSION["fund"][$i])) {
+						$sql2 = "INSERT INTO tblNewsFund (newsID, fundID) VALUES (" . $newsIDNew . ", " . $_SESSION["fund"][$i] . ");";
+						mysql_query($sql2);
+					}
+				}
+
+				// #############################################################
 				//	tblNewsTopic -  This SQL statement is to add topics,
 				//  referencing this story
 				// #############################################################
@@ -574,15 +593,15 @@ else {
 					}
 				}
 
-				$sql3 = "SELECT COUNT(areaID) AS numberOfAreas FROM tblArea;";
-				$result = mysql_query($sql3);
-				$row = mysql_fetch_array($result);
-
 				// #############################################################
 				//	tblNewsArea -  This SQL statement is to add areas,
 				//  referencing this story
 				// #############################################################
 				// Now, insert the required information into the database.
+
+				$sql3 = "SELECT COUNT(areaID) AS numberOfAreas FROM tblArea;";
+				$result = mysql_query($sql3);
+				$row = mysql_fetch_array($result);
 
 				for($i=0; $i <= $row["numberOfAreas"]; $i++) {
 					if(!empty($_SESSION["area"][$i])) {
@@ -591,15 +610,17 @@ else {
 					}
 				}
 
-				$sql3 = "SELECT COUNT(issuesID) AS numberofIssues FROM tblIssues;";
-				$result = mysql_query($sql3);
-				$row = mysql_fetch_array($result);
+
 
 				// #############################################################
 				//	tblNewsTopic -  This SQL statement is to add topics,
 				//  referencing this story
 				// #############################################################
 				// Now, insert the required information into the database.
+				$sql3 = "SELECT COUNT(issuesID) AS numberofIssues FROM tblIssues;";
+				$result = mysql_query($sql3);
+				$row = mysql_fetch_array($result);
+
 				for($i=0; $i < $row["numberofIssues"]; $i++) {
 					if(!empty($_SESSION["issues"][$i])) {
 						$sql2 = "INSERT INTO tblNewsIssues (newsID, issuesID) VALUES (" . $newsIDNew . ", " . $_SESSION["issues"][$i] . ");";

@@ -348,6 +348,32 @@ include_once('includes/header.php'); // authenticate users, includes db connecti
           </div>
         </div>
 
+        <div class="form-group <?php if($_SESSION['fundError'] == 1) echo 'error'; ?>">
+          <label class="col-sm-2 control-label metadata" for="college">Funding</label>
+          <div class="col-sm-4">
+              <?php
+              $sql = "SELECT * FROM tblFund WHERE isHidden='0' ORDER BY strFund;";
+              $result = mysql_query($sql);
+              $i = 0;
+              while($row = mysql_fetch_array($result)) {
+              if($_SESSION["fund"][$i] != 0) {
+                echo "<label class='checkbox-inline'>";
+                echo "<input type='checkbox' id='" . $row["fundID"] . "' value='" . $row["fundID"] . "' name='fund[" . $i . "]' checked='checked'> " . $row["strFund"];
+                echo "</label><br/>";
+              }
+                else {
+                  echo "<label class='checkbox-inline'>";
+                  echo "<input type='checkbox' id='" . $row["fundID"] . "' value='" . $row["fundID"] . "' name='fund[" . $i . "]'> " . $row["strFund"];
+                  echo "</label><br/>";
+                }
+
+                $i++;
+
+              }
+            ?>
+          </div>
+        </div>
+
        <div class="form-group <?php if($_SESSION['topicError'] == 1) echo 'error'; ?>">
           <label class="col-sm-2 control-label metadata" for="college">Background Topic(s)</label>
           <div class="col-sm-4">
