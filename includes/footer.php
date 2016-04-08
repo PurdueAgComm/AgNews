@@ -4,7 +4,7 @@
       <div class="footer" style="clear:both;">
         <!-- Site Launched January 2014 -->
         <p>&copy; Purdue University 2013-<?=date("Y")?> | You are logged in as <?php echo phpCAS::getAttribute('fullname');?>. <a href="?logout=1">Logout</a>
-        <span class="muted pull-right"  data-container="body" rel="tooltip" title="Updated 02.23.2016"><small>version 2.1.0</small></p>
+        <span style="cursor:help;" class="muted pull-right"  data-container="body" rel="tooltip" title="Updated 04.8.2016"><small>version 2.1.1</small></p>
 
 
       <!-- <div class="alert alert-info"><strong>2.0.0 Changelog</strong><br />

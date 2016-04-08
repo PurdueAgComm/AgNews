@@ -12,9 +12,9 @@ if($_SESSION["isAdmin"] != 1) {
     <div class="col-sm-4 text-center">
         <div class="panel panel-default">
             <div class="panel-body">
-				<h4 class="text-center"><a href="activity.php">Activity Log</a></h4>
-				<p class="text-center"><img src="img/cp/Lock.png" width="20%" height="20%" alt="Activity Log"></p>
-				<p><a class='btn btn-default btn-sm' <a href="activity.php">View Activity Log</a></p>
+        <h4 class="text-center"><a href="funds.php">Fund Options</a></h4>
+        <p class="text-center"><img src="img/cp/Settings.png" width="20%" height="20%" alt="Activity Log"></p>
+        <p><a class='btn btn-default btn-sm' <a href="funds.php">Update Fund Options</a></p>
             </div>
         </div>
     </div>
@@ -46,9 +46,9 @@ if($_SESSION["isAdmin"] != 1) {
 	<div class="col-sm-4 text-center">
         <div class="panel panel-default">
             <div class="panel-body">
-				<h4 class="text-center"><a href="reports.php">Download Reports</a></h4>
-				<p class="text-center"><img src="img/cp/Cloud-Download.png" width="20%" height="20%" alt="Download Reports"></p>
-				<p><a class='btn btn-default btn-sm' <a href="reports.php">Download Reports</a></p>
+				<h4 class="text-center"><a href="reports.php">Create Reports</a></h4>
+				<p class="text-center"><img src="img/cp/Cloud-Download.png" width="20%" height="20%" alt="Create Reports"></p>
+				<p><a class='btn btn-default btn-sm' <a href="reports.php">Create Reports</a></p>
 			</div>
 		</div>
 	</div>
@@ -107,6 +107,16 @@ if($_SESSION["isAdmin"] != 1) {
 			</div>
 		</div>
 	</div>
+
+  <div class="col-sm-4 text-center">
+        <div class="panel panel-default">
+            <div class="panel-body">
+        <h4 class="text-center"><a href="activity.php">Activity Log</a></h4>
+        <p class="text-center"><img src="img/cp/Lock.png" width="20%" height="20%" alt="Activity Log"></p>
+        <p><a class='btn btn-default btn-sm' <a href="activity.php">View Activity Log</a></p>
+            </div>
+        </div>
+    </div>
 
 
 
