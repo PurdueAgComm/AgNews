@@ -41,21 +41,18 @@ if ($_SESSION["success"] != "") {
 // ************************************************************************************************************************************
 // ************************************************************************************************************************************
 
-if(!isset($_COOKIE['210'])) { ?>
+if(!isset($_COOKIE['211'])) { ?>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Changelog - v2.1.0</h3>
+        <h3 class="panel-title">Changelog - v2.1.1</h3>
       </div>
       <div class="panel-body">
-          <p><label class="label label-success">Feature</label> <strong>My Stories Order</strong>: Order has been updated to show newest to oldest stories.</li></p>
-          <p><label class="label label-success">Feature</label> <strong>Select to receive Extension Depot news in your email</strong>: For the administrators that need to receive the Extension Depot stories in their email (in order to add it manually to the Depot), they can now select to receive these updates in their user profile rather than coded in manually by MMU Web.</p>
-          <p><label class="label label-success">Feature</label> <strong>Extension Depot Manager Role</strong>: A user can now be assigned to the role of Extension Depot Manager. This user will receive updates when any user creates a new writer in order to manage the available writers in the Extension Depot</p>
-          <p><label class="label label-danger">Removed</label> <strong>Change Confirmation</strong>: Removed the change confirmation when navigating away from a page when a form input has been changed.</p>
+          <p><label class="label label-success">Feature</label> <strong>Funding Option</strong>: You can now <a href="funds.php">manage funding options</a> and designate funds that apply to news stories.</p>
       </div>
     </div>
 <?
   // set a cookie to expire in a year
-  setcookie("210", "true", time()+60*60*24*365);
+  setcookie("211", "true", time()+60*60*24*365);
 }
 
 //END DISPLAY OF CHANGELOG
@@ -74,14 +71,7 @@ if(!isset($_COOKIE['210'])) { ?>
       </div>
     </div>
 
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Changelog - v2.1.1</h3>
-      </div>
-      <div class="panel-body">
-          <p><label class="label label-success">Feature</label> <strong>Funding Option</strong>: You can now <a href="funds.php">manage funding options</a> and designate funds that apply to news stories.</p>
-      </div>
-    </div>
+
 
 
 
