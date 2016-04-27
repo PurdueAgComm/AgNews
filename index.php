@@ -41,18 +41,18 @@ if ($_SESSION["success"] != "") {
 // ************************************************************************************************************************************
 // ************************************************************************************************************************************
 
-if(!isset($_COOKIE['211'])) { ?>
+if(!isset($_COOKIE['212'])) { ?>
     <div class="panel panel-primary">
       <div class="panel-heading">
-        <h3 class="panel-title">Changelog - v2.1.1</h3>
+        <h3 class="panel-title">Changelog - v2.1.2</h3>
       </div>
       <div class="panel-body">
-          <p><label class="label label-success">Feature</label> <strong>Funding Option</strong>: You can now <a href="funds.php">manage funding options</a> and designate funds that apply to news stories.</p>
+          <p><label class="label label-warning">Bugfix</label> <strong>Missing Area</strong>: Now if a story doesn't have an area, you'll get an appropriate error message when publishing.</p>
       </div>
     </div>
 <?
   // set a cookie to expire in a year
-  setcookie("211", "true", time()+60*60*24*365);
+  setcookie("212", "true", time()+60*60*24*365);
 }
 
 //END DISPLAY OF CHANGELOG
@@ -62,7 +62,7 @@ if(!isset($_COOKIE['211'])) { ?>
 
 <!-- What's currently in development and hasn't launched -->
 
-    <div class="panel panel-primary">
+<!--     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Changelog - v2.2.0</h3>
       </div>
@@ -70,7 +70,7 @@ if(!isset($_COOKIE['211'])) { ?>
           <p><label class="label label-default">TO DO</label> <strong>Custom Reports</strong>: If you're an administrator, you're now able to create reports that fit your needs. Visit the control panel to make your custom report.</p>
       </div>
     </div>
-
+ -->
 
 
 

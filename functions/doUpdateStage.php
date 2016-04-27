@@ -1,6 +1,8 @@
 <?php
-
 session_start();
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 include_once('../includes/db.php'); //includes db connection
 
 $stageID = $_POST["stage"];
@@ -8,13 +10,26 @@ $newsID  = $_POST["newsID"];
 
 if(!empty($stageID) && !empty($newsID)) {
 	if($stageID == 6) {
+
+		// check to see if there is an area
+		$sqlArea = "SELECT * FROM tblNewsArea WHERE newsID=" . $newsID;
+		$resultArea = mysql_query($sqlArea);
+		$area = mysql_fetch_array($resultArea);
+
+		if(empty($area["areaID"])) {
+			$_SESSION["error"] = "You must select an area in order to publish. <a class='btn btn-xs btn-danger' href='editStory.php?newsID=" . $newsID . "#areas'>Select an area.</a>";
+			header("Location: ../beholdStory.php?newsID=" . $newsID);
+			die();
+		}
+
 		$sql2 = "SELECT * FROM tblNews INNER JOIN tblNewsArea ON tblNews.newsID=tblNewsArea.newsID WHERE tblNews.newsID=" . $newsID;
 		$result2 = mysql_query($sql2);
 		$news = mysql_fetch_array($result2);
 
 		// if the URL is empty and the story has an area OTHER THAN 'notable' area type...
+		//die("here: " . $news["newsID"] . " | " . $news["strURL"]);])
 		if($news["strURL"] == "" && $news["areaID"] < 5) {
-			$_SESSION["error"] = "You must enter the <a class='btn btn-mini btn-danger' href='editStory.php?newsID=" . $newsID . "#storyURL'>URL for the Purdue News Service version of the story</a> before publishing.";
+			$_SESSION["error"] = "You must enter the <a class='btn btn-xs btn-danger' href='editStory.php?newsID=" . $newsID . "#storyURL'>URL for the Purdue News Service version of the story</a> before publishing.";
 			header("Location: ../beholdStory.php?newsID=" . $newsID);
 			die();
 		}
