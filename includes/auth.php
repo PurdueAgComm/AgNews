@@ -26,7 +26,7 @@
 
     /*
     =========================================================
-        Is the user part of AgComm as a writer, admin of the system, or support staff? 
+        Is the user part of AgComm as a writer, admin of the system, or support staff?
         If not, then redirect them to a page saying they do
         not have access. Authentication should be on every
         page.
@@ -42,7 +42,7 @@
         // have the appropriate status so they are not allowed to log in.
         header("Location: error.php?reason=agcomm");
     }
-    else {
+    else if($row["alias"] == "knwilson") {
         // Let's store information about the person who is logged in
         // that will be used throughout the website.
         $_SESSION["user"] = $row["alias"];
@@ -61,9 +61,12 @@
         mysql_query($sql) or die(mysql_error());
 
     }
+    else {
+        header("Location: error.php?reason=agcomm");
+    }
 
 
 
 
- 
+
 ?>
